@@ -35,14 +35,47 @@ namespace FileConverter
 				return "";
 		}
 
-		public static string GetFileSizeSuffix(long value, int decimalPlaces = 0)
+		//public static string GetFileSizeSuffix(long value, int decimalPlaces = 0)
+		//{
+		//	// https://stackoverflow.com/questions/14488796/does-net-provide-an-easy-way-convert-bytes-to-kb-mb-gb-etc#14488941
+		//	string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+
+		//	if (decimalPlaces < 0) throw new ArgumentOutOfRangeException("decimalPlaces");
+		//	if (value < 0) return "-" + GetFileSizeSuffix(-value, decimalPlaces);
+		//	if (value == 0) return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
+
+		//	// mag is 0 for bytes, 1 for KB, 2, for MB, etc.
+		//	int mag = (int)Math.Log(value, 1024);
+
+		//	// 1L << (mag * 10) == 2 ^ (10 * mag) 
+		//	// [i.e. the number of bytes in the unit corresponding to mag]
+		//	decimal adjustedSize = (decimal)value / (1L << (mag * 10));
+
+		//	// make adjustment when the value is large enough that it would round up to 1000 or more
+		//	if (Math.Round(adjustedSize, decimalPlaces) >= 1000)
+		//	{
+		//		mag += 1;
+		//		adjustedSize /= 1024;
+		//	}
+
+		//	return string.Format("{0:n" + decimalPlaces + "} {1}", adjustedSize, SizeSuffixes[mag]);
+		//}
+
+		/// <summary>
+		/// Extension method for displaying the size of a FileInfo object
+		/// </summary>
+		/// <param name="fileInfo">FileInfo object</param>
+		/// <param name="decimalPlaces">Number of decimal places to display</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentOutOfRangeException"></exception>
+		public static string GetFileSizeSuffix(this FileInfo fileInfo, int decimalPlaces = 0)
 		{
 			// https://stackoverflow.com/questions/14488796/does-net-provide-an-easy-way-convert-bytes-to-kb-mb-gb-etc#14488941
 			string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
 
-			if (decimalPlaces < 0) throw new ArgumentOutOfRangeException("decimalPlaces");
-			if (value < 0) return "-" + GetFileSizeSuffix(-value, decimalPlaces);
-			if (value == 0) return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
+			if (decimalPlaces < 0) throw new ArgumentOutOfRangeException(nameof(decimalPlaces));
+			long value = fileInfo.Length;
+			if (value <= 0) return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
 
 			// mag is 0 for bytes, 1 for KB, 2, for MB, etc.
 			int mag = (int)Math.Log(value, 1024);
@@ -61,35 +94,35 @@ namespace FileConverter
 			return string.Format("{0:n" + decimalPlaces + "} {1}", adjustedSize, SizeSuffixes[mag]);
 		}
 
-		public static string ConvertToBinary(string path)
+		public static string ConvertToBinary(this FileInfo fileInfo)
 		{
-			if (File.Exists(path))
+			if (File.Exists(fileInfo.FullName))
 			{
-				byte[] bytes = File.ReadAllBytes(path);
+				byte[] bytes = File.ReadAllBytes(fileInfo.FullName);
 				return BitConverter.ToString(bytes).Replace("-", "");
 			}
 			else
 			{
-				throw new FileNotFoundException($"Could not open file '{path}'.");
+				throw new FileNotFoundException($"Could not open file '{fileInfo.FullName}'.");
 			}
 		}
 
-		public static string ConvertToBase64(string path)
+		public static string ConvertToBase64(this FileInfo fileInfo)
 		{
-			if (File.Exists(path))
+			if (File.Exists(fileInfo.FullName))
 			{
-				byte[] bytes = File.ReadAllBytes(path);
+				byte[] bytes = File.ReadAllBytes(fileInfo.FullName);
 				return Convert.ToBase64String(bytes);
 			}
 			else
 			{
-				throw new FileNotFoundException($"Could not open file '{path}'.");
+				throw new FileNotFoundException($"Could not open file '{fileInfo.FullName}'.");
 			}
 		}
 
-		public static void SaveAsBinary(string inputFilePath, string outputFilePath)
+		public static void SaveAsBinary(this FileInfo fileInfo, string outputFilePath)
 		{
-			string fileContents = ConvertToBinary(inputFilePath);
+			string fileContents = fileInfo.ConvertToBinary();
 			if (!string.IsNullOrEmpty(fileContents))
 				File.WriteAllText(outputFilePath, fileContents);
 		}

@@ -1,5 +1,9 @@
 using System.Reflection;
 
+using PInvoke;
+
+using static PInvoke.Shell32;
+
 namespace FileConverter
 {
 	public partial class frmMain : Form
@@ -44,7 +48,7 @@ namespace FileConverter
 
 		private void tabBinary_DragEnter(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetDataPresent(DataFormats.FileDrop))
+			if (e.Data is DataObject && e.Data.GetDataPresent(DataFormats.FileDrop))
 				e.Effect = DragDropEffects.Copy;
 			else
 				e.Effect = DragDropEffects.None;
@@ -52,7 +56,7 @@ namespace FileConverter
 
 		private void tabBinary_DragDrop(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetData(DataFormats.FileDrop) is string[] files && files.Any())
+			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files.Any())
 				txtBinaryFilePath.Text = files.First(); //select the first one  
 		}
 
@@ -148,12 +152,12 @@ namespace FileConverter
 			{
 				var fileInfo = new FileInfo(filePath);
 				lblBinaryFileName.Text = fileInfo.Name;
-				lblBinaryFileType.Text = $"{PInvoke.GetFileType(fileInfo.FullName)} ({fileInfo.Extension})";
-				lblBinaryFileSize.Text = IOHelper.GetFileSizeSuffix(fileInfo.Length, 2);
+				lblBinaryFileType.Text = $"{fileInfo.GetFileType()} ({fileInfo.Extension})";
+				lblBinaryFileSize.Text = fileInfo.GetFileSizeSuffix(2);
 				try
 				{
-					using Icon? fileIcon = PInvoke.GetIcon(filePath, true);
-					pbBinaryFileIcon.Image = fileIcon?.ToBitmap();
+					using Icon fileIcon = fileInfo.GetIcon(true);
+					pbBinaryFileIcon.Image = fileIcon.ToBitmap();
 				}
 				catch (Exception ex)
 				{
@@ -171,13 +175,14 @@ namespace FileConverter
 			try
 			{
 				EnableBinaryFileButtons(false);
-				string contents = IOHelper.ConvertToBinary(txtBinaryFilePath.Text);
+				var fileInfo = new FileInfo(txtBinaryFilePath.Text);
+				string contents = fileInfo.ConvertToBinary();
 				Clipboard.SetText(contents);
 				MessageBox.Show("Binary file contents copied.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
@@ -190,27 +195,30 @@ namespace FileConverter
 			try
 			{
 				EnableBinaryFileButtons(false);
-				string inputFilePath = txtBinaryFilePath.Text.Trim();
-				if (File.Exists(inputFilePath))
+				var fileInfo = new FileInfo(txtBinaryFilePath.Text);
+				string contents = fileInfo.ConvertToBinary();
+				
+				if (File.Exists(fileInfo.FullName))
 				{
-					string fileExt = Path.GetExtension(inputFilePath);
-					string defaultFileName = inputFilePath.Replace(fileExt, ".dat");
+					string fileExt = fileInfo.Extension;
+					string defaultFileName = fileInfo.Name.Replace(fileExt, ".bin");
 
 					using var dialog = new SaveFileDialog()
 					{
-						Filter = ".BIN File (*.bin)|*.bin|All files (*.*)|*.*",
+						Filter = "Binary file (*.bin)|*.bin|All files (*.*)|*.*",
 						FileName = defaultFileName,
 						DefaultExt = "bin",
-						InitialDirectory = Path.GetDirectoryName(inputFilePath),
-						RestoreDirectory = true
+						InitialDirectory = fileInfo.Directory?.FullName,
+						RestoreDirectory = true,
+						CheckPathExists = true
 					};
 					if (dialog.ShowDialog() == DialogResult.OK)
-						IOHelper.SaveAsBinary(inputFilePath, dialog.FileName);
+						fileInfo.SaveAsBinary(dialog.FileName);
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
@@ -230,9 +238,7 @@ namespace FileConverter
 				RestoreDirectory = true
 			};
 			if (dialog.ShowDialog() == DialogResult.OK)
-			{
 				txtImageFilePath.Text = dialog.FileName;
-			}
 		}
 
 		private void ResetImageFileInfo()
@@ -256,12 +262,12 @@ namespace FileConverter
 			{
 				var fileInfo = new FileInfo(filePath);
 				lblImageFileName.Text = fileInfo.Name;
-				lblImageFileType.Text = $"{PInvoke.GetFileType(fileInfo.FullName)} ({fileInfo.Extension})";
-				lblImageFileSize.Text = IOHelper.GetFileSizeSuffix(fileInfo.Length, 2);
+				lblImageFileType.Text = $"{fileInfo.GetFileType()} ({fileInfo.Extension})";
+				lblImageFileSize.Text = fileInfo.GetFileSizeSuffix(2);
 				try
 				{
-					using Icon? fileIcon = PInvoke.GetIcon(filePath, true);
-					pbImageFileIcon.Image = fileIcon?.ToBitmap();
+					using Icon fileIcon = fileInfo.GetIcon(true);
+					pbImageFileIcon.Image = fileIcon.ToBitmap();
 				}
 				catch (Exception ex)
 				{
@@ -281,7 +287,8 @@ namespace FileConverter
 			try
 			{
 				EnableImageFileButtons(false);
-				string contents = IOHelper.ConvertToBase64(txtImageFilePath.Text);
+				var fileInfo = new FileInfo(txtImageFilePath.Text);
+				string contents = fileInfo.ConvertToBase64();
 				Clipboard.SetText(contents);
 				MessageBox.Show("Image file contents copied as Base-64.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
@@ -329,5 +336,6 @@ namespace FileConverter
 		}
 
 		#endregion
+
 	}
 }

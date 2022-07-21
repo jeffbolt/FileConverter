@@ -17,7 +17,7 @@ namespace FileConverter
 		private const int MAX_TYPE = 80;
 
 		[StructLayout(LayoutKind.Sequential)]
-		public struct SHFILEINFO
+		private struct SHFILEINFO
 		{
 			public IntPtr hIcon;
 			public int iIcon;
@@ -28,7 +28,19 @@ namespace FileConverter
 			public string szTypeName;
 		};
 
-		public static class FILE_ATTRIBUTE
+		//[StructLayout(LayoutKind.Sequential)]
+		//private struct SHFILEINFOW
+		//{
+		//	public IntPtr hIcon;
+		//	public int iIcon;
+		//	public uint dwAttributes;
+		//	[MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_PATH * 2)]
+		//	public string szDisplayName;
+		//	[MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_TYPE * 2)]
+		//	public string szTypeName;
+		//}
+
+		private static class FILE_ATTRIBUTE
 		{
 			// https://docs.microsoft.com/en-us/windows/win32/fileio/file-attribute-constants
 			public const uint FILE_ATTRIBUTE_ARCHIVE = 0x20;                    // 32
@@ -50,8 +62,15 @@ namespace FileConverter
 			public const uint FILE_ATTRIBUTE_VIRTUAL = 0x10000;                 // 65536
 		}
 
+		//private static class SHGFI
+		//{
+		//	public const uint SHGFI_FILE_ATTRIBUTE_NORMAL = 0x80;
+		//	public const uint SHGFI_USEFILEATTRIBUTES = 0x10;
+		//	public const uint SHGFI_TYPENAME = 0x400;
+		//}
+
 		[Flags]
-		public enum SHGFI : uint
+		private enum SHGFI : uint
 		{
 			/// <summary>get icon</summary>
 			Icon = 0x000000100,
@@ -91,22 +110,59 @@ namespace FileConverter
 			OverlayIndex = 0x000000040,
 		}
 
-		[DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-		private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
+		[DllImport("shell32.dll")]
+		private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, out SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
 
-		[DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-		private static extern int SHGetFileInfo(string pszPath, int dwFileAttributes, out SHFILEINFO psfi, uint cbfileInfo, SHGFI uFlags);
+		//[DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+		//private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
 
-		public static string GetFileType(string filePath)
+		//[DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+		//private static extern int SHGetFileInfo(string pszPath, int dwFileAttributes, out SHFILEINFO psfi, uint cbfileInfo, SHGFI uFlags);
+
+		//[DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+		//private static extern IntPtr SHGetFileInfoW(string pszPath, uint dwFileAttributes, out SHFILEINFOW psfi, uint cbfileInfo, SHGFI uFlags);
+
+		//public static string GetFileType(string filePath)
+		//{
+		//	var info = new SHFILEINFO();
+		//	uint dwFileAttributes = FILE_ATTRIBUTE.FILE_ATTRIBUTE_NORMAL;
+		//	uint uFlags = (uint)(SHGFI.TypeName | SHGFI.UseFileAttributes);
+
+		//	SHGetFileInfo(filePath, dwFileAttributes, out info, (uint)Marshal.SizeOf(info), uFlags);
+		//	return info.szTypeName;
+		//}
+
+		/// <summary>
+		/// Extension method to get the file type of a FileInfo object
+		/// </summary>
+		/// <param name="fileInfo">FileInfo object</param>
+		/// <returns></returns>
+		public static string GetFileType(this FileInfo fileInfo)
 		{
-			var info = new SHFILEINFO();
-			uint dwFileAttributes = FILE_ATTRIBUTE.FILE_ATTRIBUTE_NORMAL;
-			uint uFlags = (uint)(SHGFI.TypeName | SHGFI.UseFileAttributes);
-
-			SHGetFileInfo(filePath, dwFileAttributes, ref info, (uint)Marshal.SizeOf(info), uFlags);
-
-			return info.szTypeName;
+			if (SHGetFileInfo(fileInfo.Extension, (uint)SHGFI.Attributes, out SHFILEINFO shFileInfo, (uint)Marshal.SizeOf(typeof(SHFILEINFO)), 
+				(uint)(SHGFI.UseFileAttributes | SHGFI.TypeName)) != IntPtr.Zero)
+				return shFileInfo.szTypeName;
+			else
+				return string.Empty;
 		}
+
+		//public static string GetFileTypeW(string filePath)
+		//{
+		//	var info = new SHFILEINFOW();
+		//	uint dwFileAttributes = FILE_ATTRIBUTE.FILE_ATTRIBUTE_NORMAL;
+		//	var uFlags = SHGFI.TypeName | SHGFI.UseFileAttributes;
+
+		//	SHGetFileInfoW(filePath, dwFileAttributes, out info, (uint)Marshal.SizeOf(info), uFlags);
+		//	return info.szTypeName;
+		//}
+
+		//public static string GetFileTypeDisplayName(string fileName)
+		//{
+		//	SHFILEINFO shinfo = new();
+		//	uint uFlags = (uint)(SHGFI.TypeName | SHGFI.UseFileAttributes);
+		//	SHGetFileInfo(fileName, 0, ref shinfo, (uint)Marshal.SizeOf(shinfo), uFlags);
+		//	return shinfo.szTypeName;
+		//}
 
 		/// <summary>
 		/// Returns the associated Icon for a file or application.
@@ -115,9 +171,22 @@ namespace FileConverter
 		/// <param name="filePath">Full path to the file</param>
 		/// <param name="small">If true, the 16x16 icon is returned otherwise the 32x32</param>
 		/// <returns></returns>
-		public static Icon GetIcon(string filePath, bool small)
+		//public static Icon GetIcon(string filePath, bool small)
+		//{
+		//	SHFILEINFO info = new();
+		//	int cbFileInfo = Marshal.SizeOf(info);
+		//	SHGFI flags;
+		//	if (small)
+		//		flags = SHGFI.Icon | SHGFI.SmallIcon | SHGFI.UseFileAttributes;
+		//	else
+		//		flags = SHGFI.Icon | SHGFI.LargeIcon | SHGFI.UseFileAttributes;
+
+		//	SHGetFileInfo(filePath, 256, out info, (uint)cbFileInfo, flags);
+		//	return Icon.FromHandle(info.hIcon);
+		//}
+		public static Icon GetIcon(this FileInfo fileInfo, bool small)
 		{
-			SHFILEINFO info = new SHFILEINFO();
+			SHFILEINFO info = new();
 			int cbFileInfo = Marshal.SizeOf(info);
 			SHGFI flags;
 			if (small)
@@ -125,7 +194,7 @@ namespace FileConverter
 			else
 				flags = SHGFI.Icon | SHGFI.LargeIcon | SHGFI.UseFileAttributes;
 
-			SHGetFileInfo(filePath, 256, out info, (uint)cbFileInfo, flags);
+			SHGetFileInfo(fileInfo.FullName, 256, out info, (uint)cbFileInfo, (uint)flags);
 			return Icon.FromHandle(info.hIcon);
 		}
 
@@ -162,15 +231,15 @@ namespace FileConverter
 		/// <param name="size">Size of the icon to load. If there is no such size available, a larger or smaller
 		///        sized-icon is scaled.</param>
 		/// <returns>List of all icons.</returns>
-		public static Icon? GetIconFromExe(string? path = null, string resId = "#32512", int size = 32)
+		public static Icon? GetIconFromExe(this FileInfo fileInfo, string resId = "#32512", int size = 32)
 		{
 			// load module
 			IntPtr h;
-			if (path == null)
+			if (fileInfo == null)
 				h = Marshal.GetHINSTANCE(Assembly.GetEntryAssembly().GetModules()[0]);
 			else
 			{
-				h = LoadLibraryEx(path, IntPtr.Zero, LoadLibraryFlags.LOAD_LIBRARY_AS_DATAFILE);
+				h = LoadLibraryEx(fileInfo.FullName, IntPtr.Zero, LoadLibraryFlags.LOAD_LIBRARY_AS_DATAFILE);
 				if (h == IntPtr.Zero)
 					return null;
 			}
@@ -192,4 +261,50 @@ namespace FileConverter
 			return null;
 		}
 	}
+
+	///// <summary>
+	///// See https://stackoverflow.com/questions/20152273/shgetfileinfo-description-for-a-files-extension-too-short#20159956
+	///// </summary>
+	//public static class PInvoke64
+	//{
+	//	/// <summary>Maximal Length of unmanaged Windows-Path-strings</summary>
+	//	private const int MAX_PATH = 260;
+	//	/// <summary>Maximal Length of unmanaged Typename</summary>
+	//	private const int MAX_TYPE = 80;
+
+	//	[DllImport("shell32.dll")]
+	//	internal static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, out SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
+
+	//	[StructLayout(LayoutKind.Sequential)]
+	//	internal struct SHFILEINFO
+	//	{
+	//		public IntPtr hIcon;
+	//		public int iIcon;
+	//		public uint dwAttributes;
+	//		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_PATH)]
+	//		public string szDisplayName;
+	//		[MarshalAs(UnmanagedType.ByValTStr, SizeConst = MAX_TYPE)]
+	//		public string szTypeName;
+	//	};
+
+	//	private const uint SHGFI_FILE_ATTRIBUTE_NORMAL = 0x80,
+	//					   SHGFI_USEFILEATTRIBUTES = 0x10,
+	//					   SHGFI_TYPENAME = 0x400;
+
+	//	public static string GetFileTypeDescription(this FileInfo file)
+	//	{
+	//		if (SHGetFileInfo(file.Extension,
+	//			SHGFI_FILE_ATTRIBUTE_NORMAL,
+	//			out SHFILEINFO shFileInfo,
+	//			(uint)Marshal.SizeOf(typeof(SHFILEINFO)),
+	//			SHGFI_USEFILEATTRIBUTES | SHGFI_TYPENAME) != IntPtr.Zero)
+	//		{
+	//			return shFileInfo.szTypeName;
+	//		}
+	//		else
+	//		{
+	//			return string.Empty;
+	//		}
+	//	}
+	//}
 }
