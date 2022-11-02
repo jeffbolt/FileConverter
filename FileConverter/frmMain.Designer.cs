@@ -28,7 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.pnlTop = new System.Windows.Forms.Panel();
+			this.pbTitle = new System.Windows.Forms.PictureBox();
 			this.lblVersion = new System.Windows.Forms.Label();
 			this.lblTitle = new System.Windows.Forms.Label();
 			this.tcMain = new System.Windows.Forms.TabControl();
@@ -62,6 +64,7 @@
 			this.txtImageFilePath = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.pnlTop.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbTitle)).BeginInit();
 			this.tcMain.SuspendLayout();
 			this.tabBinary.SuspendLayout();
 			this.grpBinaryFileInfo.SuspendLayout();
@@ -77,19 +80,34 @@
 			this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnlTop.BackColor = System.Drawing.Color.White;
+			this.pnlTop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlTop.BackgroundImage")));
 			this.pnlTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pnlTop.Controls.Add(this.pbTitle);
 			this.pnlTop.Controls.Add(this.lblVersion);
 			this.pnlTop.Controls.Add(this.lblTitle);
 			this.pnlTop.Location = new System.Drawing.Point(0, 0);
 			this.pnlTop.Name = "pnlTop";
-			this.pnlTop.Size = new System.Drawing.Size(584, 59);
+			this.pnlTop.Size = new System.Drawing.Size(584, 60);
 			this.pnlTop.TabIndex = 2;
+			// 
+			// pbTitle
+			// 
+			this.pbTitle.ErrorImage = null;
+			this.pbTitle.Image = global::FileConverter.Properties.Resources.App;
+			this.pbTitle.Location = new System.Drawing.Point(11, 8);
+			this.pbTitle.Name = "pbTitle";
+			this.pbTitle.Size = new System.Drawing.Size(34, 37);
+			this.pbTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pbTitle.TabIndex = 12;
+			this.pbTitle.TabStop = false;
 			// 
 			// lblVersion
 			// 
 			this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblVersion.AutoSize = true;
+			this.lblVersion.BackColor = System.Drawing.Color.Transparent;
 			this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.lblVersion.ForeColor = System.Drawing.Color.White;
 			this.lblVersion.Location = new System.Drawing.Point(516, 19);
 			this.lblVersion.Name = "lblVersion";
 			this.lblVersion.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -100,8 +118,11 @@
 			// lblTitle
 			// 
 			this.lblTitle.AutoSize = true;
+			this.lblTitle.BackColor = System.Drawing.Color.Transparent;
+			this.lblTitle.Cursor = System.Windows.Forms.Cursors.Default;
 			this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.lblTitle.Location = new System.Drawing.Point(13, 7);
+			this.lblTitle.ForeColor = System.Drawing.Color.White;
+			this.lblTitle.Location = new System.Drawing.Point(51, 8);
 			this.lblTitle.Name = "lblTitle";
 			this.lblTitle.Size = new System.Drawing.Size(174, 32);
 			this.lblTitle.TabIndex = 1;
@@ -118,7 +139,7 @@
 			this.tcMain.Name = "tcMain";
 			this.tcMain.SelectedIndex = 0;
 			this.tcMain.Size = new System.Drawing.Size(558, 266);
-			this.tcMain.TabIndex = 3;
+			this.tcMain.TabIndex = 1;
 			// 
 			// tabBinary
 			// 
@@ -142,21 +163,25 @@
 			// btnBinaryFileCopyClipboard
 			// 
 			this.btnBinaryFileCopyClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnBinaryFileCopyClipboard.Enabled = false;
 			this.btnBinaryFileCopyClipboard.Location = new System.Drawing.Point(16, 201);
 			this.btnBinaryFileCopyClipboard.Name = "btnBinaryFileCopyClipboard";
 			this.btnBinaryFileCopyClipboard.Size = new System.Drawing.Size(150, 23);
-			this.btnBinaryFileCopyClipboard.TabIndex = 9;
-			this.btnBinaryFileCopyClipboard.Text = "Copy Binary Contents";
+			this.btnBinaryFileCopyClipboard.TabIndex = 3;
+			this.btnBinaryFileCopyClipboard.Tag = "";
+			this.btnBinaryFileCopyClipboard.Text = "Copy as SQL Binary";
 			this.btnBinaryFileCopyClipboard.UseVisualStyleBackColor = true;
 			this.btnBinaryFileCopyClipboard.Click += new System.EventHandler(this.btnBinaryFileCopyClipboard_Click);
 			// 
 			// btnSaveBinaryFileAs
 			// 
 			this.btnSaveBinaryFileAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSaveBinaryFileAs.Enabled = false;
 			this.btnSaveBinaryFileAs.Location = new System.Drawing.Point(172, 201);
 			this.btnSaveBinaryFileAs.Name = "btnSaveBinaryFileAs";
 			this.btnSaveBinaryFileAs.Size = new System.Drawing.Size(100, 23);
-			this.btnSaveBinaryFileAs.TabIndex = 8;
+			this.btnSaveBinaryFileAs.TabIndex = 4;
+			this.btnSaveBinaryFileAs.Tag = "";
 			this.btnSaveBinaryFileAs.Text = "Save As...";
 			this.btnSaveBinaryFileAs.UseVisualStyleBackColor = true;
 			this.btnSaveBinaryFileAs.Click += new System.EventHandler(this.btnSaveBinaryFileAs_Click);
@@ -254,7 +279,7 @@
 			this.btnBinaryFileBrowse.Location = new System.Drawing.Point(459, 31);
 			this.btnBinaryFileBrowse.Name = "btnBinaryFileBrowse";
 			this.btnBinaryFileBrowse.Size = new System.Drawing.Size(75, 23);
-			this.btnBinaryFileBrowse.TabIndex = 6;
+			this.btnBinaryFileBrowse.TabIndex = 2;
 			this.btnBinaryFileBrowse.Text = "Browse...";
 			this.btnBinaryFileBrowse.UseVisualStyleBackColor = true;
 			this.btnBinaryFileBrowse.Click += new System.EventHandler(this.btnBinaryFileBrowse_Click);
@@ -266,7 +291,7 @@
 			this.txtBinaryFilePath.Location = new System.Drawing.Point(16, 31);
 			this.txtBinaryFilePath.Name = "txtBinaryFilePath";
 			this.txtBinaryFilePath.Size = new System.Drawing.Size(437, 23);
-			this.txtBinaryFilePath.TabIndex = 5;
+			this.txtBinaryFilePath.TabIndex = 1;
 			this.txtBinaryFilePath.TextChanged += new System.EventHandler(this.txtBinaryFilePath_TextChanged);
 			// 
 			// lblBinaryBrowse
@@ -300,10 +325,12 @@
 			// btnImageFileSaveAs
 			// 
 			this.btnImageFileSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnImageFileSaveAs.Enabled = false;
 			this.btnImageFileSaveAs.Location = new System.Drawing.Point(172, 201);
 			this.btnImageFileSaveAs.Name = "btnImageFileSaveAs";
 			this.btnImageFileSaveAs.Size = new System.Drawing.Size(100, 23);
-			this.btnImageFileSaveAs.TabIndex = 13;
+			this.btnImageFileSaveAs.TabIndex = 7;
+			this.btnImageFileSaveAs.Tag = "";
 			this.btnImageFileSaveAs.Text = "Save As...";
 			this.btnImageFileSaveAs.UseVisualStyleBackColor = true;
 			this.btnImageFileSaveAs.Click += new System.EventHandler(this.btnImageFileSaveAs_Click);
@@ -311,11 +338,13 @@
 			// btnImageFileCopyClipboard
 			// 
 			this.btnImageFileCopyClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnImageFileCopyClipboard.Enabled = false;
 			this.btnImageFileCopyClipboard.Location = new System.Drawing.Point(16, 201);
 			this.btnImageFileCopyClipboard.Name = "btnImageFileCopyClipboard";
 			this.btnImageFileCopyClipboard.Size = new System.Drawing.Size(150, 23);
-			this.btnImageFileCopyClipboard.TabIndex = 12;
-			this.btnImageFileCopyClipboard.Text = "Copy Base-64 Contents";
+			this.btnImageFileCopyClipboard.TabIndex = 6;
+			this.btnImageFileCopyClipboard.Tag = "";
+			this.btnImageFileCopyClipboard.Text = "Copy as Base-64";
 			this.btnImageFileCopyClipboard.UseVisualStyleBackColor = true;
 			this.btnImageFileCopyClipboard.Click += new System.EventHandler(this.btnImageFileCopyClipboard_Click);
 			// 
@@ -426,7 +455,7 @@
 			this.btnImageFileBrowse.Location = new System.Drawing.Point(459, 31);
 			this.btnImageFileBrowse.Name = "btnImageFileBrowse";
 			this.btnImageFileBrowse.Size = new System.Drawing.Size(75, 23);
-			this.btnImageFileBrowse.TabIndex = 9;
+			this.btnImageFileBrowse.TabIndex = 5;
 			this.btnImageFileBrowse.Text = "Browse...";
 			this.btnImageFileBrowse.UseVisualStyleBackColor = true;
 			this.btnImageFileBrowse.Click += new System.EventHandler(this.btnImageFileBrowse_Click);
@@ -438,7 +467,7 @@
 			this.txtImageFilePath.Location = new System.Drawing.Point(16, 31);
 			this.txtImageFilePath.Name = "txtImageFilePath";
 			this.txtImageFilePath.Size = new System.Drawing.Size(437, 23);
-			this.txtImageFilePath.TabIndex = 8;
+			this.txtImageFilePath.TabIndex = 4;
 			this.txtImageFilePath.TextChanged += new System.EventHandler(this.txtImageFilePath_TextChanged);
 			// 
 			// label1
@@ -464,6 +493,7 @@
 			this.Load += new System.EventHandler(this.frmMain_Load);
 			this.pnlTop.ResumeLayout(false);
 			this.pnlTop.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbTitle)).EndInit();
 			this.tcMain.ResumeLayout(false);
 			this.tabBinary.ResumeLayout(false);
 			this.tabBinary.PerformLayout();
@@ -514,5 +544,6 @@
 		private Label lblImageFileTypeTitle;
 		private Button btnImageFileCopyClipboard;
 		private Button btnImageFileSaveAs;
+		private PictureBox pbTitle;
 	}
 }
