@@ -1,15 +1,12 @@
 using System.Reflection;
-
-using PInvoke;
-
-using static PInvoke.Shell32;
+using System.Linq;
 
 namespace FileConverter
 {
 	public partial class frmMain : Form
 	{
 		private const string SupportedImageFileTypes = "*.bmp;*.jpg;*.jpeg;*.png;*.gif";
-		private List<string> ImageFileTypes = new(SupportedImageFileTypes.Replace("*", "").Split(';'));
+		private readonly List<string> ImageFileTypes = new(SupportedImageFileTypes.Replace("*", "").Split(';'));
 
 		private bool IsSupportedImageFile(string filename)
 		{
@@ -136,11 +133,13 @@ namespace FileConverter
 			lblBinaryFileName.Text = "";
 			lblBinaryFileType.Text = "";
 			lblBinaryFileSize.Text = "";
+			pbBinaryFileIcon.Visible = false;
+			EnableBinaryFileButtons(false);
 		}
 
-		private void EnableBinaryFileButtons(bool enable)
+		private void EnableBinaryFileButtons(bool enable, bool includeBrowse = false)
 		{
-			btnBinaryFileBrowse.Enabled = enable;
+			if (includeBrowse) btnBinaryFileBrowse.Enabled = enable;
 			btnBinaryFileCopyClipboard.Enabled = enable;
 			btnSaveBinaryFileAs.Enabled = enable;
 		}
@@ -157,16 +156,18 @@ namespace FileConverter
 				try
 				{
 					using Icon fileIcon = fileInfo.GetIcon(true);
+					pbBinaryFileIcon.Visible = true;
 					pbBinaryFileIcon.Image = fileIcon.ToBitmap();
 				}
 				catch (Exception ex)
 				{
 					System.Diagnostics.Debug.WriteLine(ex.ToString());
 				}
+				EnableBinaryFileButtons(true, true);
 			}
 			else
 			{
-				ResetImageFileInfo();
+				ResetBinaryFileInfo();
 			}
 		}
 
@@ -174,7 +175,7 @@ namespace FileConverter
 		{
 			try
 			{
-				EnableBinaryFileButtons(false);
+				EnableBinaryFileButtons(false, true);
 				var fileInfo = new FileInfo(txtBinaryFilePath.Text);
 				string contents = fileInfo.ConvertToBinary();
 				Clipboard.SetText(contents);
@@ -186,7 +187,7 @@ namespace FileConverter
 			}
 			finally
 			{
-				EnableBinaryFileButtons(true);
+				EnableBinaryFileButtons(true, true);
 			}
 		}
 
@@ -194,7 +195,7 @@ namespace FileConverter
 		{
 			try
 			{
-				EnableBinaryFileButtons(false);
+				EnableBinaryFileButtons(false, true);
 				var fileInfo = new FileInfo(txtBinaryFilePath.Text);
 				string contents = fileInfo.ConvertToBinary();
 				
@@ -222,7 +223,7 @@ namespace FileConverter
 			}
 			finally
 			{
-				EnableBinaryFileButtons(true);
+				EnableBinaryFileButtons(true, true);
 			}
 		}
 
@@ -246,11 +247,14 @@ namespace FileConverter
 			lblImageFileName.Text = "";
 			lblImageFileType.Text = "";
 			lblImageFileSize.Text = "";
+			pbImageFileIcon.Visible = false;
+			pbImageFilePreview.Visible = false;
+			EnableImageFileButtons(false);
 		}
 
-		private void EnableImageFileButtons(bool enable)
+		private void EnableImageFileButtons(bool enable, bool includeBrowse = false)
 		{
-			btnImageFileBrowse.Enabled = enable;
+			if (includeBrowse) btnImageFileBrowse.Enabled = includeBrowse && enable;
 			btnImageFileCopyClipboard.Enabled = enable;
 			btnImageFileSaveAs.Enabled = enable;
 		}
@@ -267,6 +271,7 @@ namespace FileConverter
 				try
 				{
 					using Icon fileIcon = fileInfo.GetIcon(true);
+					pbImageFileIcon.Visible = true;
 					pbImageFileIcon.Image = fileIcon.ToBitmap();
 				}
 				catch (Exception ex)
@@ -274,7 +279,9 @@ namespace FileConverter
 					System.Diagnostics.Debug.WriteLine(ex.ToString());
 				}
 
+				pbImageFilePreview.Visible = true;
 				pbImageFilePreview.Image = new Bitmap(filePath);
+				EnableImageFileButtons(true, true);
 			}
 			else
 			{
@@ -286,7 +293,7 @@ namespace FileConverter
 		{
 			try
 			{
-				EnableImageFileButtons(false);
+				EnableImageFileButtons(false, true);
 				var fileInfo = new FileInfo(txtImageFilePath.Text);
 				string contents = fileInfo.ConvertToBase64();
 				Clipboard.SetText(contents);
@@ -298,7 +305,7 @@ namespace FileConverter
 			}
 			finally
 			{
-				EnableImageFileButtons(true);
+				EnableImageFileButtons(true, true);
 			}
 		}
 

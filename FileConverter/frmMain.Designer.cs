@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.pnlTop = new System.Windows.Forms.Panel();
 			this.pbTitle = new System.Windows.Forms.PictureBox();
 			this.lblVersion = new System.Windows.Forms.Label();
@@ -79,7 +80,8 @@
 			this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnlTop.BackColor = System.Drawing.Color.White;
-			this.pnlTop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pnlTop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlTop.BackgroundImage")));
+			this.pnlTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pnlTop.Controls.Add(this.pbTitle);
 			this.pnlTop.Controls.Add(this.lblVersion);
 			this.pnlTop.Controls.Add(this.lblTitle);
@@ -103,8 +105,10 @@
 			// 
 			this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblVersion.AutoSize = true;
+			this.lblVersion.BackColor = System.Drawing.Color.Transparent;
 			this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.lblVersion.Location = new System.Drawing.Point(514, 19);
+			this.lblVersion.ForeColor = System.Drawing.Color.White;
+			this.lblVersion.Location = new System.Drawing.Point(516, 19);
 			this.lblVersion.Name = "lblVersion";
 			this.lblVersion.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.lblVersion.Size = new System.Drawing.Size(51, 17);
@@ -114,7 +118,10 @@
 			// lblTitle
 			// 
 			this.lblTitle.AutoSize = true;
+			this.lblTitle.BackColor = System.Drawing.Color.Transparent;
+			this.lblTitle.Cursor = System.Windows.Forms.Cursors.Default;
 			this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			this.lblTitle.ForeColor = System.Drawing.Color.White;
 			this.lblTitle.Location = new System.Drawing.Point(51, 8);
 			this.lblTitle.Name = "lblTitle";
 			this.lblTitle.Size = new System.Drawing.Size(174, 32);
@@ -156,10 +163,12 @@
 			// btnBinaryFileCopyClipboard
 			// 
 			this.btnBinaryFileCopyClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnBinaryFileCopyClipboard.Enabled = false;
 			this.btnBinaryFileCopyClipboard.Location = new System.Drawing.Point(16, 201);
 			this.btnBinaryFileCopyClipboard.Name = "btnBinaryFileCopyClipboard";
 			this.btnBinaryFileCopyClipboard.Size = new System.Drawing.Size(150, 23);
 			this.btnBinaryFileCopyClipboard.TabIndex = 3;
+			this.btnBinaryFileCopyClipboard.Tag = "";
 			this.btnBinaryFileCopyClipboard.Text = "Copy as SQL Binary";
 			this.btnBinaryFileCopyClipboard.UseVisualStyleBackColor = true;
 			this.btnBinaryFileCopyClipboard.Click += new System.EventHandler(this.btnBinaryFileCopyClipboard_Click);
@@ -167,10 +176,12 @@
 			// btnSaveBinaryFileAs
 			// 
 			this.btnSaveBinaryFileAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnSaveBinaryFileAs.Enabled = false;
 			this.btnSaveBinaryFileAs.Location = new System.Drawing.Point(172, 201);
 			this.btnSaveBinaryFileAs.Name = "btnSaveBinaryFileAs";
 			this.btnSaveBinaryFileAs.Size = new System.Drawing.Size(100, 23);
 			this.btnSaveBinaryFileAs.TabIndex = 4;
+			this.btnSaveBinaryFileAs.Tag = "";
 			this.btnSaveBinaryFileAs.Text = "Save As...";
 			this.btnSaveBinaryFileAs.UseVisualStyleBackColor = true;
 			this.btnSaveBinaryFileAs.Click += new System.EventHandler(this.btnSaveBinaryFileAs_Click);
@@ -319,6 +330,7 @@
 			this.btnImageFileSaveAs.Name = "btnImageFileSaveAs";
 			this.btnImageFileSaveAs.Size = new System.Drawing.Size(100, 23);
 			this.btnImageFileSaveAs.TabIndex = 7;
+			this.btnImageFileSaveAs.Tag = "";
 			this.btnImageFileSaveAs.Text = "Save As...";
 			this.btnImageFileSaveAs.UseVisualStyleBackColor = true;
 			this.btnImageFileSaveAs.Click += new System.EventHandler(this.btnImageFileSaveAs_Click);
@@ -326,10 +338,12 @@
 			// btnImageFileCopyClipboard
 			// 
 			this.btnImageFileCopyClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnImageFileCopyClipboard.Enabled = false;
 			this.btnImageFileCopyClipboard.Location = new System.Drawing.Point(16, 201);
 			this.btnImageFileCopyClipboard.Name = "btnImageFileCopyClipboard";
 			this.btnImageFileCopyClipboard.Size = new System.Drawing.Size(150, 23);
 			this.btnImageFileCopyClipboard.TabIndex = 6;
+			this.btnImageFileCopyClipboard.Tag = "";
 			this.btnImageFileCopyClipboard.Text = "Copy as Base-64";
 			this.btnImageFileCopyClipboard.UseVisualStyleBackColor = true;
 			this.btnImageFileCopyClipboard.Click += new System.EventHandler(this.btnImageFileCopyClipboard_Click);
