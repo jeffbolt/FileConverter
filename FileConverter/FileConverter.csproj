@@ -9,8 +9,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <PackageIcon>App.png</PackageIcon>
     <ApplicationIcon>App.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <FileVersion>1.0.0.2</FileVersion>
+    <Copyright>Copyright © Jeff Bolt 2022</Copyright>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 

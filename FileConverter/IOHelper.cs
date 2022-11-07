@@ -35,47 +35,29 @@ namespace FileConverter
 				return "";
 		}
 
-		//public static string GetFileSizeSuffix(long value, int decimalPlaces = 0)
-		//{
-		//	// https://stackoverflow.com/questions/14488796/does-net-provide-an-easy-way-convert-bytes-to-kb-mb-gb-etc#14488941
-		//	string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
-
-		//	if (decimalPlaces < 0) throw new ArgumentOutOfRangeException("decimalPlaces");
-		//	if (value < 0) return "-" + GetFileSizeSuffix(-value, decimalPlaces);
-		//	if (value == 0) return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
-
-		//	// mag is 0 for bytes, 1 for KB, 2, for MB, etc.
-		//	int mag = (int)Math.Log(value, 1024);
-
-		//	// 1L << (mag * 10) == 2 ^ (10 * mag) 
-		//	// [i.e. the number of bytes in the unit corresponding to mag]
-		//	decimal adjustedSize = (decimal)value / (1L << (mag * 10));
-
-		//	// make adjustment when the value is large enough that it would round up to 1000 or more
-		//	if (Math.Round(adjustedSize, decimalPlaces) >= 1000)
-		//	{
-		//		mag += 1;
-		//		adjustedSize /= 1024;
-		//	}
-
-		//	return string.Format("{0:n" + decimalPlaces + "} {1}", adjustedSize, SizeSuffixes[mag]);
-		//}
-
-		/// <summary>
-		/// Extension method for displaying the size of a FileInfo object
-		/// </summary>
+		/// <summary>Extension method for calling GetFileSizeSuffix() from a FileInfo object</summary>
 		/// <param name="fileInfo">FileInfo object</param>
 		/// <param name="decimalPlaces">Number of decimal places to display</param>
 		/// <returns></returns>
 		/// <exception cref="ArgumentOutOfRangeException"></exception>
-		public static string GetFileSizeSuffix(this FileInfo fileInfo, int decimalPlaces = 0)
+		public static string FormatFileSize(this FileInfo fileInfo, int decimalPlaces = 0)
 		{
-			// https://stackoverflow.com/questions/14488796/does-net-provide-an-easy-way-convert-bytes-to-kb-mb-gb-etc#14488941
+			return FormatFileSize(fileInfo.Length, decimalPlaces);
+		}
+
+		/// <summary>Format the nubmer of bytes to the nearest whole number byte magnitude</summary>
+		/// <param name="value">Number of bytes</param>
+		/// <param name="decimalPlaces">Number of decimal places to display</param>
+		/// <returns>Value formatted to number of decimal places with unit suffix</returns>
+		/// <exception cref="ArgumentOutOfRangeException"></exception>
+		public static string FormatFileSize(long value, int decimalPlaces = 0)
+		{
+			// https://stackoverflow.com/questions/14488796/does-net-provide-an-easy-way-convert-bytes-to-kb-mb-gb-etc
 			string[] SizeSuffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
 
 			if (decimalPlaces < 0) throw new ArgumentOutOfRangeException(nameof(decimalPlaces));
-			long value = fileInfo.Length;
-			if (value <= 0) return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
+			if (value < 0) return "-" + FormatFileSize(-value, decimalPlaces);
+			if (value == 0) return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
 
 			// mag is 0 for bytes, 1 for KB, 2, for MB, etc.
 			int mag = (int)Math.Log(value, 1024);
@@ -92,6 +74,17 @@ namespace FileConverter
 			}
 
 			return string.Format("{0:n" + decimalPlaces + "} {1}", adjustedSize, SizeSuffixes[mag]);
+		}
+
+		public static string FormatFileSize2(long bytes, int decimalPlaces = 0)
+		{
+			// https://stackoverflow.com/questions/14488796/does-net-provide-an-easy-way-convert-bytes-to-kb-mb-gb-etc
+			var unit = 1024;
+			if (bytes < unit) return $"{bytes} B";
+
+			var exp = (int)(Math.Log(bytes) / Math.Log(unit));
+			//return $"{bytes / Math.Pow(unit, exp):F2} {"KMGTPE"[exp - 1]}B";
+			return string.Format("{0:F" + decimalPlaces + "} {1}", bytes / Math.Pow(unit, exp), $"{"KMGTPE"[exp - 1]}B");
 		}
 
 		public static string ConvertToBinary(this FileInfo fileInfo)
