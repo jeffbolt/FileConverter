@@ -1,5 +1,5 @@
+using System.Diagnostics;
 using System.Reflection;
-using System.Linq;
 
 namespace FileConverter
 {
@@ -152,7 +152,16 @@ namespace FileConverter
 				var fileInfo = new FileInfo(filePath);
 				lblBinaryFileName.Text = fileInfo.Name;
 				lblBinaryFileType.Text = $"{fileInfo.GetFileType()} ({fileInfo.Extension})";
-				lblBinaryFileSize.Text = fileInfo.GetFileSizeSuffix(2);
+				// Format file bytes to nearest whole number unit
+				// Method 1: Use recursive function
+				lblBinaryFileSize.Text = fileInfo.FormatFileSize(2);
+				// Method 2: Use exponent function
+				//lblBinaryFileSize.Text = IOHelper.FormatFileSize2(fileInfo.Length, 2);
+				// Method 3: Use ByteSize library
+				//var byteSize = ByteSizeLib.ByteSize.FromBytes(fileInfo.Length);
+				//lblBinaryFileSize.Text = byteSize.ToString();
+				//lblBinaryFileSize.Text = byteSize.ToBinaryString();
+
 				try
 				{
 					using Icon fileIcon = fileInfo.GetIcon(true);
@@ -161,7 +170,7 @@ namespace FileConverter
 				}
 				catch (Exception ex)
 				{
-					System.Diagnostics.Debug.WriteLine(ex.ToString());
+					Debug.WriteLine(ex.ToString());
 				}
 				EnableBinaryFileButtons(true, true);
 			}
@@ -267,7 +276,7 @@ namespace FileConverter
 				var fileInfo = new FileInfo(filePath);
 				lblImageFileName.Text = fileInfo.Name;
 				lblImageFileType.Text = $"{fileInfo.GetFileType()} ({fileInfo.Extension})";
-				lblImageFileSize.Text = fileInfo.GetFileSizeSuffix(2);
+				lblImageFileSize.Text = fileInfo.FormatFileSize(2);
 				try
 				{
 					using Icon fileIcon = fileInfo.GetIcon(true);
@@ -276,7 +285,7 @@ namespace FileConverter
 				}
 				catch (Exception ex)
 				{
-					System.Diagnostics.Debug.WriteLine(ex.ToString());
+					Debug.WriteLine(ex.ToString());
 				}
 
 				pbImageFilePreview.Visible = true;
