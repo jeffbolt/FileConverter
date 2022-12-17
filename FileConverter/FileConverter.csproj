@@ -9,17 +9,23 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <PackageIcon>App.png</PackageIcon>
     <ApplicationIcon>App.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.0.2</AssemblyVersion>
-    <FileVersion>1.0.0.2</FileVersion>
-    <Copyright>Copyright © Jeff Bolt 2022</Copyright>
+		<Version>$(VersionPrefix)</Version>
+		<FileVersion>1.0.1.2</FileVersion>
+		<AssemblyVersion>1.0.1.2</AssemblyVersion>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+		<Copyright>Copyright © Jeff Bolt 2022</Copyright>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Updater.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="App.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.14" />
     <PackageReference Include="PInvoke.Shell32" Version="0.7.124" />
     <PackageReference Include="PInvoke.Windows.Core" Version="0.7.124" />
   </ItemGroup>
@@ -48,6 +54,11 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileConverter.Config\FileConverter.Config.csproj" />
+    <ProjectReference Include="..\FileConverter.UpdateService\FileConverter.UpdateService.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,5 @@
+using FileConverter.UpdateService;
+
 using System.Diagnostics;
 using System.Reflection;
 
@@ -5,12 +7,13 @@ namespace FileConverter
 {
 	public partial class frmMain : Form
 	{
+		private Version? CurrentVersion;
 		private const string SupportedImageFileTypes = "*.bmp;*.jpg;*.jpeg;*.png;*.gif";
 		private readonly List<string> ImageFileTypes = new(SupportedImageFileTypes.Replace("*", "").Split(';'));
 
 		private bool IsSupportedImageFile(string filename)
 		{
-			foreach(string imageFileType in ImageFileTypes)
+			foreach (string imageFileType in ImageFileTypes)
 				if (filename.EndsWith(imageFileType, StringComparison.OrdinalIgnoreCase))
 					return true;
 			return false;
@@ -25,9 +28,93 @@ namespace FileConverter
 
 		private void frmMain_Load(object sender, EventArgs e)
 		{
-			lblVersion.Text = $"v{AssemblyHelper.GetAssemblyVersion()}";
+			CurrentVersion = AssemblyHelper.GetAssemblyVersion();
+			lblVersion.Text = $"v{CurrentVersion}";
+			lnkUpdate.Tag = "Unknown";
+			lnkUpdate.Text = "Check for Update";
 			ResetBinaryFileInfo();
 			ResetImageFileInfo();
+
+			CheckForUpdateAsync();
+		}
+
+		private void lnkUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			if (lnkUpdate.Tag.Equals("UpdateAvailable"))
+				DownloadAndInstallUpdate();
+			else if (!lnkUpdate.Tag.Equals("Checking"))
+				CheckForUpdateAsync();
+		}
+
+		#endregion
+
+		#region Auto Update
+
+		//private void CheckForUpdate(bool promptToInstall = true)
+		//{
+		//	try
+		//	{
+		//		var latestVersion = Updater.GetLatestRelease()?.Version;
+		//		if (latestVersion > CurrentVersion)
+		//		{
+		//			lnkUpdate.Tag = "UpdateAvailable";
+		//			lnkUpdate.Text = $"Click to download v{latestVersion}";
+		//			if (promptToInstall && MessageBox.Show($"Version v{latestVersion} is avaible. Download and install now?", 
+		//				"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+		//			{
+		//				DownloadAndInstallUpdate();
+		//			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		Debug.WriteLine(ex.ToString());
+		//	}
+		//}
+
+		private async void CheckForUpdateAsync(bool promptToInstall = true)
+		{
+			try
+			{
+				lnkUpdate.Tag = "Checking";
+				lnkUpdate.Text = "Checking for update...";
+
+				var latestRelease = await Updater.GetLatestReleaseAsync();
+				if (latestRelease != null)
+				{
+					var latestVersion = latestRelease.Version;
+					if (latestVersion > CurrentVersion)
+					{
+						lnkUpdate.Tag = "UpdateAvailable";
+						lnkUpdate.Text = $"Click to download v{latestVersion}";
+						if (promptToInstall && MessageBox.Show($"Version v{latestVersion} is avaible. Download and install now?",
+							"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+						{
+							DownloadAndInstallUpdate();
+						}
+					}
+					else if (latestVersion == CurrentVersion)
+					{
+						lnkUpdate.Tag = "Latest";
+						lnkUpdate.Text = "Running latest version";
+					}
+					else
+					{
+						lnkUpdate.Tag = "Unknown";
+						lnkUpdate.Text = "Check for Update";
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.ToString());
+			}
+		}
+
+		private void DownloadAndInstallUpdate()
+		{
+			// TODO: Call update service and close
+			Close();
 		}
 
 		#endregion

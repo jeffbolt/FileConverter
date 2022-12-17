@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter", "FileConver
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FileConverter.Setup", "FileConverter.Setup\FileConverter.Setup.vdproj", "{A7DB15D6-18BA-4E22-8E3E-F1DA81CF2315}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileConverter.UpdateService", "FileConverter.UpdateService\FileConverter.UpdateService.csproj", "{46F27121-3C4C-418A-8886-90E1C198B531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter.Config", "FileConverter.Config\FileConverter.Config.csproj", "{D7E4142E-1E0D-4CFD-9D12-42CD5BC6F0B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{A7DB15D6-18BA-4E22-8E3E-F1DA81CF2315}.Debug|Any CPU.ActiveCfg = Debug
 		{A7DB15D6-18BA-4E22-8E3E-F1DA81CF2315}.Release|Any CPU.ActiveCfg = Release
 		{A7DB15D6-18BA-4E22-8E3E-F1DA81CF2315}.Release|Any CPU.Build.0 = Release
+		{46F27121-3C4C-418A-8886-90E1C198B531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F27121-3C4C-418A-8886-90E1C198B531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F27121-3C4C-418A-8886-90E1C198B531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F27121-3C4C-418A-8886-90E1C198B531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7E4142E-1E0D-4CFD-9D12-42CD5BC6F0B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E4142E-1E0D-4CFD-9D12-42CD5BC6F0B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E4142E-1E0D-4CFD-9D12-42CD5BC6F0B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E4142E-1E0D-4CFD-9D12-42CD5BC6F0B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

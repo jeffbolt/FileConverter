@@ -30,6 +30,7 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.pnlTop = new System.Windows.Forms.Panel();
+			this.lnkUpdate = new System.Windows.Forms.LinkLabel();
 			this.pbTitle = new System.Windows.Forms.PictureBox();
 			this.lblVersion = new System.Windows.Forms.Label();
 			this.lblTitle = new System.Windows.Forms.Label();
@@ -62,7 +63,7 @@
 			this.lblImageFileTypeTitle = new System.Windows.Forms.Label();
 			this.btnImageFileBrowse = new System.Windows.Forms.Button();
 			this.txtImageFilePath = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
+			this.lblImageBrowse = new System.Windows.Forms.Label();
 			this.pnlTop.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbTitle)).BeginInit();
 			this.tcMain.SuspendLayout();
@@ -82,6 +83,7 @@
 			this.pnlTop.BackColor = System.Drawing.Color.Transparent;
 			this.pnlTop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlTop.BackgroundImage")));
 			this.pnlTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pnlTop.Controls.Add(this.lnkUpdate);
 			this.pnlTop.Controls.Add(this.pbTitle);
 			this.pnlTop.Controls.Add(this.lblVersion);
 			this.pnlTop.Controls.Add(this.lblTitle);
@@ -89,6 +91,21 @@
 			this.pnlTop.Name = "pnlTop";
 			this.pnlTop.Size = new System.Drawing.Size(584, 60);
 			this.pnlTop.TabIndex = 2;
+			// 
+			// lnkUpdate
+			// 
+			this.lnkUpdate.ActiveLinkColor = System.Drawing.Color.Lime;
+			this.lnkUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.lnkUpdate.LinkColor = System.Drawing.Color.Lime;
+			this.lnkUpdate.Location = new System.Drawing.Point(51, 36);
+			this.lnkUpdate.Name = "lnkUpdate";
+			this.lnkUpdate.Size = new System.Drawing.Size(516, 15);
+			this.lnkUpdate.TabIndex = 13;
+			this.lnkUpdate.TabStop = true;
+			this.lnkUpdate.Text = "Check for Update";
+			this.lnkUpdate.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.lnkUpdate.VisitedLinkColor = System.Drawing.Color.Lime;
+			this.lnkUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUpdate_LinkClicked);
 			// 
 			// pbTitle
 			// 
@@ -114,6 +131,7 @@
 			this.lblVersion.Size = new System.Drawing.Size(51, 17);
 			this.lblVersion.TabIndex = 11;
 			this.lblVersion.Text = "v0.0.0.0";
+			this.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblTitle
 			// 
@@ -311,7 +329,7 @@
 			this.tabImage.Controls.Add(this.gbImageFileInfo);
 			this.tabImage.Controls.Add(this.btnImageFileBrowse);
 			this.tabImage.Controls.Add(this.txtImageFilePath);
-			this.tabImage.Controls.Add(this.label1);
+			this.tabImage.Controls.Add(this.lblImageBrowse);
 			this.tabImage.Location = new System.Drawing.Point(4, 24);
 			this.tabImage.Name = "tabImage";
 			this.tabImage.Padding = new System.Windows.Forms.Padding(3);
@@ -470,14 +488,14 @@
 			this.txtImageFilePath.TabIndex = 4;
 			this.txtImageFilePath.TextChanged += new System.EventHandler(this.txtImageFilePath_TextChanged);
 			// 
-			// label1
+			// lblImageBrowse
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(16, 13);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(163, 15);
-			this.label1.TabIndex = 7;
-			this.label1.Text = "Drag or browse for image file:";
+			this.lblImageBrowse.AutoSize = true;
+			this.lblImageBrowse.Location = new System.Drawing.Point(16, 13);
+			this.lblImageBrowse.Name = "lblImageBrowse";
+			this.lblImageBrowse.Size = new System.Drawing.Size(163, 15);
+			this.lblImageBrowse.TabIndex = 7;
+			this.lblImageBrowse.Text = "Drag or browse for image file:";
 			// 
 			// frmMain
 			// 
@@ -533,7 +551,7 @@
 		private Button btnSaveBinaryFileAs;
 		private Button btnImageFileBrowse;
 		private TextBox txtImageFilePath;
-		private Label label1;
+		private Label lblImageBrowse;
 		private PictureBox pbImageFilePreview;
 		private GroupBox gbImageFileInfo;
 		private PictureBox pbImageFileIcon;
@@ -546,5 +564,6 @@
 		private Button btnImageFileCopyClipboard;
 		private Button btnImageFileSaveAs;
 		private PictureBox pbTitle;
+		private LinkLabel lnkUpdate;
 	}
 }

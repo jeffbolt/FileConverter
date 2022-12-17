@@ -4,11 +4,16 @@ namespace FileConverter
 {
 	public static class AssemblyHelper
 	{
-		public static string GetAssemblyVersion()
+		public static Version GetAssemblyVersion()
 		{
-			// Returns in format [Major Version].[Minor Version].[Build Number].[Revision]
-			return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			return Assembly.GetExecutingAssembly().GetName().Version;
 		}
+
+		//public static string GetAssemblyVersion()
+		//{
+		//	// Returns in format [Major Version].[Minor Version].[Build Number].[Revision]
+		//	return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+		//}
 
 		public static DateTime GetAssemblyDate()
 		{
@@ -23,6 +28,40 @@ namespace FileConverter
 		public static string GetMethodName(MethodInfo method)
 		{
 			return MethodBase.GetCurrentMethod().Name;
+		}
+	}
+
+	public class VersionComparer : IComparer<Version>
+	{
+		public int Compare(Version? x, Version? y)
+		{
+			if (x?.Major > y?.Major)
+				return 1;
+			else if (x?.Major < y?.Major)
+				return -1;
+			else
+			{
+				if (x?.Minor > y?.Minor)
+					return 1;
+				else if (x?.Minor < y?.Minor)
+					return -1;
+				else
+				{
+					if (x?.Build > y?.Build)
+						return 1;
+					else if (x?.Build < y?.Build)
+						return -1;
+					else
+					{
+						if (x?.Revision > y?.Revision)
+							return 1;
+						else if (x?.Revision < y?.Revision)
+							return -1;
+						else
+							return 0;
+					}
+				}
+			}
 		}
 	}
 }
