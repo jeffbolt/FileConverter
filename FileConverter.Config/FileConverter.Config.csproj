@@ -11,4 +11,8 @@
 		<Copyright>Copyright © Jeff Bolt 2022</Copyright>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.IO.Hashing" Version="7.0.0" />
+  </ItemGroup>
+
 </Project>

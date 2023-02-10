@@ -25,9 +25,14 @@ namespace FileConverter
 			return Environment.Version.ToString();
 		}
 
-		public static string GetMethodName(MethodInfo method)
+		public static string GetMethodName()
 		{
 			return MethodBase.GetCurrentMethod().Name;
+		}
+
+		public static string GetStartupPath()
+		{
+			return Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace(@"file:\", "");
 		}
 	}
 

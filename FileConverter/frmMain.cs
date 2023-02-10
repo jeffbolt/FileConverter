@@ -30,12 +30,25 @@ namespace FileConverter
 		{
 			CurrentVersion = AssemblyHelper.GetAssemblyVersion();
 			lblVersion.Text = $"v{CurrentVersion}";
-			lnkUpdate.Tag = "Unknown";
-			lnkUpdate.Text = "Check for Update";
+			
 			ResetBinaryFileInfo();
 			ResetImageFileInfo();
-
+#if AUTOUPDATE
+			lnkUpdate.Tag = "Unknown";
+			lnkUpdate.Text = "Check for Update";
 			CheckForUpdateAsync();
+#endif
+			ResetStatusBarMessage();
+		}
+
+		private void ResetStatusBarMessage()
+		{
+			sslStatus.Text = "Ready";
+		}
+
+		private void ShowStatusBarMessage(string message)
+		{
+			sslStatus.Text = message;
 		}
 
 		private void lnkUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -44,6 +57,46 @@ namespace FileConverter
 				DownloadAndInstallUpdate();
 			else if (!lnkUpdate.Tag.Equals("Checking"))
 				CheckForUpdateAsync();
+		}
+
+		public DateTime DateFromUnixHex(string hex)
+		{
+			// https://stackoverflow.com/questions/28321924/how-to-convert-hex-to-decimal-in-c-net#28322047
+			if (string.IsNullOrEmpty(hex))
+				return DateTime.MinValue;
+
+			if (hex.StartsWith("0x"))
+			{
+				//hex = hex.TrimStart(new char[] { '0', 'x' });
+				//hex = hex.Substring(2, hex.Length - 2);
+				hex = hex[2..];
+			}
+
+			if (int.TryParse(hex, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out int value))
+				return DateTime.UnixEpoch.AddSeconds(value);
+			else
+				return DateTime.MinValue;
+		}
+
+		public static string GenerateId(string name)
+		{
+			const string Format = "yyyyMMddHHmmss";
+			DateTime _lastTimestamp = DateTime.MinValue;
+			object _lock = new();
+			var now = DateTime.UtcNow;
+			var timestamp = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
+
+			lock (_lock)
+			{
+				if (timestamp <= _lastTimestamp)
+				{
+					timestamp = _lastTimestamp.AddSeconds(1);
+				}
+
+				_lastTimestamp = timestamp;
+			}
+
+			return timestamp.ToString(Format, System.Globalization.CultureInfo.InvariantCulture) + "_" + name;
 		}
 
 		#endregion
@@ -59,7 +112,7 @@ namespace FileConverter
 		//		{
 		//			lnkUpdate.Tag = "UpdateAvailable";
 		//			lnkUpdate.Text = $"Click to download v{latestVersion}";
-		//			if (promptToInstall && MessageBox.Show($"Version v{latestVersion} is avaible. Download and install now?", 
+		//			if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?", 
 		//				"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
 		//			{
 		//				DownloadAndInstallUpdate();
@@ -87,7 +140,7 @@ namespace FileConverter
 					{
 						lnkUpdate.Tag = "UpdateAvailable";
 						lnkUpdate.Text = $"Click to download v{latestVersion}";
-						if (promptToInstall && MessageBox.Show($"Version v{latestVersion} is avaible. Download and install now?",
+						if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?",
 							"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
 						{
 							DownloadAndInstallUpdate();
@@ -271,18 +324,20 @@ namespace FileConverter
 		{
 			try
 			{
+				ShowStatusBarMessage("Copying binary file contents...");
 				EnableBinaryFileButtons(false, true);
 				var fileInfo = new FileInfo(txtBinaryFilePath.Text);
 				string contents = fileInfo.ConvertToBinary();
 				Clipboard.SetText(contents);
-				MessageBox.Show("Binary file contents copied.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBoxEx.Show(this, "Binary file contents copied.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBoxEx.Show(this, ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
+				ResetStatusBarMessage();
 				EnableBinaryFileButtons(true, true);
 			}
 		}
@@ -291,6 +346,7 @@ namespace FileConverter
 		{
 			try
 			{
+				ShowStatusBarMessage("Copying binary file contents...");
 				EnableBinaryFileButtons(false, true);
 				var fileInfo = new FileInfo(txtBinaryFilePath.Text);
 				string contents = fileInfo.ConvertToBinary();
@@ -305,20 +361,24 @@ namespace FileConverter
 						Filter = "Binary file (*.bin)|*.bin|All files (*.*)|*.*",
 						FileName = defaultFileName,
 						DefaultExt = "bin",
-						InitialDirectory = fileInfo.Directory?.FullName,
+						//InitialDirectory = fileInfo.Directory?.FullName,
 						RestoreDirectory = true,
 						CheckPathExists = true
 					};
 					if (dialog.ShowDialog() == DialogResult.OK)
+					{
 						fileInfo.SaveAsBinary(dialog.FileName);
+						MessageBoxEx.Show(this, "Binary file saved.", "Save Binary File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					}
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBoxEx.Show(this, ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
+				ResetStatusBarMessage();
 				EnableBinaryFileButtons(true, true);
 			}
 		}
@@ -393,11 +453,11 @@ namespace FileConverter
 				var fileInfo = new FileInfo(txtImageFilePath.Text);
 				string contents = fileInfo.ConvertToBase64();
 				Clipboard.SetText(contents);
-				MessageBox.Show("Image file contents copied as Base-64.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBoxEx.Show(this, "Image file contents copied as Base-64.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBoxEx.Show(this, ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
@@ -430,7 +490,7 @@ namespace FileConverter
 			//}
 			//catch (Exception ex)
 			//{
-			//	MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//	MessageBoxEx.Show(this, ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			//}
 			//finally
 			//{

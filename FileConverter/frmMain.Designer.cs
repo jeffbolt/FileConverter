@@ -64,6 +64,8 @@
 			this.btnImageFileBrowse = new System.Windows.Forms.Button();
 			this.txtImageFilePath = new System.Windows.Forms.TextBox();
 			this.lblImageBrowse = new System.Windows.Forms.Label();
+			this.ssMain = new System.Windows.Forms.StatusStrip();
+			this.sslStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.pnlTop.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbTitle)).BeginInit();
 			this.tcMain.SuspendLayout();
@@ -74,6 +76,7 @@
 			this.gbImageFileInfo.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbImageFileIcon)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbImageFilePreview)).BeginInit();
+			this.ssMain.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// pnlTop
@@ -101,8 +104,6 @@
 			this.lnkUpdate.Name = "lnkUpdate";
 			this.lnkUpdate.Size = new System.Drawing.Size(516, 15);
 			this.lnkUpdate.TabIndex = 13;
-			this.lnkUpdate.TabStop = true;
-			this.lnkUpdate.Text = "Check for Update";
 			this.lnkUpdate.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			this.lnkUpdate.VisitedLinkColor = System.Drawing.Color.Lime;
 			this.lnkUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUpdate_LinkClicked);
@@ -497,11 +498,27 @@
 			this.lblImageBrowse.TabIndex = 7;
 			this.lblImageBrowse.Text = "Drag or browse for image file:";
 			// 
+			// ssMain
+			// 
+			this.ssMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sslStatus});
+			this.ssMain.Location = new System.Drawing.Point(0, 319);
+			this.ssMain.Name = "ssMain";
+			this.ssMain.Size = new System.Drawing.Size(584, 22);
+			this.ssMain.TabIndex = 3;
+			this.ssMain.Text = "statusStrip1";
+			// 
+			// sslStatus
+			// 
+			this.sslStatus.Name = "sslStatus";
+			this.sslStatus.Size = new System.Drawing.Size(0, 17);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(584, 341);
+			this.Controls.Add(this.ssMain);
 			this.Controls.Add(this.tcMain);
 			this.Controls.Add(this.pnlTop);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -525,7 +542,10 @@
 			this.gbImageFileInfo.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbImageFileIcon)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbImageFilePreview)).EndInit();
+			this.ssMain.ResumeLayout(false);
+			this.ssMain.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -565,5 +585,7 @@
 		private Button btnImageFileSaveAs;
 		private PictureBox pbTitle;
 		private LinkLabel lnkUpdate;
+		private StatusStrip ssMain;
+		private ToolStripStatusLabel sslStatus;
 	}
 }

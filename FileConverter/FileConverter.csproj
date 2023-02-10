@@ -10,10 +10,10 @@
     <PackageIcon>App.png</PackageIcon>
     <ApplicationIcon>App.ico</ApplicationIcon>
 		<Version>$(VersionPrefix)</Version>
-		<FileVersion>1.0.1.2</FileVersion>
-		<AssemblyVersion>1.0.1.2</AssemblyVersion>
+		<FileVersion>1.0.1.4</FileVersion>
+		<AssemblyVersion>1.0.1.4</AssemblyVersion>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-		<Copyright>Copyright © Jeff Bolt 2022</Copyright>
+		<Copyright>Copyright © Jeff Bolt 2023</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,13 +47,6 @@
 
   <ItemGroup>
     <Folder Include="Resources\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\Images\App.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
