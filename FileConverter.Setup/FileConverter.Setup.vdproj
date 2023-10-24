@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_37273C29661E45388A58AED1576885CE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5413AE76E64A439085D5685A98A71414"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -28,6 +34,12 @@
         "Entry"
         {
         "MsmKey" = "8:_C0B3A19454B24109A416E7B3F1F9F5BB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C6EEDB069DFF4F23B6381A2699D6147A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -128,10 +140,50 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_37273C29661E45388A58AED1576885CE"
+            {
+            "SourcePath" = "8:..\\FileConverter\\Licenses\\Aspose.Words.lic"
+            "TargetName" = "8:Aspose.Words.lic"
+            "Tag" = "8:"
+            "Folder" = "8:_F45B60ECF5A6488DA49030040B578D7C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_82E2E8A985EC4E9694D06A0AD947668B"
             {
             "SourcePath" = "8:..\\Images\\App.ico"
             "TargetName" = "8:App.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_F45B60ECF5A6488DA49030040B578D7C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6EEDB069DFF4F23B6381A2699D6147A"
+            {
+            "SourcePath" = "8:..\\FileConverter\\Licenses\\Aspose.Cells.lic"
+            "TargetName" = "8:Aspose.Cells.lic"
             "Tag" = "8:"
             "Folder" = "8:_F45B60ECF5A6488DA49030040B578D7C"
             "Condition" = "8:"
@@ -205,7 +257,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:File Converter"
         "ProductCode" = "8:{05768BBE-C672-4E1E-9204-2965342B9D38}"
-        "PackageCode" = "8:{76A5C9FF-863D-4055-9657-3BF260A9474C}"
+        "PackageCode" = "8:{BBC54302-931A-45A3-91DE-6A9DC34E0510}"
         "UpgradeCode" = "8:{AD804A21-F4B9-4F00-A240-86FDBD21A8A3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -754,7 +806,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5413AE76E64A439085D5685A98A71414"
             {
-            "SourcePath" = "8:..\\FileConverter\\obj\\Release\\net6.0-windows7.0\\apphost.exe"
+            "SourcePath" = "8:..\\FileConverter\\obj\\Release\\net6.0-windows10.0.19041.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F45B60ECF5A6488DA49030040B578D7C"
@@ -782,7 +834,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_C0B3A19454B24109A416E7B3F1F9F5BB"
             {
-            "SourcePath" = "8:..\\FileConverter\\obj\\Release\\net6.0-windows7.0\\FileConverter.dll"
+            "SourcePath" = "8:..\\FileConverter\\obj\\Release\\net6.0-windows10.0.19041.0\\FileConverter.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F45B60ECF5A6488DA49030040B578D7C"

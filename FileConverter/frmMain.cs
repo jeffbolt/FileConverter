@@ -10,13 +10,31 @@ namespace FileConverter
 		private Version? CurrentVersion;
 		private const string SupportedImageFileTypes = "*.bmp;*.jpg;*.jpeg;*.png;*.gif";
 		private readonly List<string> ImageFileTypes = new(SupportedImageFileTypes.Replace("*", "").Split(';'));
+		private const string SupportedDocumentTypes = "*.doc;*.docx;";
+		private readonly List<string> DocumentTypes = new(SupportedDocumentTypes.Replace("*", "").Split(';'));
 
-		private bool IsSupportedImageFile(string filename)
+		//private bool IsSupportedImageFile(string filename)
+		//{
+		//	foreach (string imageFileType in ImageFileTypes)
+		//		if (filename.EndsWith(imageFileType, StringComparison.OrdinalIgnoreCase))
+		//			return true;
+		//	return false;
+		//}
+
+		private void SetDropEffect(DragEventArgs e, List<string>? fileTypes = null)
 		{
-			foreach (string imageFileType in ImageFileTypes)
-				if (filename.EndsWith(imageFileType, StringComparison.OrdinalIgnoreCase))
-					return true;
-			return false;
+			if (e.Data is DataObject && e.Data.GetDataPresent(DataFormats.FileDrop) &&
+				e.Data?.GetData(DataFormats.FileDrop) is string[] files && files?.Length == 1 &&
+				(fileTypes == null || IsSupportedFile(files[0], fileTypes)))
+				e.Effect = DragDropEffects.Copy;
+			else
+				e.Effect = DragDropEffects.None;
+		}
+
+		private bool IsSupportedFile(string filename, List<string> fileTypes)
+		{
+			var fi = new FileInfo(filename);
+			return fileTypes.Contains(fi.Extension);
 		}
 
 		#region Form Events
@@ -33,6 +51,7 @@ namespace FileConverter
 			
 			ResetBinaryFileInfo();
 			ResetImageFileInfo();
+			ResetDocumentInfo();
 #if AUTOUPDATE
 			lnkUpdate.Tag = "Unknown";
 			lnkUpdate.Text = "Check for Update";
@@ -185,16 +204,13 @@ namespace FileConverter
 
 		private void tabBinary_DragEnter(object sender, DragEventArgs e)
 		{
-			if (e.Data is DataObject && e.Data.GetDataPresent(DataFormats.FileDrop))
-				e.Effect = DragDropEffects.Copy;
-			else
-				e.Effect = DragDropEffects.None;
+			SetDropEffect(e);
 		}
 
 		private void tabBinary_DragDrop(object sender, DragEventArgs e)
 		{
-			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files.Any())
-				txtBinaryFilePath.Text = files.First(); //select the first one  
+			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files?.Length == 1)
+				txtBinaryFilePath.Text = files.First();  
 		}
 
 		private void txtBinaryFilePath_TextChanged(object sender, EventArgs e)
@@ -223,16 +239,13 @@ namespace FileConverter
 
 		private void tabImage_DragEnter(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetDataPresent(DataFormats.FileDrop))
-				e.Effect = DragDropEffects.Copy;
-			else
-				e.Effect = DragDropEffects.None;
+			SetDropEffect(e, ImageFileTypes);
 		}
 
 		private void tabImage_DragDrop(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetData(DataFormats.FileDrop) is string[] files && files.Any())
-				txtImageFilePath.Text = files.FirstOrDefault(x => IsSupportedImageFile(x));
+			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files?.Length == 1)
+				txtImageFilePath.Text = files.First();
 		}
 
 		private void txtImageFilePath_TextChanged(object sender, EventArgs e)
@@ -253,6 +266,36 @@ namespace FileConverter
 		private void btnImageFileSaveAs_Click(object sender, EventArgs e)
 		{
 			SaveImageFileAs();
+		}
+
+		#endregion
+
+		#region Image File Tab Page Events
+
+		private void tabDocuments_DragEnter(object sender, DragEventArgs e)
+		{
+			SetDropEffect(e, DocumentTypes);
+		}
+
+		private void tabDocuments_DragDrop(object sender, DragEventArgs e)
+		{
+			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files?.Length == 1)
+				txtDocumentPath.Text = files.First();
+		}
+
+		private void txtDocumentPath_TextChanged(object sender, EventArgs e)
+		{
+			LoadDocumentInfo();
+		}
+
+		private void btnDocumentBrowse_Click(object sender, EventArgs e)
+		{
+			BrowseForDocument();
+		}
+
+		private void btnDocumentSaveAs_Click(object sender, EventArgs e)
+		{
+			SaveDocumentAs();
 		}
 
 		#endregion
@@ -496,6 +539,114 @@ namespace FileConverter
 			//{
 			//	EnableImageFileButtons(true);
 			//}
+		}
+
+		#endregion
+
+		#region Document Tab Methods
+
+		private void BrowseForDocument()
+		{
+			using var dialog = new OpenFileDialog()
+			{
+				Filter = $"Image Files ({SupportedDocumentTypes})|{SupportedDocumentTypes}|All files (*.*)|*.*",
+				RestoreDirectory = true
+			};
+			if (dialog.ShowDialog() == DialogResult.OK)
+				txtDocumentPath.Text = dialog.FileName;
+		}
+
+		private void ResetDocumentInfo()
+		{
+			lblDocumentName.Text = "";
+			lblDocumentType.Text = "";
+			lblDocumentSize.Text = "";
+			pbDocumentIcon.Visible = false;
+			EnableDocumentButtons(false);
+		}
+
+		private void EnableDocumentButtons(bool enable, bool includeBrowse = false)
+		{
+			if (includeBrowse) btnDocumentBrowse.Enabled = includeBrowse && enable;
+			btnDocumentSaveAs.Enabled = enable;
+		}
+
+		private void LoadDocumentInfo()
+		{
+			string filePath = txtDocumentPath.Text.Trim();
+			if (File.Exists(filePath))
+			{
+				var fileInfo = new FileInfo(filePath);
+				lblDocumentName.Text = fileInfo.Name;
+				lblDocumentType.Text = $"{fileInfo.GetFileType()} ({fileInfo.Extension})";
+				lblDocumentSize.Text = fileInfo.FormatFileSize(2);
+				try
+				{
+					using Icon fileIcon = fileInfo.GetIcon(true);
+					pbDocumentIcon.Visible = true;
+					pbDocumentIcon.Image = fileIcon.ToBitmap();
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine(ex.ToString());
+				}
+
+				EnableDocumentButtons(true, true);
+			}
+			else
+			{
+				ResetDocumentInfo();
+			}
+		}
+
+		private void SaveDocumentAs()
+		{
+			string filePath = txtDocumentPath.Text.Trim();
+			if (!File.Exists(filePath)) return;
+			string pdfFilePath = "";
+
+			try
+			{
+				if (WordConverter.ToPdf(filePath, ref pdfFilePath))
+				{
+					var fi = new FileInfo(filePath);
+					using FileStream fs = new(pdfFilePath, FileMode.Open, FileAccess.Read);
+					var sfd = new SaveFileDialog
+					{
+						FileName = Path.ChangeExtension(fi.Name, "pdf"),
+						Filter = "PDF (*.pdf)|*.pdf|All files (*.*)|*.*",
+						DefaultExt = "pdf",
+						//InitialDirectory = fi.Directory?.FullName,
+						RestoreDirectory = true,
+						CheckPathExists = true
+					};
+
+					if (sfd.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(sfd.FileName))
+					{
+						byte[] bytes = new byte[fs.Length];
+						using var ms = new MemoryStream(bytes);
+						fs.CopyTo(ms);
+						File.WriteAllBytes(sfd.FileName, bytes);
+					}
+				}
+				else
+				{
+					MessageBox.Show("Document conversion failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+			}
+			finally
+			{
+				ResetStatusBarMessage();
+				EnableDocumentButtons(true, true);
+
+				// Delete the temp file
+				try { if (File.Exists(pdfFilePath)) File.Delete(pdfFilePath); }
+				catch { }
+			}
 		}
 
 		#endregion

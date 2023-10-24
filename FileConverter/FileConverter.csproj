@@ -10,8 +10,8 @@
     <PackageIcon>App.png</PackageIcon>
     <ApplicationIcon>App.ico</ApplicationIcon>
 		<Version>$(VersionPrefix)</Version>
-		<FileVersion>1.0.1.4</FileVersion>
-		<AssemblyVersion>1.0.1.4</AssemblyVersion>
+		<FileVersion>1.0.1.5</FileVersion>
+		<AssemblyVersion>1.0.1.5</AssemblyVersion>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
 		<Copyright>Copyright © Jeff Bolt 2023</Copyright>
   </PropertyGroup>
@@ -25,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.14" />
+    <PackageReference Include="Aspose.Cells" Version="7.5.3" />
+    <PackageReference Include="Aspose.Words" Version="13.8.0" />
     <PackageReference Include="PInvoke.Shell32" Version="0.7.124" />
     <PackageReference Include="PInvoke.Windows.Core" Version="0.7.124" />
   </ItemGroup>
