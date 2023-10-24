@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Version>$(VersionPrefix)</Version>
+    <FileVersion>1.0.1.2</FileVersion>
+    <AssemblyVersion>1.0.1.2</AssemblyVersion>
+    <Copyright>Copyright © Jeff Bolt 2022</Copyright>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.14" />
+		<PackageReference Include="RestSharp" Version="108.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\FileConverter.Config\FileConverter.Config.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<License>
+  <Data>
+    <LicensedTo>Inscape Publishing</LicensedTo>
+    <LicenseType>Developer OEM</LicenseType>
+    <LicenseNote>Limited to 3 developers.</LicenseNote>
+    <OrderID>120918163926</OrderID>
+    <OEM>This is a redistributable license</OEM>
+    <Products>
+      <Product>Aspose.Words for .NET</Product>
+    </Products>
+    <EditionType>Enterprise</EditionType>
+    <SerialNumber>6377eee3-748e-4ffb-9cda-fa3f518deb70</SerialNumber>
+    <SubscriptionExpiry>20130918</SubscriptionExpiry>
+    <LicenseVersion>2.2</LicenseVersion>
+  </Data>
+  <Signature>zuASH3ZxcYP9KCndQ5CocEN5P1Oqwrb/EsNdhgGDK75nCshjOYAyORtOxnlib4KQEV7r1xivkOP5sS19IgugL2wf/xdoBOKh1ZRJY57deqSnQ5Qv4eUIprFc20vU9fd3lkQF32Z39JHFIh964DOgLfAoVLjb3YL/iCwS26bbipU=</Signature>
+</License>
