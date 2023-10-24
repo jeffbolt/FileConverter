@@ -1,3 +1,5 @@
+using FileConverter.UpdateService;
+
 using System.Diagnostics;
 using System.Reflection;
 
@@ -5,15 +7,34 @@ namespace FileConverter
 {
 	public partial class frmMain : Form
 	{
+		private Version? CurrentVersion;
 		private const string SupportedImageFileTypes = "*.bmp;*.jpg;*.jpeg;*.png;*.gif";
 		private readonly List<string> ImageFileTypes = new(SupportedImageFileTypes.Replace("*", "").Split(';'));
+		private const string SupportedDocumentTypes = "*.doc;*.docx;";
+		private readonly List<string> DocumentTypes = new(SupportedDocumentTypes.Replace("*", "").Split(';'));
 
-		private bool IsSupportedImageFile(string filename)
+		//private bool IsSupportedImageFile(string filename)
+		//{
+		//	foreach (string imageFileType in ImageFileTypes)
+		//		if (filename.EndsWith(imageFileType, StringComparison.OrdinalIgnoreCase))
+		//			return true;
+		//	return false;
+		//}
+
+		private void SetDropEffect(DragEventArgs e, List<string>? fileTypes = null)
 		{
-			foreach(string imageFileType in ImageFileTypes)
-				if (filename.EndsWith(imageFileType, StringComparison.OrdinalIgnoreCase))
-					return true;
-			return false;
+			if (e.Data is DataObject && e.Data.GetDataPresent(DataFormats.FileDrop) &&
+				e.Data?.GetData(DataFormats.FileDrop) is string[] files && files?.Length == 1 &&
+				(fileTypes == null || IsSupportedFile(files[0], fileTypes)))
+				e.Effect = DragDropEffects.Copy;
+			else
+				e.Effect = DragDropEffects.None;
+		}
+
+		private bool IsSupportedFile(string filename, List<string> fileTypes)
+		{
+			var fi = new FileInfo(filename);
+			return fileTypes.Contains(fi.Extension);
 		}
 
 		#region Form Events
@@ -25,9 +46,147 @@ namespace FileConverter
 
 		private void frmMain_Load(object sender, EventArgs e)
 		{
-			lblVersion.Text = $"v{AssemblyHelper.GetAssemblyVersion()}";
+			CurrentVersion = AssemblyHelper.GetAssemblyVersion();
+			lblVersion.Text = $"v{CurrentVersion}";
+			
 			ResetBinaryFileInfo();
 			ResetImageFileInfo();
+			ResetDocumentInfo();
+#if AUTOUPDATE
+			lnkUpdate.Tag = "Unknown";
+			lnkUpdate.Text = "Check for Update";
+			CheckForUpdateAsync();
+#endif
+			ResetStatusBarMessage();
+		}
+
+		private void ResetStatusBarMessage()
+		{
+			sslStatus.Text = "Ready";
+		}
+
+		private void ShowStatusBarMessage(string message)
+		{
+			sslStatus.Text = message;
+		}
+
+		private void lnkUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			if (lnkUpdate.Tag.Equals("UpdateAvailable"))
+				DownloadAndInstallUpdate();
+			else if (!lnkUpdate.Tag.Equals("Checking"))
+				CheckForUpdateAsync();
+		}
+
+		public DateTime DateFromUnixHex(string hex)
+		{
+			// https://stackoverflow.com/questions/28321924/how-to-convert-hex-to-decimal-in-c-net#28322047
+			if (string.IsNullOrEmpty(hex))
+				return DateTime.MinValue;
+
+			if (hex.StartsWith("0x"))
+			{
+				//hex = hex.TrimStart(new char[] { '0', 'x' });
+				//hex = hex.Substring(2, hex.Length - 2);
+				hex = hex[2..];
+			}
+
+			if (int.TryParse(hex, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out int value))
+				return DateTime.UnixEpoch.AddSeconds(value);
+			else
+				return DateTime.MinValue;
+		}
+
+		public static string GenerateId(string name)
+		{
+			const string Format = "yyyyMMddHHmmss";
+			DateTime _lastTimestamp = DateTime.MinValue;
+			object _lock = new();
+			var now = DateTime.UtcNow;
+			var timestamp = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second);
+
+			lock (_lock)
+			{
+				if (timestamp <= _lastTimestamp)
+				{
+					timestamp = _lastTimestamp.AddSeconds(1);
+				}
+
+				_lastTimestamp = timestamp;
+			}
+
+			return timestamp.ToString(Format, System.Globalization.CultureInfo.InvariantCulture) + "_" + name;
+		}
+
+		#endregion
+
+		#region Auto Update
+
+		//private void CheckForUpdate(bool promptToInstall = true)
+		//{
+		//	try
+		//	{
+		//		var latestVersion = Updater.GetLatestRelease()?.Version;
+		//		if (latestVersion > CurrentVersion)
+		//		{
+		//			lnkUpdate.Tag = "UpdateAvailable";
+		//			lnkUpdate.Text = $"Click to download v{latestVersion}";
+		//			if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?", 
+		//				"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+		//			{
+		//				DownloadAndInstallUpdate();
+		//			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		Debug.WriteLine(ex.ToString());
+		//	}
+		//}
+
+		private async void CheckForUpdateAsync(bool promptToInstall = true)
+		{
+			try
+			{
+				lnkUpdate.Tag = "Checking";
+				lnkUpdate.Text = "Checking for update...";
+
+				var latestRelease = await Updater.GetLatestReleaseAsync();
+				if (latestRelease != null)
+				{
+					var latestVersion = latestRelease.Version;
+					if (latestVersion > CurrentVersion)
+					{
+						lnkUpdate.Tag = "UpdateAvailable";
+						lnkUpdate.Text = $"Click to download v{latestVersion}";
+						if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?",
+							"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+						{
+							DownloadAndInstallUpdate();
+						}
+					}
+					else if (latestVersion == CurrentVersion)
+					{
+						lnkUpdate.Tag = "Latest";
+						lnkUpdate.Text = "Running latest version";
+					}
+					else
+					{
+						lnkUpdate.Tag = "Unknown";
+						lnkUpdate.Text = "Check for Update";
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.ToString());
+			}
+		}
+
+		private void DownloadAndInstallUpdate()
+		{
+			// TODO: Call update service and close
+			Close();
 		}
 
 		#endregion
@@ -45,16 +204,13 @@ namespace FileConverter
 
 		private void tabBinary_DragEnter(object sender, DragEventArgs e)
 		{
-			if (e.Data is DataObject && e.Data.GetDataPresent(DataFormats.FileDrop))
-				e.Effect = DragDropEffects.Copy;
-			else
-				e.Effect = DragDropEffects.None;
+			SetDropEffect(e);
 		}
 
 		private void tabBinary_DragDrop(object sender, DragEventArgs e)
 		{
-			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files.Any())
-				txtBinaryFilePath.Text = files.First(); //select the first one  
+			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files?.Length == 1)
+				txtBinaryFilePath.Text = files.First();  
 		}
 
 		private void txtBinaryFilePath_TextChanged(object sender, EventArgs e)
@@ -83,16 +239,13 @@ namespace FileConverter
 
 		private void tabImage_DragEnter(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetDataPresent(DataFormats.FileDrop))
-				e.Effect = DragDropEffects.Copy;
-			else
-				e.Effect = DragDropEffects.None;
+			SetDropEffect(e, ImageFileTypes);
 		}
 
 		private void tabImage_DragDrop(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetData(DataFormats.FileDrop) is string[] files && files.Any())
-				txtImageFilePath.Text = files.FirstOrDefault(x => IsSupportedImageFile(x));
+			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files?.Length == 1)
+				txtImageFilePath.Text = files.First();
 		}
 
 		private void txtImageFilePath_TextChanged(object sender, EventArgs e)
@@ -113,6 +266,36 @@ namespace FileConverter
 		private void btnImageFileSaveAs_Click(object sender, EventArgs e)
 		{
 			SaveImageFileAs();
+		}
+
+		#endregion
+
+		#region Image File Tab Page Events
+
+		private void tabDocuments_DragEnter(object sender, DragEventArgs e)
+		{
+			SetDropEffect(e, DocumentTypes);
+		}
+
+		private void tabDocuments_DragDrop(object sender, DragEventArgs e)
+		{
+			if (e.Data?.GetData(DataFormats.FileDrop) is string[] files && files?.Length == 1)
+				txtDocumentPath.Text = files.First();
+		}
+
+		private void txtDocumentPath_TextChanged(object sender, EventArgs e)
+		{
+			LoadDocumentInfo();
+		}
+
+		private void btnDocumentBrowse_Click(object sender, EventArgs e)
+		{
+			BrowseForDocument();
+		}
+
+		private void btnDocumentSaveAs_Click(object sender, EventArgs e)
+		{
+			SaveDocumentAs();
 		}
 
 		#endregion
@@ -184,18 +367,20 @@ namespace FileConverter
 		{
 			try
 			{
+				ShowStatusBarMessage("Copying binary file contents...");
 				EnableBinaryFileButtons(false, true);
 				var fileInfo = new FileInfo(txtBinaryFilePath.Text);
 				string contents = fileInfo.ConvertToBinary();
 				Clipboard.SetText(contents);
-				MessageBox.Show("Binary file contents copied.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBoxEx.Show(this, "Binary file contents copied.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBoxEx.Show(this, ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
+				ResetStatusBarMessage();
 				EnableBinaryFileButtons(true, true);
 			}
 		}
@@ -204,6 +389,7 @@ namespace FileConverter
 		{
 			try
 			{
+				ShowStatusBarMessage("Copying binary file contents...");
 				EnableBinaryFileButtons(false, true);
 				var fileInfo = new FileInfo(txtBinaryFilePath.Text);
 				string contents = fileInfo.ConvertToBinary();
@@ -218,20 +404,24 @@ namespace FileConverter
 						Filter = "Binary file (*.bin)|*.bin|All files (*.*)|*.*",
 						FileName = defaultFileName,
 						DefaultExt = "bin",
-						InitialDirectory = fileInfo.Directory?.FullName,
+						//InitialDirectory = fileInfo.Directory?.FullName,
 						RestoreDirectory = true,
 						CheckPathExists = true
 					};
 					if (dialog.ShowDialog() == DialogResult.OK)
+					{
 						fileInfo.SaveAsBinary(dialog.FileName);
+						MessageBoxEx.Show(this, "Binary file saved.", "Save Binary File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					}
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBoxEx.Show(this, ex.ToString(), $"Error - {MethodBase.GetCurrentMethod()?.Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
+				ResetStatusBarMessage();
 				EnableBinaryFileButtons(true, true);
 			}
 		}
@@ -306,11 +496,11 @@ namespace FileConverter
 				var fileInfo = new FileInfo(txtImageFilePath.Text);
 				string contents = fileInfo.ConvertToBase64();
 				Clipboard.SetText(contents);
-				MessageBox.Show("Image file contents copied as Base-64.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBoxEx.Show(this, "Image file contents copied as Base-64.", "Copy to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBoxEx.Show(this, ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
@@ -343,12 +533,120 @@ namespace FileConverter
 			//}
 			//catch (Exception ex)
 			//{
-			//	MessageBox.Show(ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//	MessageBoxEx.Show(this, ex.ToString(), $"Error - {MethodBase.GetCurrentMethod().Name}", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			//}
 			//finally
 			//{
 			//	EnableImageFileButtons(true);
 			//}
+		}
+
+		#endregion
+
+		#region Document Tab Methods
+
+		private void BrowseForDocument()
+		{
+			using var dialog = new OpenFileDialog()
+			{
+				Filter = $"Image Files ({SupportedDocumentTypes})|{SupportedDocumentTypes}|All files (*.*)|*.*",
+				RestoreDirectory = true
+			};
+			if (dialog.ShowDialog() == DialogResult.OK)
+				txtDocumentPath.Text = dialog.FileName;
+		}
+
+		private void ResetDocumentInfo()
+		{
+			lblDocumentName.Text = "";
+			lblDocumentType.Text = "";
+			lblDocumentSize.Text = "";
+			pbDocumentIcon.Visible = false;
+			EnableDocumentButtons(false);
+		}
+
+		private void EnableDocumentButtons(bool enable, bool includeBrowse = false)
+		{
+			if (includeBrowse) btnDocumentBrowse.Enabled = includeBrowse && enable;
+			btnDocumentSaveAs.Enabled = enable;
+		}
+
+		private void LoadDocumentInfo()
+		{
+			string filePath = txtDocumentPath.Text.Trim();
+			if (File.Exists(filePath))
+			{
+				var fileInfo = new FileInfo(filePath);
+				lblDocumentName.Text = fileInfo.Name;
+				lblDocumentType.Text = $"{fileInfo.GetFileType()} ({fileInfo.Extension})";
+				lblDocumentSize.Text = fileInfo.FormatFileSize(2);
+				try
+				{
+					using Icon fileIcon = fileInfo.GetIcon(true);
+					pbDocumentIcon.Visible = true;
+					pbDocumentIcon.Image = fileIcon.ToBitmap();
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine(ex.ToString());
+				}
+
+				EnableDocumentButtons(true, true);
+			}
+			else
+			{
+				ResetDocumentInfo();
+			}
+		}
+
+		private void SaveDocumentAs()
+		{
+			string filePath = txtDocumentPath.Text.Trim();
+			if (!File.Exists(filePath)) return;
+			string pdfFilePath = "";
+
+			try
+			{
+				if (WordConverter.ToPdf(filePath, ref pdfFilePath))
+				{
+					var fi = new FileInfo(filePath);
+					using FileStream fs = new(pdfFilePath, FileMode.Open, FileAccess.Read);
+					var sfd = new SaveFileDialog
+					{
+						FileName = Path.ChangeExtension(fi.Name, "pdf"),
+						Filter = "PDF (*.pdf)|*.pdf|All files (*.*)|*.*",
+						DefaultExt = "pdf",
+						//InitialDirectory = fi.Directory?.FullName,
+						RestoreDirectory = true,
+						CheckPathExists = true
+					};
+
+					if (sfd.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(sfd.FileName))
+					{
+						byte[] bytes = new byte[fs.Length];
+						using var ms = new MemoryStream(bytes);
+						fs.CopyTo(ms);
+						File.WriteAllBytes(sfd.FileName, bytes);
+					}
+				}
+				else
+				{
+					MessageBox.Show("Document conversion failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+			}
+			finally
+			{
+				ResetStatusBarMessage();
+				EnableDocumentButtons(true, true);
+
+				// Delete the temp file
+				try { if (File.Exists(pdfFilePath)) File.Delete(pdfFilePath); }
+				catch { }
+			}
 		}
 
 		#endregion

@@ -30,6 +30,7 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
 			this.pnlTop = new System.Windows.Forms.Panel();
+			this.lnkUpdate = new System.Windows.Forms.LinkLabel();
 			this.pbTitle = new System.Windows.Forms.PictureBox();
 			this.lblVersion = new System.Windows.Forms.Label();
 			this.lblTitle = new System.Windows.Forms.Label();
@@ -62,7 +63,22 @@
 			this.lblImageFileTypeTitle = new System.Windows.Forms.Label();
 			this.btnImageFileBrowse = new System.Windows.Forms.Button();
 			this.txtImageFilePath = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
+			this.lblImageBrowse = new System.Windows.Forms.Label();
+			this.tabDocuments = new System.Windows.Forms.TabPage();
+			this.btnDocumentSaveAs = new System.Windows.Forms.Button();
+			this.gbDocumentInfo = new System.Windows.Forms.GroupBox();
+			this.pbDocumentIcon = new System.Windows.Forms.PictureBox();
+			this.lblDocumentName = new System.Windows.Forms.Label();
+			this.lblDocumentNameTitle = new System.Windows.Forms.Label();
+			this.lblDocumentSize = new System.Windows.Forms.Label();
+			this.lblDocumentSizeTitle = new System.Windows.Forms.Label();
+			this.lblDocumentType = new System.Windows.Forms.Label();
+			this.lblDocumentTypeTitle = new System.Windows.Forms.Label();
+			this.btnDocumentBrowse = new System.Windows.Forms.Button();
+			this.txtDocumentPath = new System.Windows.Forms.TextBox();
+			this.lblBrowseDocument = new System.Windows.Forms.Label();
+			this.ssMain = new System.Windows.Forms.StatusStrip();
+			this.sslStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.pnlTop.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbTitle)).BeginInit();
 			this.tcMain.SuspendLayout();
@@ -73,6 +89,10 @@
 			this.gbImageFileInfo.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbImageFileIcon)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbImageFilePreview)).BeginInit();
+			this.tabDocuments.SuspendLayout();
+			this.gbDocumentInfo.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbDocumentIcon)).BeginInit();
+			this.ssMain.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// pnlTop
@@ -82,6 +102,7 @@
 			this.pnlTop.BackColor = System.Drawing.Color.Transparent;
 			this.pnlTop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlTop.BackgroundImage")));
 			this.pnlTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.pnlTop.Controls.Add(this.lnkUpdate);
 			this.pnlTop.Controls.Add(this.pbTitle);
 			this.pnlTop.Controls.Add(this.lblVersion);
 			this.pnlTop.Controls.Add(this.lblTitle);
@@ -89,6 +110,19 @@
 			this.pnlTop.Name = "pnlTop";
 			this.pnlTop.Size = new System.Drawing.Size(584, 60);
 			this.pnlTop.TabIndex = 2;
+			// 
+			// lnkUpdate
+			// 
+			this.lnkUpdate.ActiveLinkColor = System.Drawing.Color.Lime;
+			this.lnkUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.lnkUpdate.LinkColor = System.Drawing.Color.Lime;
+			this.lnkUpdate.Location = new System.Drawing.Point(51, 36);
+			this.lnkUpdate.Name = "lnkUpdate";
+			this.lnkUpdate.Size = new System.Drawing.Size(516, 15);
+			this.lnkUpdate.TabIndex = 13;
+			this.lnkUpdate.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.lnkUpdate.VisitedLinkColor = System.Drawing.Color.Lime;
+			this.lnkUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUpdate_LinkClicked);
 			// 
 			// pbTitle
 			// 
@@ -114,6 +148,7 @@
 			this.lblVersion.Size = new System.Drawing.Size(51, 17);
 			this.lblVersion.TabIndex = 11;
 			this.lblVersion.Text = "v0.0.0.0";
+			this.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
 			// 
 			// lblTitle
 			// 
@@ -135,6 +170,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tcMain.Controls.Add(this.tabBinary);
 			this.tcMain.Controls.Add(this.tabImage);
+			this.tcMain.Controls.Add(this.tabDocuments);
 			this.tcMain.Location = new System.Drawing.Point(12, 65);
 			this.tcMain.Name = "tcMain";
 			this.tcMain.SelectedIndex = 0;
@@ -182,7 +218,7 @@
 			this.btnSaveBinaryFileAs.Size = new System.Drawing.Size(120, 23);
 			this.btnSaveBinaryFileAs.TabIndex = 4;
 			this.btnSaveBinaryFileAs.Tag = "";
-			this.btnSaveBinaryFileAs.Text = "Save Binary As...";
+			this.btnSaveBinaryFileAs.Text = "Save Binary as...";
 			this.btnSaveBinaryFileAs.UseVisualStyleBackColor = true;
 			this.btnSaveBinaryFileAs.Click += new System.EventHandler(this.btnSaveBinaryFileAs_Click);
 			// 
@@ -311,7 +347,7 @@
 			this.tabImage.Controls.Add(this.gbImageFileInfo);
 			this.tabImage.Controls.Add(this.btnImageFileBrowse);
 			this.tabImage.Controls.Add(this.txtImageFilePath);
-			this.tabImage.Controls.Add(this.label1);
+			this.tabImage.Controls.Add(this.lblImageBrowse);
 			this.tabImage.Location = new System.Drawing.Point(4, 24);
 			this.tabImage.Name = "tabImage";
 			this.tabImage.Padding = new System.Windows.Forms.Padding(3);
@@ -331,7 +367,7 @@
 			this.btnImageFileSaveAs.Size = new System.Drawing.Size(120, 23);
 			this.btnImageFileSaveAs.TabIndex = 7;
 			this.btnImageFileSaveAs.Tag = "";
-			this.btnImageFileSaveAs.Text = "Save Image As...";
+			this.btnImageFileSaveAs.Text = "Save Image as...";
 			this.btnImageFileSaveAs.UseVisualStyleBackColor = true;
 			this.btnImageFileSaveAs.Click += new System.EventHandler(this.btnImageFileSaveAs_Click);
 			// 
@@ -470,20 +506,184 @@
 			this.txtImageFilePath.TabIndex = 4;
 			this.txtImageFilePath.TextChanged += new System.EventHandler(this.txtImageFilePath_TextChanged);
 			// 
-			// label1
+			// lblImageBrowse
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(16, 13);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(163, 15);
-			this.label1.TabIndex = 7;
-			this.label1.Text = "Drag or browse for image file:";
+			this.lblImageBrowse.AutoSize = true;
+			this.lblImageBrowse.Location = new System.Drawing.Point(16, 13);
+			this.lblImageBrowse.Name = "lblImageBrowse";
+			this.lblImageBrowse.Size = new System.Drawing.Size(163, 15);
+			this.lblImageBrowse.TabIndex = 7;
+			this.lblImageBrowse.Text = "Drag or browse for image file:";
+			// 
+			// tabDocuments
+			// 
+			this.tabDocuments.AllowDrop = true;
+			this.tabDocuments.Controls.Add(this.btnDocumentSaveAs);
+			this.tabDocuments.Controls.Add(this.gbDocumentInfo);
+			this.tabDocuments.Controls.Add(this.btnDocumentBrowse);
+			this.tabDocuments.Controls.Add(this.txtDocumentPath);
+			this.tabDocuments.Controls.Add(this.lblBrowseDocument);
+			this.tabDocuments.Location = new System.Drawing.Point(4, 24);
+			this.tabDocuments.Name = "tabDocuments";
+			this.tabDocuments.Padding = new System.Windows.Forms.Padding(3);
+			this.tabDocuments.Size = new System.Drawing.Size(552, 238);
+			this.tabDocuments.TabIndex = 2;
+			this.tabDocuments.Text = "Document Conversion";
+			this.tabDocuments.UseVisualStyleBackColor = true;
+			this.tabDocuments.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabDocuments_DragDrop);
+			this.tabDocuments.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabDocuments_DragEnter);
+			// 
+			// btnDocumentSaveAs
+			// 
+			this.btnDocumentSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnDocumentSaveAs.Enabled = false;
+			this.btnDocumentSaveAs.Location = new System.Drawing.Point(16, 201);
+			this.btnDocumentSaveAs.Name = "btnDocumentSaveAs";
+			this.btnDocumentSaveAs.Size = new System.Drawing.Size(120, 23);
+			this.btnDocumentSaveAs.TabIndex = 12;
+			this.btnDocumentSaveAs.Tag = "";
+			this.btnDocumentSaveAs.Text = "Save as...";
+			this.btnDocumentSaveAs.UseVisualStyleBackColor = true;
+			this.btnDocumentSaveAs.Click += new System.EventHandler(this.btnDocumentSaveAs_Click);
+			// 
+			// gbDocumentInfo
+			// 
+			this.gbDocumentInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gbDocumentInfo.Controls.Add(this.pbDocumentIcon);
+			this.gbDocumentInfo.Controls.Add(this.lblDocumentName);
+			this.gbDocumentInfo.Controls.Add(this.lblDocumentNameTitle);
+			this.gbDocumentInfo.Controls.Add(this.lblDocumentSize);
+			this.gbDocumentInfo.Controls.Add(this.lblDocumentSizeTitle);
+			this.gbDocumentInfo.Controls.Add(this.lblDocumentType);
+			this.gbDocumentInfo.Controls.Add(this.lblDocumentTypeTitle);
+			this.gbDocumentInfo.Location = new System.Drawing.Point(16, 60);
+			this.gbDocumentInfo.Name = "gbDocumentInfo";
+			this.gbDocumentInfo.Size = new System.Drawing.Size(520, 135);
+			this.gbDocumentInfo.TabIndex = 11;
+			this.gbDocumentInfo.TabStop = false;
+			this.gbDocumentInfo.Text = "File Information";
+			// 
+			// pbDocumentIcon
+			// 
+			this.pbDocumentIcon.Location = new System.Drawing.Point(99, 34);
+			this.pbDocumentIcon.Name = "pbDocumentIcon";
+			this.pbDocumentIcon.Size = new System.Drawing.Size(16, 16);
+			this.pbDocumentIcon.TabIndex = 11;
+			this.pbDocumentIcon.TabStop = false;
+			// 
+			// lblDocumentName
+			// 
+			this.lblDocumentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblDocumentName.AutoEllipsis = true;
+			this.lblDocumentName.Location = new System.Drawing.Point(99, 19);
+			this.lblDocumentName.Name = "lblDocumentName";
+			this.lblDocumentName.Size = new System.Drawing.Size(415, 15);
+			this.lblDocumentName.TabIndex = 10;
+			this.lblDocumentName.Text = "[file name]";
+			// 
+			// lblDocumentNameTitle
+			// 
+			this.lblDocumentNameTitle.AutoSize = true;
+			this.lblDocumentNameTitle.Location = new System.Drawing.Point(6, 19);
+			this.lblDocumentNameTitle.Name = "lblDocumentNameTitle";
+			this.lblDocumentNameTitle.Size = new System.Drawing.Size(63, 15);
+			this.lblDocumentNameTitle.TabIndex = 9;
+			this.lblDocumentNameTitle.Text = "File Name:";
+			// 
+			// lblDocumentSize
+			// 
+			this.lblDocumentSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblDocumentSize.AutoEllipsis = true;
+			this.lblDocumentSize.Location = new System.Drawing.Point(99, 49);
+			this.lblDocumentSize.Name = "lblDocumentSize";
+			this.lblDocumentSize.Size = new System.Drawing.Size(415, 15);
+			this.lblDocumentSize.TabIndex = 8;
+			this.lblDocumentSize.Text = "[file size]";
+			// 
+			// lblDocumentSizeTitle
+			// 
+			this.lblDocumentSizeTitle.AutoSize = true;
+			this.lblDocumentSizeTitle.Location = new System.Drawing.Point(6, 49);
+			this.lblDocumentSizeTitle.Name = "lblDocumentSizeTitle";
+			this.lblDocumentSizeTitle.Size = new System.Drawing.Size(30, 15);
+			this.lblDocumentSizeTitle.TabIndex = 7;
+			this.lblDocumentSizeTitle.Text = "Size:";
+			// 
+			// lblDocumentType
+			// 
+			this.lblDocumentType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblDocumentType.AutoEllipsis = true;
+			this.lblDocumentType.Location = new System.Drawing.Point(116, 34);
+			this.lblDocumentType.Name = "lblDocumentType";
+			this.lblDocumentType.Size = new System.Drawing.Size(398, 15);
+			this.lblDocumentType.TabIndex = 6;
+			this.lblDocumentType.Text = "[file type]";
+			// 
+			// lblDocumentTypeTitle
+			// 
+			this.lblDocumentTypeTitle.AutoSize = true;
+			this.lblDocumentTypeTitle.Location = new System.Drawing.Point(6, 34);
+			this.lblDocumentTypeTitle.Name = "lblDocumentTypeTitle";
+			this.lblDocumentTypeTitle.Size = new System.Drawing.Size(55, 15);
+			this.lblDocumentTypeTitle.TabIndex = 5;
+			this.lblDocumentTypeTitle.Text = "File Type:";
+			// 
+			// btnDocumentBrowse
+			// 
+			this.btnDocumentBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDocumentBrowse.Location = new System.Drawing.Point(461, 31);
+			this.btnDocumentBrowse.Name = "btnDocumentBrowse";
+			this.btnDocumentBrowse.Size = new System.Drawing.Size(75, 23);
+			this.btnDocumentBrowse.TabIndex = 10;
+			this.btnDocumentBrowse.Text = "Browse...";
+			this.btnDocumentBrowse.UseVisualStyleBackColor = true;
+			this.btnDocumentBrowse.Click += new System.EventHandler(this.btnDocumentBrowse_Click);
+			// 
+			// txtDocumentPath
+			// 
+			this.txtDocumentPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.txtDocumentPath.Location = new System.Drawing.Point(16, 31);
+			this.txtDocumentPath.Name = "txtDocumentPath";
+			this.txtDocumentPath.Size = new System.Drawing.Size(439, 23);
+			this.txtDocumentPath.TabIndex = 9;
+			this.txtDocumentPath.TextChanged += new System.EventHandler(this.txtDocumentPath_TextChanged);
+			// 
+			// lblBrowseDocument
+			// 
+			this.lblBrowseDocument.AutoSize = true;
+			this.lblBrowseDocument.Location = new System.Drawing.Point(16, 13);
+			this.lblBrowseDocument.Name = "lblBrowseDocument";
+			this.lblBrowseDocument.Size = new System.Drawing.Size(166, 15);
+			this.lblBrowseDocument.TabIndex = 8;
+			this.lblBrowseDocument.Text = "Drag or browse for document:";
+			// 
+			// ssMain
+			// 
+			this.ssMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sslStatus});
+			this.ssMain.Location = new System.Drawing.Point(0, 319);
+			this.ssMain.Name = "ssMain";
+			this.ssMain.Size = new System.Drawing.Size(584, 22);
+			this.ssMain.TabIndex = 3;
+			this.ssMain.Text = "statusStrip1";
+			// 
+			// sslStatus
+			// 
+			this.sslStatus.Name = "sslStatus";
+			this.sslStatus.Size = new System.Drawing.Size(0, 17);
 			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(584, 341);
+			this.Controls.Add(this.ssMain);
 			this.Controls.Add(this.tcMain);
 			this.Controls.Add(this.pnlTop);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -507,7 +707,15 @@
 			this.gbImageFileInfo.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbImageFileIcon)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbImageFilePreview)).EndInit();
+			this.tabDocuments.ResumeLayout(false);
+			this.tabDocuments.PerformLayout();
+			this.gbDocumentInfo.ResumeLayout(false);
+			this.gbDocumentInfo.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbDocumentIcon)).EndInit();
+			this.ssMain.ResumeLayout(false);
+			this.ssMain.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -533,7 +741,7 @@
 		private Button btnSaveBinaryFileAs;
 		private Button btnImageFileBrowse;
 		private TextBox txtImageFilePath;
-		private Label label1;
+		private Label lblImageBrowse;
 		private PictureBox pbImageFilePreview;
 		private GroupBox gbImageFileInfo;
 		private PictureBox pbImageFileIcon;
@@ -546,5 +754,21 @@
 		private Button btnImageFileCopyClipboard;
 		private Button btnImageFileSaveAs;
 		private PictureBox pbTitle;
+		private LinkLabel lnkUpdate;
+		private StatusStrip ssMain;
+		private ToolStripStatusLabel sslStatus;
+		private TabPage tabDocuments;
+		private Button btnDocumentSaveAs;
+		private GroupBox gbDocumentInfo;
+		private PictureBox pbDocumentIcon;
+		private Label lblDocumentName;
+		private Label lblDocumentNameTitle;
+		private Label lblDocumentSize;
+		private Label lblDocumentSizeTitle;
+		private Label lblDocumentType;
+		private Label lblDocumentTypeTitle;
+		private Button btnDocumentBrowse;
+		private TextBox txtDocumentPath;
+		private Label lblBrowseDocument;
 	}
 }
