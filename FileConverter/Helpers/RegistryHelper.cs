@@ -21,6 +21,7 @@ namespace FileConverter
 			}
 			catch (Exception ex)
 			{
+				Console.Error.WriteLine(ex.Message);
 				// If there is a permissions issue, revert to the traditional method
 				value = Environment.GetEnvironmentVariable(key);
 			}

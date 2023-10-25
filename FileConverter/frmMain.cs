@@ -607,7 +607,7 @@ namespace FileConverter
 
 			try
 			{
-				if (WordConverter.ToPdf(filePath, ref pdfFilePath))
+				if (WordHelper.ToPdf(filePath, ref pdfFilePath))
 				{
 					var fi = new FileInfo(filePath);
 					using FileStream fs = new(pdfFilePath, FileMode.Open, FileAccess.Read);
@@ -631,12 +631,12 @@ namespace FileConverter
 				}
 				else
 				{
-					MessageBox.Show("Document conversion failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBoxEx.Show("Document conversion failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+				MessageBoxEx.Show(ex.Message, "Error", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
 			}
 			finally
 			{
