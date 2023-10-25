@@ -19,6 +19,12 @@ namespace FileConverter
 			return Path.Combine(Directory.GetParent(GetBaseDirectory()).Parent.FullName, "Temp");
 		}
 
+		public static string GetLicenceDirectory()
+		{
+			var di = new DirectoryInfo(Directory.GetCurrentDirectory());
+			return Path.Combine(di.Parent.Parent.Parent.FullName, "Licenses");
+		}
+
 		public static string GetFileExtension(string fileName)
 		{
 			var objFileInfo = new FileInfo(fileName);
