@@ -596,25 +596,28 @@ namespace FileConverter
 					Version latestVersion = latestRelease.Version;
 					List<GitHubAsset>? assets = latestRelease.Assets;
 
-					if (latestVersion > CurrentVersion && assets?.Count > 0)
+					switch (CurrentVersion.CompareTo(latestVersion))
 					{
-						lnkUpdate.Tag = "UpdateAvailable";
-						lnkUpdate.Text = $"Click to download v{latestVersion}";
-						if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?",
-							"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
-						{
-							DownloadAndInstallUpdate(assets);
-						}
-					}
-					else if (latestVersion == CurrentVersion)
-					{
-						lnkUpdate.Tag = "Latest";
-						lnkUpdate.Text = "Running latest version";
-					}
-					else
-					{
-						lnkUpdate.Tag = "Unknown";
-						lnkUpdate.Text = "Check for Update";
+						case 0:
+							lnkUpdate.Tag = "Latest";
+							lnkUpdate.Text = "Running latest version";
+							break;
+						case 1:
+							if (assets?.Count > 0)
+							{
+								lnkUpdate.Tag = "UpdateAvailable";
+								lnkUpdate.Text = $"Click to download v{latestVersion}";
+								if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?",
+									"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+								{
+									DownloadAndInstallUpdate(assets);
+								}
+							}
+							break;
+						case -1:
+							lnkUpdate.Tag = "Unknown";
+							lnkUpdate.Text = "Check for Update";
+							break;
 					}
 				}
 			}
