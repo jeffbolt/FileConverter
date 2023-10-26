@@ -1,4 +1,6 @@
-﻿namespace FileConverter
+﻿using FileConverter.Config;
+
+namespace FileConverter
 {
 	public static class AsposeHelper
 	{
@@ -30,18 +32,40 @@
 		///	license.SetLicense("Aspose.Words.NET.lic");
 		/// </example>
 		/// <see href="https://reference.aspose.com/words/net/aspose.words/license/setlicense/" />
-		public static bool SetWordsLicense()
+
+		private const string WordsLicenseFile = "Aspose.Words.lic";  // valid up to v13.8.0.0
+		private const string CellsLicenseFile = "Aspose.Cells.lic";  // valid up to v7.5.3.0
+
+		public enum LicenseType
+		{
+			Words = 0,
+			Cells = 1
+		}
+
+		/// <summary>
+		/// Licenses Aspose components
+		/// </summary>
+		/// <param name="type"></param>
+		/// <returns>True if successful, otherwise false.</returns>
+		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="FileNotFoundException"></exception>
+		public static bool SetLicense(LicenseType type)
 		{
 			try
 			{
 				// Get license from local file system (must set as environment variable)
-				string licenseFolder = RegistryHelper.GetEnvironmentVariable("AsposeLicensePath") ?? "";
-				string licenseFile = Path.Combine(licenseFolder, "Aspose.Words.lic");
+				string licenseFolder = EnvironmentVariables.GetEnvironmentVariable("AsposeLicensePath");
+				string licenseFile = type switch
+				{
+					LicenseType.Words => WordsLicenseFile,
+					LicenseType.Cells => CellsLicenseFile,
+					_ => throw new ArgumentException($"Invalid Aspose License Type '{(int)type}'."),
+				};
+				string licensePath = Path.Combine(licenseFolder, licenseFile);
 
 				if (!File.Exists(licenseFile))
 					throw new FileNotFoundException($"Cannot locate license file '{licenseFile}'.");
 
-				// Aspose.Words.dll license valid for v13.8.0.0
 				using (Stream stream = File.OpenRead(licenseFile))
 				{
 					var license = new Aspose.Words.License();
@@ -51,7 +75,7 @@
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+				Console.Error.WriteLine(ex.ToString());
 				return false;
 			}
 		}

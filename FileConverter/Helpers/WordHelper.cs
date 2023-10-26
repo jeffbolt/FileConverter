@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FileConverter
 {
-	public static class WordConverter
+	public static class WordHelper
 	{
 		private static List<string> GetSupportedFormats()
 		{
@@ -21,7 +21,7 @@ namespace FileConverter
 					throw new FileNotFoundException();
 				else if (!GetSupportedFormats().Contains(fiInput.Extension))
 					throw new Exception("Invalid file type.");
-				else if (!AsposeHelper.SetWordsLicense())
+				else if (!AsposeHelper.SetLicense(AsposeHelper.LicenseType.Words))
 					throw new Exception("Could not activate Aspose.Words license.");
 
 				var pdfOptions = new PdfSaveOptions
@@ -63,6 +63,7 @@ namespace FileConverter
 			}
 			catch (Exception ex)
 			{
+				Console.Error.WriteLine(ex.ToString());
 				return false;
 			}
 		}

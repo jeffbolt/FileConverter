@@ -14,8 +14,8 @@ namespace FileConverter.Config
 			const string AppName = "FileConverter";
 			const string RegPath = @"SYSTEM\ControlSet001\Control\Session Manager\Environment";
 			string key = string.Concat(AppName, subKey);
-			var value = Environment.GetEnvironmentVariable(key) ??
-						Registry.GetRegistryValue(RegistryHive.LocalMachine, RegPath, key);
+			var value = Registry.GetRegistryValue(RegistryHive.LocalMachine, RegPath, key) ??
+						Environment.GetEnvironmentVariable(key);
 			return value?.ToString() ?? "";
 		}
 	}

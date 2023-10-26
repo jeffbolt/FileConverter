@@ -19,6 +19,10 @@ namespace FileConverter
 		{
 			return File.GetCreationTime(Assembly.GetExecutingAssembly().Location);
 		}
+		public static string GetAssemblyName()
+		{
+			return Assembly.GetExecutingAssembly().GetName().Name;
+		}
 
 		public static string GetClrVersion()
 		{
