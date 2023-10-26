@@ -75,7 +75,7 @@ namespace FileConverter
 			//if (lnkUpdate.Tag.Equals("UpdateAvailable"))
 			//	DownloadAndInstallUpdate();
 			//else if (!lnkUpdate.Tag.Equals("Checking"))
-			//	CheckForUpdateAsync();
+			//	CheckForUpdate();
 			CheckForUpdate();
 		}
 
