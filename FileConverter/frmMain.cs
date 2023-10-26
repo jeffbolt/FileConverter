@@ -7,19 +7,17 @@ namespace FileConverter
 {
 	public partial class frmMain : Form
 	{
+		#region Private Variables
+
 		private Version? CurrentVersion;
 		private const string SupportedImageFileTypes = "*.bmp;*.jpg;*.jpeg;*.png;*.gif";
 		private readonly List<string> ImageFileTypes = new(SupportedImageFileTypes.Replace("*", "").Split(';'));
 		private const string SupportedDocumentTypes = "*.doc;*.docx;";
 		private readonly List<string> DocumentTypes = new(SupportedDocumentTypes.Replace("*", "").Split(';'));
 
-		//private bool IsSupportedImageFile(string filename)
-		//{
-		//	foreach (string imageFileType in ImageFileTypes)
-		//		if (filename.EndsWith(imageFileType, StringComparison.OrdinalIgnoreCase))
-		//			return true;
-		//	return false;
-		//}
+		#endregion
+
+		#region Common Methods
 
 		private void SetDropEffect(DragEventArgs e, List<string>? fileTypes = null)
 		{
@@ -31,11 +29,13 @@ namespace FileConverter
 				e.Effect = DragDropEffects.None;
 		}
 
-		private bool IsSupportedFile(string filename, List<string> fileTypes)
+		private static bool IsSupportedFile(string filename, List<string> fileTypes)
 		{
 			var fi = new FileInfo(filename);
 			return fileTypes.Contains(fi.Extension);
 		}
+
+		#endregion
 
 		#region Form Events
 
@@ -52,11 +52,11 @@ namespace FileConverter
 			ResetBinaryFileInfo();
 			ResetImageFileInfo();
 			ResetDocumentInfo();
-#if AUTOUPDATE
+
 			lnkUpdate.Tag = "Unknown";
 			lnkUpdate.Text = "Check for Update";
-			CheckForUpdateAsync();
-#endif
+			CheckForUpdate();
+
 			ResetStatusBarMessage();
 		}
 
@@ -72,10 +72,11 @@ namespace FileConverter
 
 		private void lnkUpdate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			if (lnkUpdate.Tag.Equals("UpdateAvailable"))
-				DownloadAndInstallUpdate();
-			else if (!lnkUpdate.Tag.Equals("Checking"))
-				CheckForUpdateAsync();
+			//if (lnkUpdate.Tag.Equals("UpdateAvailable"))
+			//	DownloadAndInstallUpdate();
+			//else if (!lnkUpdate.Tag.Equals("Checking"))
+			//	CheckForUpdateAsync();
+			CheckForUpdate();
 		}
 
 		public DateTime DateFromUnixHex(string hex)
@@ -120,87 +121,9 @@ namespace FileConverter
 
 		#endregion
 
-		#region Auto Update
+		#region Tab Events
 
-		//private void CheckForUpdate(bool promptToInstall = true)
-		//{
-		//	try
-		//	{
-		//		var latestVersion = Updater.GetLatestRelease()?.Version;
-		//		if (latestVersion > CurrentVersion)
-		//		{
-		//			lnkUpdate.Tag = "UpdateAvailable";
-		//			lnkUpdate.Text = $"Click to download v{latestVersion}";
-		//			if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?", 
-		//				"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
-		//			{
-		//				DownloadAndInstallUpdate();
-		//			}
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		Debug.WriteLine(ex.ToString());
-		//	}
-		//}
-
-		private async void CheckForUpdateAsync(bool promptToInstall = true)
-		{
-			try
-			{
-				lnkUpdate.Tag = "Checking";
-				lnkUpdate.Text = "Checking for update...";
-
-				var latestRelease = await Updater.GetLatestReleaseAsync();
-				if (latestRelease != null)
-				{
-					var latestVersion = latestRelease.Version;
-					if (latestVersion > CurrentVersion)
-					{
-						lnkUpdate.Tag = "UpdateAvailable";
-						lnkUpdate.Text = $"Click to download v{latestVersion}";
-						if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?",
-							"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
-						{
-							DownloadAndInstallUpdate();
-						}
-					}
-					else if (latestVersion == CurrentVersion)
-					{
-						lnkUpdate.Tag = "Latest";
-						lnkUpdate.Text = "Running latest version";
-					}
-					else
-					{
-						lnkUpdate.Tag = "Unknown";
-						lnkUpdate.Text = "Check for Update";
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex.ToString());
-			}
-		}
-
-		private void DownloadAndInstallUpdate()
-		{
-			// TODO: Call update service and close
-			Close();
-		}
-
-		#endregion
-
-		#region Tab Control Events
-
-		//private void tabFiles_MouseDown(object sender, MouseEventArgs e)
-		//{
-		//	tabFiles.DoDragDrop(tabFiles.Text, DragDropEffects.Copy | DragDropEffects.Move);
-		//}
-
-		#endregion
-
-		#region Binary File Tab Page Events
+		#region Binary File Tab Events
 
 		private void tabBinary_DragEnter(object sender, DragEventArgs e)
 		{
@@ -235,7 +158,7 @@ namespace FileConverter
 
 		#endregion
 
-		#region Image File Tab Page Events
+		#region Image File Tab Events
 
 		private void tabImage_DragEnter(object sender, DragEventArgs e)
 		{
@@ -270,7 +193,7 @@ namespace FileConverter
 
 		#endregion
 
-		#region Image File Tab Page Events
+		#region Image File Tab Events
 
 		private void tabDocuments_DragEnter(object sender, DragEventArgs e)
 		{
@@ -299,6 +222,10 @@ namespace FileConverter
 		}
 
 		#endregion
+
+		#endregion
+
+		#region Tab Methods
 
 		#region Binary File Tab Methods
 
@@ -646,6 +573,71 @@ namespace FileConverter
 				// Delete the temp file
 				try { if (File.Exists(pdfFilePath)) File.Delete(pdfFilePath); }
 				catch { }
+			}
+		}
+
+		#endregion
+
+		#endregion
+
+		#region Auto-update Methods
+
+		private async void CheckForUpdate(bool promptToInstall = true)
+		{
+			try
+			{
+				lnkUpdate.Tag = "Checking";
+				lnkUpdate.Text = "Checking for update...";
+
+				var latestRelease = await Updater.GetLatestRelease();
+
+				if (latestRelease != null)
+				{
+					Version latestVersion = latestRelease.Version;
+					List<GitHubAsset>? assets = latestRelease.Assets;
+
+					if (latestVersion > CurrentVersion && assets?.Count > 0)
+					{
+						lnkUpdate.Tag = "UpdateAvailable";
+						lnkUpdate.Text = $"Click to download v{latestVersion}";
+						if (promptToInstall && MessageBoxEx.Show(this, $"Version v{latestVersion} is avaible. Download and install now?",
+							"New Version Available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+						{
+							DownloadAndInstallUpdate(assets);
+						}
+					}
+					else if (latestVersion == CurrentVersion)
+					{
+						lnkUpdate.Tag = "Latest";
+						lnkUpdate.Text = "Running latest version";
+					}
+					else
+					{
+						lnkUpdate.Tag = "Unknown";
+						lnkUpdate.Text = "Check for Update";
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.ToString());
+			}
+		}
+
+		private async void DownloadAndInstallUpdate(List<GitHubAsset> assets)
+		{
+			try
+			{
+				// Download and run installer
+				if (await Updater.DownloadAssets(assets, true))
+				{
+					// Close app
+					Close();
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.ToString());
 			}
 		}
 

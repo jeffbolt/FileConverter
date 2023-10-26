@@ -12,10 +12,8 @@ namespace FileConverter.UpdateService
 		public string? Name { get; set; }
 		[JsonProperty("label")]
 		public string? Label { get; set; }
-
 		[JsonProperty("uploader")]
 		public GitHubUser? Uploader { get; set; }
-
 		[JsonProperty("content_type")]
 		public string? ContentType { get; set; }
 		[JsonProperty("state")]

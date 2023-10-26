@@ -1,4 +1,6 @@
-﻿namespace FileConverter
+﻿using FileConverter.Config;
+
+namespace FileConverter
 {
 	public static class AsposeHelper
 	{
@@ -52,7 +54,7 @@
 			try
 			{
 				// Get license from local file system (must set as environment variable)
-				string licenseFolder = RegistryHelper.GetEnvironmentVariable("AsposeLicensePath") ?? "";
+				string licenseFolder = EnvironmentVariables.GetEnvironmentVariable("AsposeLicensePath");
 				string licenseFile = type switch
 				{
 					LicenseType.Words => WordsLicenseFile,
