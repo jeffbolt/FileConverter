@@ -1,7 +1,10 @@
+using Aspose.Words.Saving;
+
 using FileConverter.UpdateService;
 
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
 
 namespace FileConverter
 {
@@ -490,6 +493,7 @@ namespace FileConverter
 			lblDocumentSize.Text = "";
 			pbDocumentIcon.Visible = false;
 			EnableDocumentButtons(false);
+			LoadPdfPermissions();
 		}
 
 		private void EnableDocumentButtons(bool enable, bool includeBrowse = false)
@@ -526,6 +530,51 @@ namespace FileConverter
 			}
 		}
 
+		private void LoadPdfPermissions()
+		{
+			cblPdfPermissions.Items.Clear();
+			foreach (var permission in Enum.GetValues(typeof(PdfPermissions)))
+			{
+				//cblPdfPermissions.Items.Add(permission);
+				string value = permission.ToString();
+				string phrase = MakePhrase(value);
+				cblPdfPermissions.Items.Add(phrase);
+			};
+		}
+
+		private string MakePhrase(string Value)
+		{
+			// Ex: Converts "ThisIsMyPhrase" into "This Is My Phrase"
+			var sb = new StringBuilder();
+			var arrChars = Value.ToCharArray();
+
+			for (int i = 0; i < arrChars.Length; i++)
+			{
+				char ch = arrChars[i];
+				if (i > 0 && i < arrChars.Length - 1 && char.IsUpper(ch))
+					sb.Append(' ');
+				sb.Append(ch);
+			}
+
+			return sb.ToString();
+		 }
+
+		private void lnkDocumentsPdfOptionsCheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			CheckAllDocumentsPdfOptions(true);
+		}
+
+		private void lnkDocumentsPdfOptionsUncheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			CheckAllDocumentsPdfOptions(false);
+		}
+
+		private void CheckAllDocumentsPdfOptions(bool check)
+		{
+			for (int i = 0; i < cblPdfPermissions.Items.Count; i++)
+				cblPdfPermissions.SetItemChecked(i, check);
+		}
+
 		private void SaveDocumentAs()
 		{
 			string filePath = txtDocumentPath.Text.Trim();
@@ -534,7 +583,16 @@ namespace FileConverter
 
 			try
 			{
-				if (WordHelper.ToPdf(filePath, ref pdfFilePath))
+				var permissions = new PdfPermissions();
+				foreach (var chk in cblPdfPermissions.CheckedItems)
+					foreach (var permission in Enum.GetValues(typeof(PdfPermissions)))
+					{
+						string val = chk.ToString().Replace(" ", "");
+						if (val == permission.ToString())
+							permissions |= (PdfPermissions)Enum.Parse(typeof(PdfPermissions), val);
+					}
+
+				if (WordHelper.ToPdf(filePath, ref pdfFilePath, permissions))
 				{
 					var fi = new FileInfo(filePath);
 					using FileStream fs = new(pdfFilePath, FileMode.Open, FileAccess.Read);

@@ -548,6 +548,48 @@
 			gbDocumentInfo.TabStop = false;
 			gbDocumentInfo.Text = "File Information";
 			// 
+			// lnkDocumentsPdfOptionsUncheckAll
+			// 
+			lnkDocumentsPdfOptionsUncheckAll.Location = new System.Drawing.Point(24, 95);
+			lnkDocumentsPdfOptionsUncheckAll.Name = "lnkDocumentsPdfOptionsUncheckAll";
+			lnkDocumentsPdfOptionsUncheckAll.Size = new System.Drawing.Size(70, 16);
+			lnkDocumentsPdfOptionsUncheckAll.TabIndex = 17;
+			lnkDocumentsPdfOptionsUncheckAll.TabStop = true;
+			lnkDocumentsPdfOptionsUncheckAll.Text = "Uncheck All";
+			lnkDocumentsPdfOptionsUncheckAll.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			lnkDocumentsPdfOptionsUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkDocumentsPdfOptionsUncheckAll_LinkClicked);
+			// 
+			// lnkDocumentsPdfOptionsCheckAll
+			// 
+			lnkDocumentsPdfOptionsCheckAll.Location = new System.Drawing.Point(24, 80);
+			lnkDocumentsPdfOptionsCheckAll.Name = "lnkDocumentsPdfOptionsCheckAll";
+			lnkDocumentsPdfOptionsCheckAll.Size = new System.Drawing.Size(70, 15);
+			lnkDocumentsPdfOptionsCheckAll.TabIndex = 16;
+			lnkDocumentsPdfOptionsCheckAll.TabStop = true;
+			lnkDocumentsPdfOptionsCheckAll.Text = "Check All";
+			lnkDocumentsPdfOptionsCheckAll.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			lnkDocumentsPdfOptionsCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkDocumentsPdfOptionsCheckAll_LinkClicked);
+			// 
+			// cblPdfPermissions
+			// 
+			cblPdfPermissions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			cblPdfPermissions.CheckOnClick = true;
+			cblPdfPermissions.FormattingEnabled = true;
+			cblPdfPermissions.Location = new System.Drawing.Point(100, 68);
+			cblPdfPermissions.Name = "cblPdfPermissions";
+			cblPdfPermissions.Size = new System.Drawing.Size(404, 58);
+			cblPdfPermissions.TabIndex = 15;
+			// 
+			// lblPdfPermissions
+			// 
+			lblPdfPermissions.AutoSize = true;
+			lblPdfPermissions.Location = new System.Drawing.Point(6, 65);
+			lblPdfPermissions.Name = "lblPdfPermissions";
+			lblPdfPermissions.Size = new System.Drawing.Size(73, 15);
+			lblPdfPermissions.TabIndex = 14;
+			lblPdfPermissions.Text = "Permissions:";
+			// 
 			// pbDocumentIcon
 			// 
 			pbDocumentIcon.Location = new Point(99, 34);
@@ -753,6 +795,10 @@
 		private Button btnDocumentBrowse;
 		private TextBox txtDocumentPath;
 		private Label lblBrowseDocument;
+		private CheckedListBox cblPdfPermissions;
+		private Label lblPdfPermissions;
+		private LinkLabel lnkDocumentsPdfOptionsUncheckAll;
+		private LinkLabel lnkDocumentsPdfOptionsCheckAll;
 		private ToolTip ttUpdate;
 	}
 }

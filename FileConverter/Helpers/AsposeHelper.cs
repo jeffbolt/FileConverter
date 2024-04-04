@@ -63,10 +63,10 @@ namespace FileConverter
 				};
 				string licensePath = Path.Combine(licenseFolder, licenseFile);
 
-				if (!File.Exists(licenseFile))
+				if (!File.Exists(licensePath))
 					throw new FileNotFoundException($"Cannot locate license file '{licenseFile}'.");
 
-				using (Stream stream = File.OpenRead(licenseFile))
+				using (Stream stream = File.OpenRead(licensePath))
 				{
 					var license = new Aspose.Words.License();
 					license.SetLicense(stream);
