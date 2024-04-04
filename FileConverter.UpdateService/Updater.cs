@@ -49,7 +49,7 @@ namespace FileConverter.UpdateService
 				string folderName = string.Concat("FileConverter", Guid.NewGuid().ToString().ToUpper());
 				string path = Path.Combine(Path.GetTempPath(), folderName);
 				if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-				string? setupFilePath = assets.FirstOrDefault(x => x.Name == "setup.exe").Name;
+				string setupFilePath = "";
 
 				foreach (GitHubAsset asset in assets)
 				{

@@ -110,6 +110,10 @@ namespace FileConverter
 			OverlayIndex = 0x000000040,
 		}
 
+		// API Declaration
+		[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		public static extern bool SetForegroundWindow(IntPtr hWnd);
+
 		[DllImport("shell32.dll")]
 		private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, out SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
 
