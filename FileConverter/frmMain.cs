@@ -57,9 +57,9 @@ namespace FileConverter
 			ResetDocumentInfo();
 
 			lnkUpdate.Tag = "Unknown";
-			lnkUpdate.Text = "Check for Update";
-			CheckForUpdate();
+			lnkUpdate.Text = "Check for update";
 
+			CheckForUpdate();
 			ResetStatusBarMessage();
 		}
 
@@ -658,7 +658,7 @@ namespace FileConverter
 					{
 						case 0:
 							lnkUpdate.Tag = "Latest";
-							lnkUpdate.Text = "Running latest version";
+							lnkUpdate.Text = "No update available";
 							break;
 						case 1:
 							if (assets?.Count > 0)
@@ -674,9 +674,14 @@ namespace FileConverter
 							break;
 						case -1:
 							lnkUpdate.Tag = "Unknown";
-							lnkUpdate.Text = "Check for Update";
+							lnkUpdate.Text = "Check for update";
 							break;
 					}
+				}
+				else
+				{
+					lnkUpdate.Tag = "Failure";
+					lnkUpdate.Text = "Unable to check for update";
 				}
 			}
 			catch (Exception ex)

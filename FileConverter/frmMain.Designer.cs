@@ -28,745 +28,720 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-			this.pnlTop = new System.Windows.Forms.Panel();
-			this.lnkUpdate = new System.Windows.Forms.LinkLabel();
-			this.pbTitle = new System.Windows.Forms.PictureBox();
-			this.lblVersion = new System.Windows.Forms.Label();
-			this.lblTitle = new System.Windows.Forms.Label();
-			this.tcMain = new System.Windows.Forms.TabControl();
-			this.tabBinary = new System.Windows.Forms.TabPage();
-			this.btnBinaryFileCopyClipboard = new System.Windows.Forms.Button();
-			this.btnSaveBinaryFileAs = new System.Windows.Forms.Button();
-			this.grpBinaryFileInfo = new System.Windows.Forms.GroupBox();
-			this.pbBinaryFileIcon = new System.Windows.Forms.PictureBox();
-			this.lblBinaryFileName = new System.Windows.Forms.Label();
-			this.lblBinaryFileNameTitle = new System.Windows.Forms.Label();
-			this.lblBinaryFileSize = new System.Windows.Forms.Label();
-			this.lblBinaryFileSizeTitle = new System.Windows.Forms.Label();
-			this.lblBinaryFileType = new System.Windows.Forms.Label();
-			this.lblBinaryFileTypeTitle = new System.Windows.Forms.Label();
-			this.btnBinaryFileBrowse = new System.Windows.Forms.Button();
-			this.txtBinaryFilePath = new System.Windows.Forms.TextBox();
-			this.lblBinaryBrowse = new System.Windows.Forms.Label();
-			this.tabImage = new System.Windows.Forms.TabPage();
-			this.btnImageFileSaveAs = new System.Windows.Forms.Button();
-			this.btnImageFileCopyClipboard = new System.Windows.Forms.Button();
-			this.gbImageFileInfo = new System.Windows.Forms.GroupBox();
-			this.pbImageFileIcon = new System.Windows.Forms.PictureBox();
-			this.pbImageFilePreview = new System.Windows.Forms.PictureBox();
-			this.lblImageFileName = new System.Windows.Forms.Label();
-			this.lblImageFileNameTitle = new System.Windows.Forms.Label();
-			this.lblImageFileSize = new System.Windows.Forms.Label();
-			this.lblImageFileSizeTitle = new System.Windows.Forms.Label();
-			this.lblImageFileType = new System.Windows.Forms.Label();
-			this.lblImageFileTypeTitle = new System.Windows.Forms.Label();
-			this.btnImageFileBrowse = new System.Windows.Forms.Button();
-			this.txtImageFilePath = new System.Windows.Forms.TextBox();
-			this.lblImageBrowse = new System.Windows.Forms.Label();
-			this.tabDocuments = new System.Windows.Forms.TabPage();
-			this.btnDocumentSaveAs = new System.Windows.Forms.Button();
-			this.gbDocumentInfo = new System.Windows.Forms.GroupBox();
-			this.lnkDocumentsPdfOptionsUncheckAll = new System.Windows.Forms.LinkLabel();
-			this.lnkDocumentsPdfOptionsCheckAll = new System.Windows.Forms.LinkLabel();
-			this.cblPdfPermissions = new System.Windows.Forms.CheckedListBox();
-			this.lblPdfPermissions = new System.Windows.Forms.Label();
-			this.pbDocumentIcon = new System.Windows.Forms.PictureBox();
-			this.lblDocumentName = new System.Windows.Forms.Label();
-			this.lblDocumentNameTitle = new System.Windows.Forms.Label();
-			this.lblDocumentSize = new System.Windows.Forms.Label();
-			this.lblDocumentSizeTitle = new System.Windows.Forms.Label();
-			this.lblDocumentType = new System.Windows.Forms.Label();
-			this.lblDocumentTypeTitle = new System.Windows.Forms.Label();
-			this.btnDocumentBrowse = new System.Windows.Forms.Button();
-			this.txtDocumentPath = new System.Windows.Forms.TextBox();
-			this.lblBrowseDocument = new System.Windows.Forms.Label();
-			this.ssMain = new System.Windows.Forms.StatusStrip();
-			this.sslStatus = new System.Windows.Forms.ToolStripStatusLabel();
-			this.pnlTop.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbTitle)).BeginInit();
-			this.tcMain.SuspendLayout();
-			this.tabBinary.SuspendLayout();
-			this.grpBinaryFileInfo.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbBinaryFileIcon)).BeginInit();
-			this.tabImage.SuspendLayout();
-			this.gbImageFileInfo.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbImageFileIcon)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbImageFilePreview)).BeginInit();
-			this.tabDocuments.SuspendLayout();
-			this.gbDocumentInfo.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbDocumentIcon)).BeginInit();
-			this.ssMain.SuspendLayout();
-			this.SuspendLayout();
+			pnlTop = new Panel();
+			lnkUpdate = new LinkLabel();
+			pbTitle = new PictureBox();
+			lblVersion = new Label();
+			lblTitle = new Label();
+			tcMain = new TabControl();
+			tabBinary = new TabPage();
+			btnBinaryFileCopyClipboard = new Button();
+			btnSaveBinaryFileAs = new Button();
+			grpBinaryFileInfo = new GroupBox();
+			pbBinaryFileIcon = new PictureBox();
+			lblBinaryFileName = new Label();
+			lblBinaryFileNameTitle = new Label();
+			lblBinaryFileSize = new Label();
+			lblBinaryFileSizeTitle = new Label();
+			lblBinaryFileType = new Label();
+			lblBinaryFileTypeTitle = new Label();
+			btnBinaryFileBrowse = new Button();
+			txtBinaryFilePath = new TextBox();
+			lblBinaryBrowse = new Label();
+			tabImage = new TabPage();
+			btnImageFileSaveAs = new Button();
+			btnImageFileCopyClipboard = new Button();
+			gbImageFileInfo = new GroupBox();
+			pbImageFileIcon = new PictureBox();
+			pbImageFilePreview = new PictureBox();
+			lblImageFileName = new Label();
+			lblImageFileNameTitle = new Label();
+			lblImageFileSize = new Label();
+			lblImageFileSizeTitle = new Label();
+			lblImageFileType = new Label();
+			lblImageFileTypeTitle = new Label();
+			btnImageFileBrowse = new Button();
+			txtImageFilePath = new TextBox();
+			lblImageBrowse = new Label();
+			tabDocuments = new TabPage();
+			btnDocumentSaveAs = new Button();
+			gbDocumentInfo = new GroupBox();
+			pbDocumentIcon = new PictureBox();
+			lblDocumentName = new Label();
+			lblDocumentNameTitle = new Label();
+			lblDocumentSize = new Label();
+			lblDocumentSizeTitle = new Label();
+			lblDocumentType = new Label();
+			lblDocumentTypeTitle = new Label();
+			btnDocumentBrowse = new Button();
+			txtDocumentPath = new TextBox();
+			lblBrowseDocument = new Label();
+			ssMain = new StatusStrip();
+			sslStatus = new ToolStripStatusLabel();
+			ttUpdate = new ToolTip(components);
+			pnlTop.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)pbTitle).BeginInit();
+			tcMain.SuspendLayout();
+			tabBinary.SuspendLayout();
+			grpBinaryFileInfo.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)pbBinaryFileIcon).BeginInit();
+			tabImage.SuspendLayout();
+			gbImageFileInfo.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)pbImageFileIcon).BeginInit();
+			((System.ComponentModel.ISupportInitialize)pbImageFilePreview).BeginInit();
+			tabDocuments.SuspendLayout();
+			gbDocumentInfo.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)pbDocumentIcon).BeginInit();
+			ssMain.SuspendLayout();
+			SuspendLayout();
 			// 
 			// pnlTop
 			// 
-			this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.pnlTop.BackColor = System.Drawing.Color.Transparent;
-			this.pnlTop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnlTop.BackgroundImage")));
-			this.pnlTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pnlTop.Controls.Add(this.lnkUpdate);
-			this.pnlTop.Controls.Add(this.pbTitle);
-			this.pnlTop.Controls.Add(this.lblVersion);
-			this.pnlTop.Controls.Add(this.lblTitle);
-			this.pnlTop.Location = new System.Drawing.Point(0, 0);
-			this.pnlTop.Name = "pnlTop";
-			this.pnlTop.Size = new System.Drawing.Size(584, 60);
-			this.pnlTop.TabIndex = 2;
+			pnlTop.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			pnlTop.BackColor = Color.Transparent;
+			pnlTop.BackgroundImage = (Image)resources.GetObject("pnlTop.BackgroundImage");
+			pnlTop.BorderStyle = BorderStyle.FixedSingle;
+			pnlTop.Controls.Add(lnkUpdate);
+			pnlTop.Controls.Add(pbTitle);
+			pnlTop.Controls.Add(lblVersion);
+			pnlTop.Controls.Add(lblTitle);
+			pnlTop.Location = new Point(0, 0);
+			pnlTop.Name = "pnlTop";
+			pnlTop.Size = new Size(584, 60);
+			pnlTop.TabIndex = 2;
 			// 
 			// lnkUpdate
 			// 
-			this.lnkUpdate.ActiveLinkColor = System.Drawing.Color.Lime;
-			this.lnkUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lnkUpdate.LinkColor = System.Drawing.Color.Lime;
-			this.lnkUpdate.Location = new System.Drawing.Point(51, 36);
-			this.lnkUpdate.Name = "lnkUpdate";
-			this.lnkUpdate.Size = new System.Drawing.Size(516, 15);
-			this.lnkUpdate.TabIndex = 13;
-			this.lnkUpdate.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.lnkUpdate.VisitedLinkColor = System.Drawing.Color.Lime;
-			this.lnkUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUpdate_LinkClicked);
+			lnkUpdate.ActiveLinkColor = Color.Lime;
+			lnkUpdate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			lnkUpdate.LinkColor = Color.Lime;
+			lnkUpdate.Location = new Point(51, 36);
+			lnkUpdate.Name = "lnkUpdate";
+			lnkUpdate.Size = new Size(516, 15);
+			lnkUpdate.TabIndex = 13;
+			lnkUpdate.TextAlign = ContentAlignment.TopRight;
+			ttUpdate.SetToolTip(lnkUpdate, "Click to check if new version is available.");
+			lnkUpdate.VisitedLinkColor = Color.Lime;
+			lnkUpdate.LinkClicked += lnkUpdate_LinkClicked;
 			// 
 			// pbTitle
 			// 
-			this.pbTitle.ErrorImage = null;
-			this.pbTitle.Image = global::FileConverter.Properties.Resources.App;
-			this.pbTitle.Location = new System.Drawing.Point(11, 8);
-			this.pbTitle.Name = "pbTitle";
-			this.pbTitle.Size = new System.Drawing.Size(34, 37);
-			this.pbTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pbTitle.TabIndex = 12;
-			this.pbTitle.TabStop = false;
+			pbTitle.ErrorImage = null;
+			pbTitle.Image = Properties.Resources.App;
+			pbTitle.Location = new Point(11, 8);
+			pbTitle.Name = "pbTitle";
+			pbTitle.Size = new Size(34, 37);
+			pbTitle.SizeMode = PictureBoxSizeMode.Zoom;
+			pbTitle.TabIndex = 12;
+			pbTitle.TabStop = false;
 			// 
 			// lblVersion
 			// 
-			this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblVersion.AutoSize = true;
-			this.lblVersion.BackColor = System.Drawing.Color.Transparent;
-			this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.lblVersion.ForeColor = System.Drawing.Color.White;
-			this.lblVersion.Location = new System.Drawing.Point(516, 19);
-			this.lblVersion.Name = "lblVersion";
-			this.lblVersion.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.lblVersion.Size = new System.Drawing.Size(51, 17);
-			this.lblVersion.TabIndex = 11;
-			this.lblVersion.Text = "v0.0.0.0";
-			this.lblVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			lblVersion.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			lblVersion.AutoSize = true;
+			lblVersion.BackColor = Color.Transparent;
+			lblVersion.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+			lblVersion.ForeColor = Color.White;
+			lblVersion.Location = new Point(516, 19);
+			lblVersion.Name = "lblVersion";
+			lblVersion.RightToLeft = RightToLeft.Yes;
+			lblVersion.Size = new Size(51, 17);
+			lblVersion.TabIndex = 11;
+			lblVersion.Text = "v0.0.0.0";
+			lblVersion.TextAlign = ContentAlignment.TopRight;
 			// 
 			// lblTitle
 			// 
-			this.lblTitle.AutoSize = true;
-			this.lblTitle.BackColor = System.Drawing.Color.Transparent;
-			this.lblTitle.Cursor = System.Windows.Forms.Cursors.Default;
-			this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.lblTitle.ForeColor = System.Drawing.Color.White;
-			this.lblTitle.Location = new System.Drawing.Point(51, 8);
-			this.lblTitle.Name = "lblTitle";
-			this.lblTitle.Size = new System.Drawing.Size(174, 32);
-			this.lblTitle.TabIndex = 1;
-			this.lblTitle.Text = "File Converter";
+			lblTitle.AutoSize = true;
+			lblTitle.BackColor = Color.Transparent;
+			lblTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+			lblTitle.ForeColor = Color.White;
+			lblTitle.Location = new Point(51, 8);
+			lblTitle.Name = "lblTitle";
+			lblTitle.Size = new Size(174, 32);
+			lblTitle.TabIndex = 1;
+			lblTitle.Text = "File Converter";
 			// 
 			// tcMain
 			// 
-			this.tcMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tcMain.Controls.Add(this.tabBinary);
-			this.tcMain.Controls.Add(this.tabImage);
-			this.tcMain.Controls.Add(this.tabDocuments);
-			this.tcMain.Location = new System.Drawing.Point(12, 65);
-			this.tcMain.Name = "tcMain";
-			this.tcMain.SelectedIndex = 0;
-			this.tcMain.Size = new System.Drawing.Size(560, 266);
-			this.tcMain.TabIndex = 1;
+			tcMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			tcMain.Controls.Add(tabBinary);
+			tcMain.Controls.Add(tabImage);
+			tcMain.Controls.Add(tabDocuments);
+			tcMain.Location = new Point(12, 65);
+			tcMain.Name = "tcMain";
+			tcMain.SelectedIndex = 0;
+			tcMain.Size = new Size(560, 266);
+			tcMain.TabIndex = 1;
 			// 
 			// tabBinary
 			// 
-			this.tabBinary.AllowDrop = true;
-			this.tabBinary.Controls.Add(this.btnBinaryFileCopyClipboard);
-			this.tabBinary.Controls.Add(this.btnSaveBinaryFileAs);
-			this.tabBinary.Controls.Add(this.grpBinaryFileInfo);
-			this.tabBinary.Controls.Add(this.btnBinaryFileBrowse);
-			this.tabBinary.Controls.Add(this.txtBinaryFilePath);
-			this.tabBinary.Controls.Add(this.lblBinaryBrowse);
-			this.tabBinary.Location = new System.Drawing.Point(4, 24);
-			this.tabBinary.Name = "tabBinary";
-			this.tabBinary.Padding = new System.Windows.Forms.Padding(3);
-			this.tabBinary.Size = new System.Drawing.Size(552, 238);
-			this.tabBinary.TabIndex = 0;
-			this.tabBinary.Text = "Binary Conversion";
-			this.tabBinary.UseVisualStyleBackColor = true;
-			this.tabBinary.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabBinary_DragDrop);
-			this.tabBinary.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabBinary_DragEnter);
+			tabBinary.AllowDrop = true;
+			tabBinary.Controls.Add(btnBinaryFileCopyClipboard);
+			tabBinary.Controls.Add(btnSaveBinaryFileAs);
+			tabBinary.Controls.Add(grpBinaryFileInfo);
+			tabBinary.Controls.Add(btnBinaryFileBrowse);
+			tabBinary.Controls.Add(txtBinaryFilePath);
+			tabBinary.Controls.Add(lblBinaryBrowse);
+			tabBinary.Location = new Point(4, 24);
+			tabBinary.Name = "tabBinary";
+			tabBinary.Padding = new Padding(3);
+			tabBinary.Size = new Size(552, 238);
+			tabBinary.TabIndex = 0;
+			tabBinary.Text = "Binary Conversion";
+			tabBinary.UseVisualStyleBackColor = true;
+			tabBinary.DragDrop += tabBinary_DragDrop;
+			tabBinary.DragEnter += tabBinary_DragEnter;
 			// 
 			// btnBinaryFileCopyClipboard
 			// 
-			this.btnBinaryFileCopyClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnBinaryFileCopyClipboard.Enabled = false;
-			this.btnBinaryFileCopyClipboard.Location = new System.Drawing.Point(16, 201);
-			this.btnBinaryFileCopyClipboard.Name = "btnBinaryFileCopyClipboard";
-			this.btnBinaryFileCopyClipboard.Size = new System.Drawing.Size(120, 23);
-			this.btnBinaryFileCopyClipboard.TabIndex = 3;
-			this.btnBinaryFileCopyClipboard.Tag = "";
-			this.btnBinaryFileCopyClipboard.Text = "Copy as Binary";
-			this.btnBinaryFileCopyClipboard.UseVisualStyleBackColor = true;
-			this.btnBinaryFileCopyClipboard.Click += new System.EventHandler(this.btnBinaryFileCopyClipboard_Click);
+			btnBinaryFileCopyClipboard.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			btnBinaryFileCopyClipboard.Enabled = false;
+			btnBinaryFileCopyClipboard.Location = new Point(16, 201);
+			btnBinaryFileCopyClipboard.Name = "btnBinaryFileCopyClipboard";
+			btnBinaryFileCopyClipboard.Size = new Size(120, 23);
+			btnBinaryFileCopyClipboard.TabIndex = 3;
+			btnBinaryFileCopyClipboard.Tag = "";
+			btnBinaryFileCopyClipboard.Text = "Copy as Binary";
+			btnBinaryFileCopyClipboard.UseVisualStyleBackColor = true;
+			btnBinaryFileCopyClipboard.Click += btnBinaryFileCopyClipboard_Click;
 			// 
 			// btnSaveBinaryFileAs
 			// 
-			this.btnSaveBinaryFileAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnSaveBinaryFileAs.Enabled = false;
-			this.btnSaveBinaryFileAs.Location = new System.Drawing.Point(142, 201);
-			this.btnSaveBinaryFileAs.Name = "btnSaveBinaryFileAs";
-			this.btnSaveBinaryFileAs.Size = new System.Drawing.Size(120, 23);
-			this.btnSaveBinaryFileAs.TabIndex = 4;
-			this.btnSaveBinaryFileAs.Tag = "";
-			this.btnSaveBinaryFileAs.Text = "Save Binary as...";
-			this.btnSaveBinaryFileAs.UseVisualStyleBackColor = true;
-			this.btnSaveBinaryFileAs.Click += new System.EventHandler(this.btnSaveBinaryFileAs_Click);
+			btnSaveBinaryFileAs.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			btnSaveBinaryFileAs.Enabled = false;
+			btnSaveBinaryFileAs.Location = new Point(142, 201);
+			btnSaveBinaryFileAs.Name = "btnSaveBinaryFileAs";
+			btnSaveBinaryFileAs.Size = new Size(120, 23);
+			btnSaveBinaryFileAs.TabIndex = 4;
+			btnSaveBinaryFileAs.Tag = "";
+			btnSaveBinaryFileAs.Text = "Save Binary as...";
+			btnSaveBinaryFileAs.UseVisualStyleBackColor = true;
+			btnSaveBinaryFileAs.Click += btnSaveBinaryFileAs_Click;
 			// 
 			// grpBinaryFileInfo
 			// 
-			this.grpBinaryFileInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.grpBinaryFileInfo.Controls.Add(this.pbBinaryFileIcon);
-			this.grpBinaryFileInfo.Controls.Add(this.lblBinaryFileName);
-			this.grpBinaryFileInfo.Controls.Add(this.lblBinaryFileNameTitle);
-			this.grpBinaryFileInfo.Controls.Add(this.lblBinaryFileSize);
-			this.grpBinaryFileInfo.Controls.Add(this.lblBinaryFileSizeTitle);
-			this.grpBinaryFileInfo.Controls.Add(this.lblBinaryFileType);
-			this.grpBinaryFileInfo.Controls.Add(this.lblBinaryFileTypeTitle);
-			this.grpBinaryFileInfo.Location = new System.Drawing.Point(16, 60);
-			this.grpBinaryFileInfo.Name = "grpBinaryFileInfo";
-			this.grpBinaryFileInfo.Size = new System.Drawing.Size(520, 135);
-			this.grpBinaryFileInfo.TabIndex = 7;
-			this.grpBinaryFileInfo.TabStop = false;
-			this.grpBinaryFileInfo.Text = "File Information";
+			grpBinaryFileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			grpBinaryFileInfo.Controls.Add(pbBinaryFileIcon);
+			grpBinaryFileInfo.Controls.Add(lblBinaryFileName);
+			grpBinaryFileInfo.Controls.Add(lblBinaryFileNameTitle);
+			grpBinaryFileInfo.Controls.Add(lblBinaryFileSize);
+			grpBinaryFileInfo.Controls.Add(lblBinaryFileSizeTitle);
+			grpBinaryFileInfo.Controls.Add(lblBinaryFileType);
+			grpBinaryFileInfo.Controls.Add(lblBinaryFileTypeTitle);
+			grpBinaryFileInfo.Location = new Point(16, 60);
+			grpBinaryFileInfo.Name = "grpBinaryFileInfo";
+			grpBinaryFileInfo.Size = new Size(520, 135);
+			grpBinaryFileInfo.TabIndex = 7;
+			grpBinaryFileInfo.TabStop = false;
+			grpBinaryFileInfo.Text = "File Information";
 			// 
 			// pbBinaryFileIcon
 			// 
-			this.pbBinaryFileIcon.Location = new System.Drawing.Point(100, 35);
-			this.pbBinaryFileIcon.Name = "pbBinaryFileIcon";
-			this.pbBinaryFileIcon.Size = new System.Drawing.Size(16, 16);
-			this.pbBinaryFileIcon.TabIndex = 11;
-			this.pbBinaryFileIcon.TabStop = false;
+			pbBinaryFileIcon.Location = new Point(99, 34);
+			pbBinaryFileIcon.Name = "pbBinaryFileIcon";
+			pbBinaryFileIcon.Size = new Size(16, 16);
+			pbBinaryFileIcon.TabIndex = 11;
+			pbBinaryFileIcon.TabStop = false;
 			// 
 			// lblBinaryFileName
 			// 
-			this.lblBinaryFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblBinaryFileName.AutoEllipsis = true;
-			this.lblBinaryFileName.Location = new System.Drawing.Point(100, 20);
-			this.lblBinaryFileName.Name = "lblBinaryFileName";
-			this.lblBinaryFileName.Size = new System.Drawing.Size(415, 15);
-			this.lblBinaryFileName.TabIndex = 10;
-			this.lblBinaryFileName.Text = "[file name]";
+			lblBinaryFileName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblBinaryFileName.AutoEllipsis = true;
+			lblBinaryFileName.Location = new Point(99, 19);
+			lblBinaryFileName.Name = "lblBinaryFileName";
+			lblBinaryFileName.Size = new Size(415, 15);
+			lblBinaryFileName.TabIndex = 10;
+			lblBinaryFileName.Text = "[file name]";
 			// 
 			// lblBinaryFileNameTitle
 			// 
-			this.lblBinaryFileNameTitle.AutoSize = true;
-			this.lblBinaryFileNameTitle.Location = new System.Drawing.Point(6, 20);
-			this.lblBinaryFileNameTitle.Name = "lblBinaryFileNameTitle";
-			this.lblBinaryFileNameTitle.Size = new System.Drawing.Size(63, 15);
-			this.lblBinaryFileNameTitle.TabIndex = 9;
-			this.lblBinaryFileNameTitle.Text = "File Name:";
+			lblBinaryFileNameTitle.AutoSize = true;
+			lblBinaryFileNameTitle.Location = new Point(6, 19);
+			lblBinaryFileNameTitle.Name = "lblBinaryFileNameTitle";
+			lblBinaryFileNameTitle.Size = new Size(63, 15);
+			lblBinaryFileNameTitle.TabIndex = 9;
+			lblBinaryFileNameTitle.Text = "File Name:";
 			// 
 			// lblBinaryFileSize
 			// 
-			this.lblBinaryFileSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblBinaryFileSize.AutoEllipsis = true;
-			this.lblBinaryFileSize.Location = new System.Drawing.Point(100, 50);
-			this.lblBinaryFileSize.Name = "lblBinaryFileSize";
-			this.lblBinaryFileSize.Size = new System.Drawing.Size(415, 15);
-			this.lblBinaryFileSize.TabIndex = 8;
-			this.lblBinaryFileSize.Text = "[file size]";
+			lblBinaryFileSize.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblBinaryFileSize.AutoEllipsis = true;
+			lblBinaryFileSize.Location = new Point(99, 49);
+			lblBinaryFileSize.Name = "lblBinaryFileSize";
+			lblBinaryFileSize.Size = new Size(415, 15);
+			lblBinaryFileSize.TabIndex = 8;
+			lblBinaryFileSize.Text = "[file size]";
 			// 
 			// lblBinaryFileSizeTitle
 			// 
-			this.lblBinaryFileSizeTitle.AutoSize = true;
-			this.lblBinaryFileSizeTitle.Location = new System.Drawing.Point(6, 50);
-			this.lblBinaryFileSizeTitle.Name = "lblBinaryFileSizeTitle";
-			this.lblBinaryFileSizeTitle.Size = new System.Drawing.Size(30, 15);
-			this.lblBinaryFileSizeTitle.TabIndex = 7;
-			this.lblBinaryFileSizeTitle.Text = "Size:";
+			lblBinaryFileSizeTitle.AutoSize = true;
+			lblBinaryFileSizeTitle.Location = new Point(6, 49);
+			lblBinaryFileSizeTitle.Name = "lblBinaryFileSizeTitle";
+			lblBinaryFileSizeTitle.Size = new Size(30, 15);
+			lblBinaryFileSizeTitle.TabIndex = 7;
+			lblBinaryFileSizeTitle.Text = "Size:";
 			// 
 			// lblBinaryFileType
 			// 
-			this.lblBinaryFileType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblBinaryFileType.AutoEllipsis = true;
-			this.lblBinaryFileType.Location = new System.Drawing.Point(116, 35);
-			this.lblBinaryFileType.Name = "lblBinaryFileType";
-			this.lblBinaryFileType.Size = new System.Drawing.Size(395, 15);
-			this.lblBinaryFileType.TabIndex = 6;
-			this.lblBinaryFileType.Text = "[file type]";
+			lblBinaryFileType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblBinaryFileType.AutoEllipsis = true;
+			lblBinaryFileType.Location = new Point(116, 34);
+			lblBinaryFileType.Name = "lblBinaryFileType";
+			lblBinaryFileType.Size = new Size(398, 15);
+			lblBinaryFileType.TabIndex = 6;
+			lblBinaryFileType.Text = "[file type]";
 			// 
 			// lblBinaryFileTypeTitle
 			// 
-			this.lblBinaryFileTypeTitle.AutoSize = true;
-			this.lblBinaryFileTypeTitle.Location = new System.Drawing.Point(6, 35);
-			this.lblBinaryFileTypeTitle.Name = "lblBinaryFileTypeTitle";
-			this.lblBinaryFileTypeTitle.Size = new System.Drawing.Size(55, 15);
-			this.lblBinaryFileTypeTitle.TabIndex = 5;
-			this.lblBinaryFileTypeTitle.Text = "File Type:";
+			lblBinaryFileTypeTitle.AutoSize = true;
+			lblBinaryFileTypeTitle.Location = new Point(6, 34);
+			lblBinaryFileTypeTitle.Name = "lblBinaryFileTypeTitle";
+			lblBinaryFileTypeTitle.Size = new Size(55, 15);
+			lblBinaryFileTypeTitle.TabIndex = 5;
+			lblBinaryFileTypeTitle.Text = "File Type:";
 			// 
 			// btnBinaryFileBrowse
 			// 
-			this.btnBinaryFileBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnBinaryFileBrowse.Location = new System.Drawing.Point(461, 31);
-			this.btnBinaryFileBrowse.Name = "btnBinaryFileBrowse";
-			this.btnBinaryFileBrowse.Size = new System.Drawing.Size(75, 23);
-			this.btnBinaryFileBrowse.TabIndex = 2;
-			this.btnBinaryFileBrowse.Text = "Browse...";
-			this.btnBinaryFileBrowse.UseVisualStyleBackColor = true;
-			this.btnBinaryFileBrowse.Click += new System.EventHandler(this.btnBinaryFileBrowse_Click);
+			btnBinaryFileBrowse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			btnBinaryFileBrowse.Location = new Point(461, 31);
+			btnBinaryFileBrowse.Name = "btnBinaryFileBrowse";
+			btnBinaryFileBrowse.Size = new Size(75, 23);
+			btnBinaryFileBrowse.TabIndex = 2;
+			btnBinaryFileBrowse.Text = "Browse...";
+			btnBinaryFileBrowse.UseVisualStyleBackColor = true;
+			btnBinaryFileBrowse.Click += btnBinaryFileBrowse_Click;
 			// 
 			// txtBinaryFilePath
 			// 
-			this.txtBinaryFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtBinaryFilePath.Location = new System.Drawing.Point(16, 31);
-			this.txtBinaryFilePath.Name = "txtBinaryFilePath";
-			this.txtBinaryFilePath.Size = new System.Drawing.Size(439, 23);
-			this.txtBinaryFilePath.TabIndex = 1;
-			this.txtBinaryFilePath.TextChanged += new System.EventHandler(this.txtBinaryFilePath_TextChanged);
+			txtBinaryFilePath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			txtBinaryFilePath.Location = new Point(16, 31);
+			txtBinaryFilePath.Name = "txtBinaryFilePath";
+			txtBinaryFilePath.Size = new Size(439, 23);
+			txtBinaryFilePath.TabIndex = 1;
+			txtBinaryFilePath.TextChanged += txtBinaryFilePath_TextChanged;
 			// 
 			// lblBinaryBrowse
 			// 
-			this.lblBinaryBrowse.AutoSize = true;
-			this.lblBinaryBrowse.Location = new System.Drawing.Point(16, 13);
-			this.lblBinaryBrowse.Name = "lblBinaryBrowse";
-			this.lblBinaryBrowse.Size = new System.Drawing.Size(163, 15);
-			this.lblBinaryBrowse.TabIndex = 4;
-			this.lblBinaryBrowse.Text = "Drag or browse for binary file:";
+			lblBinaryBrowse.AutoSize = true;
+			lblBinaryBrowse.Location = new Point(16, 13);
+			lblBinaryBrowse.Name = "lblBinaryBrowse";
+			lblBinaryBrowse.Size = new Size(163, 15);
+			lblBinaryBrowse.TabIndex = 4;
+			lblBinaryBrowse.Text = "Drag or browse for binary file:";
 			// 
 			// tabImage
 			// 
-			this.tabImage.AllowDrop = true;
-			this.tabImage.Controls.Add(this.btnImageFileSaveAs);
-			this.tabImage.Controls.Add(this.btnImageFileCopyClipboard);
-			this.tabImage.Controls.Add(this.gbImageFileInfo);
-			this.tabImage.Controls.Add(this.btnImageFileBrowse);
-			this.tabImage.Controls.Add(this.txtImageFilePath);
-			this.tabImage.Controls.Add(this.lblImageBrowse);
-			this.tabImage.Location = new System.Drawing.Point(4, 24);
-			this.tabImage.Name = "tabImage";
-			this.tabImage.Padding = new System.Windows.Forms.Padding(3);
-			this.tabImage.Size = new System.Drawing.Size(552, 238);
-			this.tabImage.TabIndex = 1;
-			this.tabImage.Text = "Image Conversion";
-			this.tabImage.UseVisualStyleBackColor = true;
-			this.tabImage.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabImage_DragDrop);
-			this.tabImage.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabImage_DragEnter);
+			tabImage.AllowDrop = true;
+			tabImage.Controls.Add(btnImageFileSaveAs);
+			tabImage.Controls.Add(btnImageFileCopyClipboard);
+			tabImage.Controls.Add(gbImageFileInfo);
+			tabImage.Controls.Add(btnImageFileBrowse);
+			tabImage.Controls.Add(txtImageFilePath);
+			tabImage.Controls.Add(lblImageBrowse);
+			tabImage.Location = new Point(4, 24);
+			tabImage.Name = "tabImage";
+			tabImage.Padding = new Padding(3);
+			tabImage.Size = new Size(552, 238);
+			tabImage.TabIndex = 1;
+			tabImage.Text = "Image Conversion";
+			tabImage.UseVisualStyleBackColor = true;
+			tabImage.DragDrop += tabImage_DragDrop;
+			tabImage.DragEnter += tabImage_DragEnter;
 			// 
 			// btnImageFileSaveAs
 			// 
-			this.btnImageFileSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnImageFileSaveAs.Enabled = false;
-			this.btnImageFileSaveAs.Location = new System.Drawing.Point(142, 201);
-			this.btnImageFileSaveAs.Name = "btnImageFileSaveAs";
-			this.btnImageFileSaveAs.Size = new System.Drawing.Size(120, 23);
-			this.btnImageFileSaveAs.TabIndex = 7;
-			this.btnImageFileSaveAs.Tag = "";
-			this.btnImageFileSaveAs.Text = "Save Image as...";
-			this.btnImageFileSaveAs.UseVisualStyleBackColor = true;
-			this.btnImageFileSaveAs.Click += new System.EventHandler(this.btnImageFileSaveAs_Click);
+			btnImageFileSaveAs.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			btnImageFileSaveAs.Enabled = false;
+			btnImageFileSaveAs.Location = new Point(142, 201);
+			btnImageFileSaveAs.Name = "btnImageFileSaveAs";
+			btnImageFileSaveAs.Size = new Size(120, 23);
+			btnImageFileSaveAs.TabIndex = 7;
+			btnImageFileSaveAs.Tag = "";
+			btnImageFileSaveAs.Text = "Save Image as...";
+			btnImageFileSaveAs.UseVisualStyleBackColor = true;
+			btnImageFileSaveAs.Click += btnImageFileSaveAs_Click;
 			// 
 			// btnImageFileCopyClipboard
 			// 
-			this.btnImageFileCopyClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnImageFileCopyClipboard.Enabled = false;
-			this.btnImageFileCopyClipboard.Location = new System.Drawing.Point(16, 201);
-			this.btnImageFileCopyClipboard.Name = "btnImageFileCopyClipboard";
-			this.btnImageFileCopyClipboard.Size = new System.Drawing.Size(120, 23);
-			this.btnImageFileCopyClipboard.TabIndex = 6;
-			this.btnImageFileCopyClipboard.Tag = "";
-			this.btnImageFileCopyClipboard.Text = "Copy as Base-64";
-			this.btnImageFileCopyClipboard.UseVisualStyleBackColor = true;
-			this.btnImageFileCopyClipboard.Click += new System.EventHandler(this.btnImageFileCopyClipboard_Click);
+			btnImageFileCopyClipboard.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			btnImageFileCopyClipboard.Enabled = false;
+			btnImageFileCopyClipboard.Location = new Point(16, 201);
+			btnImageFileCopyClipboard.Name = "btnImageFileCopyClipboard";
+			btnImageFileCopyClipboard.Size = new Size(120, 23);
+			btnImageFileCopyClipboard.TabIndex = 6;
+			btnImageFileCopyClipboard.Tag = "";
+			btnImageFileCopyClipboard.Text = "Copy as Base-64";
+			btnImageFileCopyClipboard.UseVisualStyleBackColor = true;
+			btnImageFileCopyClipboard.Click += btnImageFileCopyClipboard_Click;
 			// 
 			// gbImageFileInfo
 			// 
-			this.gbImageFileInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.gbImageFileInfo.Controls.Add(this.pbImageFileIcon);
-			this.gbImageFileInfo.Controls.Add(this.pbImageFilePreview);
-			this.gbImageFileInfo.Controls.Add(this.lblImageFileName);
-			this.gbImageFileInfo.Controls.Add(this.lblImageFileNameTitle);
-			this.gbImageFileInfo.Controls.Add(this.lblImageFileSize);
-			this.gbImageFileInfo.Controls.Add(this.lblImageFileSizeTitle);
-			this.gbImageFileInfo.Controls.Add(this.lblImageFileType);
-			this.gbImageFileInfo.Controls.Add(this.lblImageFileTypeTitle);
-			this.gbImageFileInfo.Location = new System.Drawing.Point(16, 60);
-			this.gbImageFileInfo.Name = "gbImageFileInfo";
-			this.gbImageFileInfo.Size = new System.Drawing.Size(520, 135);
-			this.gbImageFileInfo.TabIndex = 10;
-			this.gbImageFileInfo.TabStop = false;
-			this.gbImageFileInfo.Text = "File Information";
+			gbImageFileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			gbImageFileInfo.Controls.Add(pbImageFileIcon);
+			gbImageFileInfo.Controls.Add(pbImageFilePreview);
+			gbImageFileInfo.Controls.Add(lblImageFileName);
+			gbImageFileInfo.Controls.Add(lblImageFileNameTitle);
+			gbImageFileInfo.Controls.Add(lblImageFileSize);
+			gbImageFileInfo.Controls.Add(lblImageFileSizeTitle);
+			gbImageFileInfo.Controls.Add(lblImageFileType);
+			gbImageFileInfo.Controls.Add(lblImageFileTypeTitle);
+			gbImageFileInfo.Location = new Point(16, 60);
+			gbImageFileInfo.Name = "gbImageFileInfo";
+			gbImageFileInfo.Size = new Size(520, 135);
+			gbImageFileInfo.TabIndex = 10;
+			gbImageFileInfo.TabStop = false;
+			gbImageFileInfo.Text = "File Information";
 			// 
 			// pbImageFileIcon
 			// 
-			this.pbImageFileIcon.Location = new System.Drawing.Point(100, 35);
-			this.pbImageFileIcon.Name = "pbImageFileIcon";
-			this.pbImageFileIcon.Size = new System.Drawing.Size(16, 16);
-			this.pbImageFileIcon.TabIndex = 11;
-			this.pbImageFileIcon.TabStop = false;
+			pbImageFileIcon.Location = new Point(99, 34);
+			pbImageFileIcon.Name = "pbImageFileIcon";
+			pbImageFileIcon.Size = new Size(16, 16);
+			pbImageFileIcon.TabIndex = 11;
+			pbImageFileIcon.TabStop = false;
 			// 
 			// pbImageFilePreview
 			// 
-			this.pbImageFilePreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.pbImageFilePreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.pbImageFilePreview.Location = new System.Drawing.Point(412, 20);
-			this.pbImageFilePreview.Name = "pbImageFilePreview";
-			this.pbImageFilePreview.Size = new System.Drawing.Size(102, 100);
-			this.pbImageFilePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pbImageFilePreview.TabIndex = 11;
-			this.pbImageFilePreview.TabStop = false;
+			pbImageFilePreview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			pbImageFilePreview.BorderStyle = BorderStyle.FixedSingle;
+			pbImageFilePreview.Location = new Point(412, 19);
+			pbImageFilePreview.Name = "pbImageFilePreview";
+			pbImageFilePreview.Size = new Size(102, 100);
+			pbImageFilePreview.SizeMode = PictureBoxSizeMode.Zoom;
+			pbImageFilePreview.TabIndex = 11;
+			pbImageFilePreview.TabStop = false;
 			// 
 			// lblImageFileName
 			// 
-			this.lblImageFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblImageFileName.AutoEllipsis = true;
-			this.lblImageFileName.Location = new System.Drawing.Point(100, 20);
-			this.lblImageFileName.Name = "lblImageFileName";
-			this.lblImageFileName.Size = new System.Drawing.Size(309, 15);
-			this.lblImageFileName.TabIndex = 10;
-			this.lblImageFileName.Text = "[file name]";
+			lblImageFileName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblImageFileName.AutoEllipsis = true;
+			lblImageFileName.Location = new Point(99, 19);
+			lblImageFileName.Name = "lblImageFileName";
+			lblImageFileName.Size = new Size(309, 15);
+			lblImageFileName.TabIndex = 10;
+			lblImageFileName.Text = "[file name]";
 			// 
 			// lblImageFileNameTitle
 			// 
-			this.lblImageFileNameTitle.AutoSize = true;
-			this.lblImageFileNameTitle.Location = new System.Drawing.Point(6, 20);
-			this.lblImageFileNameTitle.Name = "lblImageFileNameTitle";
-			this.lblImageFileNameTitle.Size = new System.Drawing.Size(63, 15);
-			this.lblImageFileNameTitle.TabIndex = 9;
-			this.lblImageFileNameTitle.Text = "File Name:";
+			lblImageFileNameTitle.AutoSize = true;
+			lblImageFileNameTitle.Location = new Point(6, 19);
+			lblImageFileNameTitle.Name = "lblImageFileNameTitle";
+			lblImageFileNameTitle.Size = new Size(63, 15);
+			lblImageFileNameTitle.TabIndex = 9;
+			lblImageFileNameTitle.Text = "File Name:";
 			// 
 			// lblImageFileSize
 			// 
-			this.lblImageFileSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblImageFileSize.AutoEllipsis = true;
-			this.lblImageFileSize.Location = new System.Drawing.Point(100, 50);
-			this.lblImageFileSize.Name = "lblImageFileSize";
-			this.lblImageFileSize.Size = new System.Drawing.Size(309, 15);
-			this.lblImageFileSize.TabIndex = 8;
-			this.lblImageFileSize.Text = "[file size]";
+			lblImageFileSize.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblImageFileSize.AutoEllipsis = true;
+			lblImageFileSize.Location = new Point(99, 49);
+			lblImageFileSize.Name = "lblImageFileSize";
+			lblImageFileSize.Size = new Size(309, 15);
+			lblImageFileSize.TabIndex = 8;
+			lblImageFileSize.Text = "[file size]";
 			// 
 			// lblImageFileSizeTitle
 			// 
-			this.lblImageFileSizeTitle.AutoSize = true;
-			this.lblImageFileSizeTitle.Location = new System.Drawing.Point(6, 50);
-			this.lblImageFileSizeTitle.Name = "lblImageFileSizeTitle";
-			this.lblImageFileSizeTitle.Size = new System.Drawing.Size(30, 15);
-			this.lblImageFileSizeTitle.TabIndex = 7;
-			this.lblImageFileSizeTitle.Text = "Size:";
+			lblImageFileSizeTitle.AutoSize = true;
+			lblImageFileSizeTitle.Location = new Point(6, 49);
+			lblImageFileSizeTitle.Name = "lblImageFileSizeTitle";
+			lblImageFileSizeTitle.Size = new Size(30, 15);
+			lblImageFileSizeTitle.TabIndex = 7;
+			lblImageFileSizeTitle.Text = "Size:";
 			// 
 			// lblImageFileType
 			// 
-			this.lblImageFileType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblImageFileType.AutoEllipsis = true;
-			this.lblImageFileType.Location = new System.Drawing.Point(116, 35);
-			this.lblImageFileType.Name = "lblImageFileType";
-			this.lblImageFileType.Size = new System.Drawing.Size(290, 15);
-			this.lblImageFileType.TabIndex = 6;
-			this.lblImageFileType.Text = "[file type]";
+			lblImageFileType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblImageFileType.AutoEllipsis = true;
+			lblImageFileType.Location = new Point(116, 34);
+			lblImageFileType.Name = "lblImageFileType";
+			lblImageFileType.Size = new Size(292, 15);
+			lblImageFileType.TabIndex = 6;
+			lblImageFileType.Text = "[file type]";
 			// 
 			// lblImageFileTypeTitle
 			// 
-			this.lblImageFileTypeTitle.AutoSize = true;
-			this.lblImageFileTypeTitle.Location = new System.Drawing.Point(6, 35);
-			this.lblImageFileTypeTitle.Name = "lblImageFileTypeTitle";
-			this.lblImageFileTypeTitle.Size = new System.Drawing.Size(55, 15);
-			this.lblImageFileTypeTitle.TabIndex = 5;
-			this.lblImageFileTypeTitle.Text = "File Type:";
+			lblImageFileTypeTitle.AutoSize = true;
+			lblImageFileTypeTitle.Location = new Point(6, 34);
+			lblImageFileTypeTitle.Name = "lblImageFileTypeTitle";
+			lblImageFileTypeTitle.Size = new Size(55, 15);
+			lblImageFileTypeTitle.TabIndex = 5;
+			lblImageFileTypeTitle.Text = "File Type:";
 			// 
 			// btnImageFileBrowse
 			// 
-			this.btnImageFileBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnImageFileBrowse.Location = new System.Drawing.Point(461, 31);
-			this.btnImageFileBrowse.Name = "btnImageFileBrowse";
-			this.btnImageFileBrowse.Size = new System.Drawing.Size(75, 23);
-			this.btnImageFileBrowse.TabIndex = 5;
-			this.btnImageFileBrowse.Text = "Browse...";
-			this.btnImageFileBrowse.UseVisualStyleBackColor = true;
-			this.btnImageFileBrowse.Click += new System.EventHandler(this.btnImageFileBrowse_Click);
+			btnImageFileBrowse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			btnImageFileBrowse.Location = new Point(461, 31);
+			btnImageFileBrowse.Name = "btnImageFileBrowse";
+			btnImageFileBrowse.Size = new Size(75, 23);
+			btnImageFileBrowse.TabIndex = 5;
+			btnImageFileBrowse.Text = "Browse...";
+			btnImageFileBrowse.UseVisualStyleBackColor = true;
+			btnImageFileBrowse.Click += btnImageFileBrowse_Click;
 			// 
 			// txtImageFilePath
 			// 
-			this.txtImageFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtImageFilePath.Location = new System.Drawing.Point(16, 31);
-			this.txtImageFilePath.Name = "txtImageFilePath";
-			this.txtImageFilePath.Size = new System.Drawing.Size(439, 23);
-			this.txtImageFilePath.TabIndex = 4;
-			this.txtImageFilePath.TextChanged += new System.EventHandler(this.txtImageFilePath_TextChanged);
+			txtImageFilePath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			txtImageFilePath.Location = new Point(16, 31);
+			txtImageFilePath.Name = "txtImageFilePath";
+			txtImageFilePath.Size = new Size(439, 23);
+			txtImageFilePath.TabIndex = 4;
+			txtImageFilePath.TextChanged += txtImageFilePath_TextChanged;
 			// 
 			// lblImageBrowse
 			// 
-			this.lblImageBrowse.AutoSize = true;
-			this.lblImageBrowse.Location = new System.Drawing.Point(16, 13);
-			this.lblImageBrowse.Name = "lblImageBrowse";
-			this.lblImageBrowse.Size = new System.Drawing.Size(163, 15);
-			this.lblImageBrowse.TabIndex = 7;
-			this.lblImageBrowse.Text = "Drag or browse for image file:";
+			lblImageBrowse.AutoSize = true;
+			lblImageBrowse.Location = new Point(16, 13);
+			lblImageBrowse.Name = "lblImageBrowse";
+			lblImageBrowse.Size = new Size(163, 15);
+			lblImageBrowse.TabIndex = 7;
+			lblImageBrowse.Text = "Drag or browse for image file:";
 			// 
 			// tabDocuments
 			// 
-			this.tabDocuments.AllowDrop = true;
-			this.tabDocuments.Controls.Add(this.btnDocumentSaveAs);
-			this.tabDocuments.Controls.Add(this.gbDocumentInfo);
-			this.tabDocuments.Controls.Add(this.btnDocumentBrowse);
-			this.tabDocuments.Controls.Add(this.txtDocumentPath);
-			this.tabDocuments.Controls.Add(this.lblBrowseDocument);
-			this.tabDocuments.Location = new System.Drawing.Point(4, 24);
-			this.tabDocuments.Name = "tabDocuments";
-			this.tabDocuments.Padding = new System.Windows.Forms.Padding(3);
-			this.tabDocuments.Size = new System.Drawing.Size(552, 238);
-			this.tabDocuments.TabIndex = 2;
-			this.tabDocuments.Text = "Document Conversion";
-			this.tabDocuments.UseVisualStyleBackColor = true;
-			this.tabDocuments.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabDocuments_DragDrop);
-			this.tabDocuments.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabDocuments_DragEnter);
+			tabDocuments.AllowDrop = true;
+			tabDocuments.Controls.Add(btnDocumentSaveAs);
+			tabDocuments.Controls.Add(gbDocumentInfo);
+			tabDocuments.Controls.Add(btnDocumentBrowse);
+			tabDocuments.Controls.Add(txtDocumentPath);
+			tabDocuments.Controls.Add(lblBrowseDocument);
+			tabDocuments.Location = new Point(4, 24);
+			tabDocuments.Name = "tabDocuments";
+			tabDocuments.Padding = new Padding(3);
+			tabDocuments.Size = new Size(552, 238);
+			tabDocuments.TabIndex = 2;
+			tabDocuments.Text = "Document Conversion";
+			tabDocuments.UseVisualStyleBackColor = true;
+			tabDocuments.DragDrop += tabDocuments_DragDrop;
+			tabDocuments.DragEnter += tabDocuments_DragEnter;
 			// 
 			// btnDocumentSaveAs
 			// 
-			this.btnDocumentSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.btnDocumentSaveAs.Enabled = false;
-			this.btnDocumentSaveAs.Location = new System.Drawing.Point(16, 201);
-			this.btnDocumentSaveAs.Name = "btnDocumentSaveAs";
-			this.btnDocumentSaveAs.Size = new System.Drawing.Size(120, 23);
-			this.btnDocumentSaveAs.TabIndex = 12;
-			this.btnDocumentSaveAs.Tag = "";
-			this.btnDocumentSaveAs.Text = "Save as...";
-			this.btnDocumentSaveAs.UseVisualStyleBackColor = true;
-			this.btnDocumentSaveAs.Click += new System.EventHandler(this.btnDocumentSaveAs_Click);
+			btnDocumentSaveAs.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+			btnDocumentSaveAs.Enabled = false;
+			btnDocumentSaveAs.Location = new Point(16, 201);
+			btnDocumentSaveAs.Name = "btnDocumentSaveAs";
+			btnDocumentSaveAs.Size = new Size(120, 23);
+			btnDocumentSaveAs.TabIndex = 12;
+			btnDocumentSaveAs.Tag = "";
+			btnDocumentSaveAs.Text = "Save as...";
+			btnDocumentSaveAs.UseVisualStyleBackColor = true;
+			btnDocumentSaveAs.Click += btnDocumentSaveAs_Click;
 			// 
 			// gbDocumentInfo
 			// 
-			this.gbDocumentInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.gbDocumentInfo.Controls.Add(this.lnkDocumentsPdfOptionsUncheckAll);
-			this.gbDocumentInfo.Controls.Add(this.lnkDocumentsPdfOptionsCheckAll);
-			this.gbDocumentInfo.Controls.Add(this.cblPdfPermissions);
-			this.gbDocumentInfo.Controls.Add(this.lblPdfPermissions);
-			this.gbDocumentInfo.Controls.Add(this.pbDocumentIcon);
-			this.gbDocumentInfo.Controls.Add(this.lblDocumentName);
-			this.gbDocumentInfo.Controls.Add(this.lblDocumentNameTitle);
-			this.gbDocumentInfo.Controls.Add(this.lblDocumentSize);
-			this.gbDocumentInfo.Controls.Add(this.lblDocumentSizeTitle);
-			this.gbDocumentInfo.Controls.Add(this.lblDocumentType);
-			this.gbDocumentInfo.Controls.Add(this.lblDocumentTypeTitle);
-			this.gbDocumentInfo.Location = new System.Drawing.Point(16, 60);
-			this.gbDocumentInfo.Name = "gbDocumentInfo";
-			this.gbDocumentInfo.Size = new System.Drawing.Size(520, 135);
-			this.gbDocumentInfo.TabIndex = 11;
-			this.gbDocumentInfo.TabStop = false;
-			this.gbDocumentInfo.Text = "File Information";
+			gbDocumentInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			gbDocumentInfo.Controls.Add(pbDocumentIcon);
+			gbDocumentInfo.Controls.Add(lblDocumentName);
+			gbDocumentInfo.Controls.Add(lblDocumentNameTitle);
+			gbDocumentInfo.Controls.Add(lblDocumentSize);
+			gbDocumentInfo.Controls.Add(lblDocumentSizeTitle);
+			gbDocumentInfo.Controls.Add(lblDocumentType);
+			gbDocumentInfo.Controls.Add(lblDocumentTypeTitle);
+			gbDocumentInfo.Location = new Point(16, 60);
+			gbDocumentInfo.Name = "gbDocumentInfo";
+			gbDocumentInfo.Size = new Size(520, 135);
+			gbDocumentInfo.TabIndex = 11;
+			gbDocumentInfo.TabStop = false;
+			gbDocumentInfo.Text = "File Information";
 			// 
 			// lnkDocumentsPdfOptionsUncheckAll
 			// 
-			this.lnkDocumentsPdfOptionsUncheckAll.Location = new System.Drawing.Point(24, 95);
-			this.lnkDocumentsPdfOptionsUncheckAll.Name = "lnkDocumentsPdfOptionsUncheckAll";
-			this.lnkDocumentsPdfOptionsUncheckAll.Size = new System.Drawing.Size(70, 16);
-			this.lnkDocumentsPdfOptionsUncheckAll.TabIndex = 17;
-			this.lnkDocumentsPdfOptionsUncheckAll.TabStop = true;
-			this.lnkDocumentsPdfOptionsUncheckAll.Text = "Uncheck All";
-			this.lnkDocumentsPdfOptionsUncheckAll.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.lnkDocumentsPdfOptionsUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDocumentsPdfOptionsUncheckAll_LinkClicked);
+			lnkDocumentsPdfOptionsUncheckAll.Location = new System.Drawing.Point(24, 95);
+			lnkDocumentsPdfOptionsUncheckAll.Name = "lnkDocumentsPdfOptionsUncheckAll";
+			lnkDocumentsPdfOptionsUncheckAll.Size = new System.Drawing.Size(70, 16);
+			lnkDocumentsPdfOptionsUncheckAll.TabIndex = 17;
+			lnkDocumentsPdfOptionsUncheckAll.TabStop = true;
+			lnkDocumentsPdfOptionsUncheckAll.Text = "Uncheck All";
+			lnkDocumentsPdfOptionsUncheckAll.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			lnkDocumentsPdfOptionsUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkDocumentsPdfOptionsUncheckAll_LinkClicked);
 			// 
 			// lnkDocumentsPdfOptionsCheckAll
 			// 
-			this.lnkDocumentsPdfOptionsCheckAll.Location = new System.Drawing.Point(24, 80);
-			this.lnkDocumentsPdfOptionsCheckAll.Name = "lnkDocumentsPdfOptionsCheckAll";
-			this.lnkDocumentsPdfOptionsCheckAll.Size = new System.Drawing.Size(70, 15);
-			this.lnkDocumentsPdfOptionsCheckAll.TabIndex = 16;
-			this.lnkDocumentsPdfOptionsCheckAll.TabStop = true;
-			this.lnkDocumentsPdfOptionsCheckAll.Text = "Check All";
-			this.lnkDocumentsPdfOptionsCheckAll.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.lnkDocumentsPdfOptionsCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDocumentsPdfOptionsCheckAll_LinkClicked);
+			lnkDocumentsPdfOptionsCheckAll.Location = new System.Drawing.Point(24, 80);
+			lnkDocumentsPdfOptionsCheckAll.Name = "lnkDocumentsPdfOptionsCheckAll";
+			lnkDocumentsPdfOptionsCheckAll.Size = new System.Drawing.Size(70, 15);
+			lnkDocumentsPdfOptionsCheckAll.TabIndex = 16;
+			lnkDocumentsPdfOptionsCheckAll.TabStop = true;
+			lnkDocumentsPdfOptionsCheckAll.Text = "Check All";
+			lnkDocumentsPdfOptionsCheckAll.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			lnkDocumentsPdfOptionsCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkDocumentsPdfOptionsCheckAll_LinkClicked);
 			// 
 			// cblPdfPermissions
 			// 
-			this.cblPdfPermissions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			cblPdfPermissions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.cblPdfPermissions.CheckOnClick = true;
-			this.cblPdfPermissions.FormattingEnabled = true;
-			this.cblPdfPermissions.Location = new System.Drawing.Point(100, 68);
-			this.cblPdfPermissions.Name = "cblPdfPermissions";
-			this.cblPdfPermissions.Size = new System.Drawing.Size(404, 58);
-			this.cblPdfPermissions.TabIndex = 15;
+			cblPdfPermissions.CheckOnClick = true;
+			cblPdfPermissions.FormattingEnabled = true;
+			cblPdfPermissions.Location = new System.Drawing.Point(100, 68);
+			cblPdfPermissions.Name = "cblPdfPermissions";
+			cblPdfPermissions.Size = new System.Drawing.Size(404, 58);
+			cblPdfPermissions.TabIndex = 15;
 			// 
 			// lblPdfPermissions
 			// 
-			this.lblPdfPermissions.AutoSize = true;
-			this.lblPdfPermissions.Location = new System.Drawing.Point(6, 65);
-			this.lblPdfPermissions.Name = "lblPdfPermissions";
-			this.lblPdfPermissions.Size = new System.Drawing.Size(73, 15);
-			this.lblPdfPermissions.TabIndex = 14;
-			this.lblPdfPermissions.Text = "Permissions:";
+			lblPdfPermissions.AutoSize = true;
+			lblPdfPermissions.Location = new System.Drawing.Point(6, 65);
+			lblPdfPermissions.Name = "lblPdfPermissions";
+			lblPdfPermissions.Size = new System.Drawing.Size(73, 15);
+			lblPdfPermissions.TabIndex = 14;
+			lblPdfPermissions.Text = "Permissions:";
 			// 
 			// pbDocumentIcon
 			// 
-			this.pbDocumentIcon.Location = new System.Drawing.Point(100, 35);
-			this.pbDocumentIcon.Name = "pbDocumentIcon";
-			this.pbDocumentIcon.Size = new System.Drawing.Size(16, 16);
-			this.pbDocumentIcon.TabIndex = 11;
-			this.pbDocumentIcon.TabStop = false;
+			pbDocumentIcon.Location = new Point(99, 34);
+			pbDocumentIcon.Name = "pbDocumentIcon";
+			pbDocumentIcon.Size = new Size(16, 16);
+			pbDocumentIcon.TabIndex = 11;
+			pbDocumentIcon.TabStop = false;
 			// 
 			// lblDocumentName
 			// 
-			this.lblDocumentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblDocumentName.AutoEllipsis = true;
-			this.lblDocumentName.Location = new System.Drawing.Point(100, 20);
-			this.lblDocumentName.Name = "lblDocumentName";
-			this.lblDocumentName.Size = new System.Drawing.Size(415, 15);
-			this.lblDocumentName.TabIndex = 10;
-			this.lblDocumentName.Text = "[file name]";
+			lblDocumentName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblDocumentName.AutoEllipsis = true;
+			lblDocumentName.Location = new Point(99, 19);
+			lblDocumentName.Name = "lblDocumentName";
+			lblDocumentName.Size = new Size(415, 15);
+			lblDocumentName.TabIndex = 10;
+			lblDocumentName.Text = "[file name]";
 			// 
 			// lblDocumentNameTitle
 			// 
-			this.lblDocumentNameTitle.AutoSize = true;
-			this.lblDocumentNameTitle.Location = new System.Drawing.Point(6, 20);
-			this.lblDocumentNameTitle.Name = "lblDocumentNameTitle";
-			this.lblDocumentNameTitle.Size = new System.Drawing.Size(63, 15);
-			this.lblDocumentNameTitle.TabIndex = 9;
-			this.lblDocumentNameTitle.Text = "File Name:";
+			lblDocumentNameTitle.AutoSize = true;
+			lblDocumentNameTitle.Location = new Point(6, 19);
+			lblDocumentNameTitle.Name = "lblDocumentNameTitle";
+			lblDocumentNameTitle.Size = new Size(63, 15);
+			lblDocumentNameTitle.TabIndex = 9;
+			lblDocumentNameTitle.Text = "File Name:";
 			// 
 			// lblDocumentSize
 			// 
-			this.lblDocumentSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblDocumentSize.AutoEllipsis = true;
-			this.lblDocumentSize.Location = new System.Drawing.Point(100, 50);
-			this.lblDocumentSize.Name = "lblDocumentSize";
-			this.lblDocumentSize.Size = new System.Drawing.Size(415, 15);
-			this.lblDocumentSize.TabIndex = 8;
-			this.lblDocumentSize.Text = "[file size]";
+			lblDocumentSize.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblDocumentSize.AutoEllipsis = true;
+			lblDocumentSize.Location = new Point(99, 49);
+			lblDocumentSize.Name = "lblDocumentSize";
+			lblDocumentSize.Size = new Size(415, 15);
+			lblDocumentSize.TabIndex = 8;
+			lblDocumentSize.Text = "[file size]";
 			// 
 			// lblDocumentSizeTitle
 			// 
-			this.lblDocumentSizeTitle.AutoSize = true;
-			this.lblDocumentSizeTitle.Location = new System.Drawing.Point(6, 50);
-			this.lblDocumentSizeTitle.Name = "lblDocumentSizeTitle";
-			this.lblDocumentSizeTitle.Size = new System.Drawing.Size(30, 15);
-			this.lblDocumentSizeTitle.TabIndex = 7;
-			this.lblDocumentSizeTitle.Text = "Size:";
+			lblDocumentSizeTitle.AutoSize = true;
+			lblDocumentSizeTitle.Location = new Point(6, 49);
+			lblDocumentSizeTitle.Name = "lblDocumentSizeTitle";
+			lblDocumentSizeTitle.Size = new Size(30, 15);
+			lblDocumentSizeTitle.TabIndex = 7;
+			lblDocumentSizeTitle.Text = "Size:";
 			// 
 			// lblDocumentType
 			// 
-			this.lblDocumentType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lblDocumentType.AutoEllipsis = true;
-			this.lblDocumentType.Location = new System.Drawing.Point(116, 35);
-			this.lblDocumentType.Name = "lblDocumentType";
-			this.lblDocumentType.Size = new System.Drawing.Size(395, 15);
-			this.lblDocumentType.TabIndex = 6;
-			this.lblDocumentType.Text = "[file type]";
+			lblDocumentType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			lblDocumentType.AutoEllipsis = true;
+			lblDocumentType.Location = new Point(116, 34);
+			lblDocumentType.Name = "lblDocumentType";
+			lblDocumentType.Size = new Size(398, 15);
+			lblDocumentType.TabIndex = 6;
+			lblDocumentType.Text = "[file type]";
 			// 
 			// lblDocumentTypeTitle
 			// 
-			this.lblDocumentTypeTitle.AutoSize = true;
-			this.lblDocumentTypeTitle.Location = new System.Drawing.Point(6, 35);
-			this.lblDocumentTypeTitle.Name = "lblDocumentTypeTitle";
-			this.lblDocumentTypeTitle.Size = new System.Drawing.Size(55, 15);
-			this.lblDocumentTypeTitle.TabIndex = 5;
-			this.lblDocumentTypeTitle.Text = "File Type:";
+			lblDocumentTypeTitle.AutoSize = true;
+			lblDocumentTypeTitle.Location = new Point(6, 34);
+			lblDocumentTypeTitle.Name = "lblDocumentTypeTitle";
+			lblDocumentTypeTitle.Size = new Size(55, 15);
+			lblDocumentTypeTitle.TabIndex = 5;
+			lblDocumentTypeTitle.Text = "File Type:";
 			// 
 			// btnDocumentBrowse
 			// 
-			this.btnDocumentBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnDocumentBrowse.Location = new System.Drawing.Point(461, 31);
-			this.btnDocumentBrowse.Name = "btnDocumentBrowse";
-			this.btnDocumentBrowse.Size = new System.Drawing.Size(75, 23);
-			this.btnDocumentBrowse.TabIndex = 10;
-			this.btnDocumentBrowse.Text = "Browse...";
-			this.btnDocumentBrowse.UseVisualStyleBackColor = true;
-			this.btnDocumentBrowse.Click += new System.EventHandler(this.btnDocumentBrowse_Click);
+			btnDocumentBrowse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+			btnDocumentBrowse.Location = new Point(461, 31);
+			btnDocumentBrowse.Name = "btnDocumentBrowse";
+			btnDocumentBrowse.Size = new Size(75, 23);
+			btnDocumentBrowse.TabIndex = 10;
+			btnDocumentBrowse.Text = "Browse...";
+			btnDocumentBrowse.UseVisualStyleBackColor = true;
+			btnDocumentBrowse.Click += btnDocumentBrowse_Click;
 			// 
 			// txtDocumentPath
 			// 
-			this.txtDocumentPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.txtDocumentPath.Location = new System.Drawing.Point(16, 31);
-			this.txtDocumentPath.Name = "txtDocumentPath";
-			this.txtDocumentPath.Size = new System.Drawing.Size(439, 23);
-			this.txtDocumentPath.TabIndex = 9;
-			this.txtDocumentPath.TextChanged += new System.EventHandler(this.txtDocumentPath_TextChanged);
+			txtDocumentPath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+			txtDocumentPath.Location = new Point(16, 31);
+			txtDocumentPath.Name = "txtDocumentPath";
+			txtDocumentPath.Size = new Size(439, 23);
+			txtDocumentPath.TabIndex = 9;
+			txtDocumentPath.TextChanged += txtDocumentPath_TextChanged;
 			// 
 			// lblBrowseDocument
 			// 
-			this.lblBrowseDocument.AutoSize = true;
-			this.lblBrowseDocument.Location = new System.Drawing.Point(16, 13);
-			this.lblBrowseDocument.Name = "lblBrowseDocument";
-			this.lblBrowseDocument.Size = new System.Drawing.Size(166, 15);
-			this.lblBrowseDocument.TabIndex = 8;
-			this.lblBrowseDocument.Text = "Drag or browse for document:";
+			lblBrowseDocument.AutoSize = true;
+			lblBrowseDocument.Location = new Point(16, 13);
+			lblBrowseDocument.Name = "lblBrowseDocument";
+			lblBrowseDocument.Size = new Size(166, 15);
+			lblBrowseDocument.TabIndex = 8;
+			lblBrowseDocument.Text = "Drag or browse for document:";
 			// 
 			// ssMain
 			// 
-			this.ssMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sslStatus});
-			this.ssMain.Location = new System.Drawing.Point(0, 319);
-			this.ssMain.Name = "ssMain";
-			this.ssMain.Size = new System.Drawing.Size(584, 22);
-			this.ssMain.TabIndex = 3;
-			this.ssMain.Text = "statusStrip1";
+			ssMain.Items.AddRange(new ToolStripItem[] { sslStatus });
+			ssMain.Location = new Point(0, 319);
+			ssMain.Name = "ssMain";
+			ssMain.Size = new Size(584, 22);
+			ssMain.TabIndex = 3;
+			ssMain.Text = "statusStrip1";
 			// 
 			// sslStatus
 			// 
-			this.sslStatus.Name = "sslStatus";
-			this.sslStatus.Size = new System.Drawing.Size(0, 17);
+			sslStatus.Name = "sslStatus";
+			sslStatus.Size = new Size(0, 17);
+			// 
+			// ttUpdate
+			// 
+			ttUpdate.IsBalloon = true;
+			ttUpdate.ToolTipIcon = ToolTipIcon.Info;
+			ttUpdate.ToolTipTitle = "Auto-update";
 			// 
 			// frmMain
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(584, 341);
-			this.Controls.Add(this.ssMain);
-			this.Controls.Add(this.tcMain);
-			this.Controls.Add(this.pnlTop);
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Name = "frmMain";
-			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "File Converter";
-			this.Load += new System.EventHandler(this.frmMain_Load);
-			this.pnlTop.ResumeLayout(false);
-			this.pnlTop.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbTitle)).EndInit();
-			this.tcMain.ResumeLayout(false);
-			this.tabBinary.ResumeLayout(false);
-			this.tabBinary.PerformLayout();
-			this.grpBinaryFileInfo.ResumeLayout(false);
-			this.grpBinaryFileInfo.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbBinaryFileIcon)).EndInit();
-			this.tabImage.ResumeLayout(false);
-			this.tabImage.PerformLayout();
-			this.gbImageFileInfo.ResumeLayout(false);
-			this.gbImageFileInfo.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbImageFileIcon)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbImageFilePreview)).EndInit();
-			this.tabDocuments.ResumeLayout(false);
-			this.tabDocuments.PerformLayout();
-			this.gbDocumentInfo.ResumeLayout(false);
-			this.gbDocumentInfo.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbDocumentIcon)).EndInit();
-			this.ssMain.ResumeLayout(false);
-			this.ssMain.PerformLayout();
-			this.ResumeLayout(false);
-			this.PerformLayout();
-
+			AutoScaleDimensions = new SizeF(7F, 15F);
+			AutoScaleMode = AutoScaleMode.Font;
+			ClientSize = new Size(584, 341);
+			Controls.Add(ssMain);
+			Controls.Add(tcMain);
+			Controls.Add(pnlTop);
+			Icon = (Icon)resources.GetObject("$this.Icon");
+			Name = "frmMain";
+			SizeGripStyle = SizeGripStyle.Show;
+			StartPosition = FormStartPosition.CenterScreen;
+			Text = "File Converter";
+			Load += frmMain_Load;
+			pnlTop.ResumeLayout(false);
+			pnlTop.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)pbTitle).EndInit();
+			tcMain.ResumeLayout(false);
+			tabBinary.ResumeLayout(false);
+			tabBinary.PerformLayout();
+			grpBinaryFileInfo.ResumeLayout(false);
+			grpBinaryFileInfo.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)pbBinaryFileIcon).EndInit();
+			tabImage.ResumeLayout(false);
+			tabImage.PerformLayout();
+			gbImageFileInfo.ResumeLayout(false);
+			gbImageFileInfo.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)pbImageFileIcon).EndInit();
+			((System.ComponentModel.ISupportInitialize)pbImageFilePreview).EndInit();
+			tabDocuments.ResumeLayout(false);
+			tabDocuments.PerformLayout();
+			gbDocumentInfo.ResumeLayout(false);
+			gbDocumentInfo.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)pbDocumentIcon).EndInit();
+			ssMain.ResumeLayout(false);
+			ssMain.PerformLayout();
+			ResumeLayout(false);
+			PerformLayout();
 		}
 
 		#endregion
@@ -824,5 +799,6 @@
 		private Label lblPdfPermissions;
 		private LinkLabel lnkDocumentsPdfOptionsUncheckAll;
 		private LinkLabel lnkDocumentsPdfOptionsCheckAll;
+		private ToolTip ttUpdate;
 	}
 }

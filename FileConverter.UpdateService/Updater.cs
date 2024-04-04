@@ -14,6 +14,8 @@ namespace FileConverter.UpdateService
 		public async static Task<GitHubRelease?> GetLatestRelease()
 		{
 			// GitHub REST API https://docs.github.com/en/rest/
+			// NOTE: GitHub environment variables must be set to function.
+			// TODO: Encrypt the API Token
 			try
 			{
 				const string GitHubLastestRelease = "/releases/latest";
@@ -23,7 +25,8 @@ namespace FileConverter.UpdateService
 				
 				using var restClient = new RestClient();
 				restClient.AcceptedContentTypes = new[] { "application/vnd.github+json" };
-				restClient.AddDefaultHeader("Authorization", $"Bearer {token}");
+				if (!string.IsNullOrEmpty(token))
+					restClient.AddDefaultHeader("Authorization", $"Bearer {token}");
 				var response = await restClient.ExecuteAsync(new RestRequest(latestReleaseUrl, Method.Get));
 				if (response?.StatusCode == HttpStatusCode.OK && !string.IsNullOrEmpty(response?.Content))
 				{
@@ -46,7 +49,7 @@ namespace FileConverter.UpdateService
 				string folderName = string.Concat("FileConverter", Guid.NewGuid().ToString().ToUpper());
 				string path = Path.Combine(Path.GetTempPath(), folderName);
 				if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-				string setupFilePath = "";
+				string? setupFilePath = assets.FirstOrDefault(x => x.Name == "setup.exe").Name;
 
 				foreach (GitHubAsset asset in assets)
 				{
