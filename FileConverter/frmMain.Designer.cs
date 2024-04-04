@@ -68,6 +68,10 @@
 			tabDocuments = new TabPage();
 			btnDocumentSaveAs = new Button();
 			gbDocumentInfo = new GroupBox();
+			lnkDocumentsPdfOptionsUncheckAll = new LinkLabel();
+			lnkDocumentsPdfOptionsCheckAll = new LinkLabel();
+			cblPdfPermissions = new CheckedListBox();
+			lblPdfPermissions = new Label();
 			pbDocumentIcon = new PictureBox();
 			lblDocumentName = new Label();
 			lblDocumentNameTitle = new Label();
@@ -122,7 +126,7 @@
 			lnkUpdate.Size = new Size(516, 15);
 			lnkUpdate.TabIndex = 13;
 			lnkUpdate.TextAlign = ContentAlignment.TopRight;
-			ttUpdate.SetToolTip(lnkUpdate, "Click to check if new version is available.");
+			ttUpdate.SetToolTip(lnkUpdate, "Click to check for updated version.");
 			lnkUpdate.VisitedLinkColor = Color.Lime;
 			lnkUpdate.LinkClicked += lnkUpdate_LinkClicked;
 			// 
@@ -240,7 +244,7 @@
 			// 
 			// pbBinaryFileIcon
 			// 
-			pbBinaryFileIcon.Location = new Point(99, 34);
+			pbBinaryFileIcon.Location = new Point(100, 35);
 			pbBinaryFileIcon.Name = "pbBinaryFileIcon";
 			pbBinaryFileIcon.Size = new Size(16, 16);
 			pbBinaryFileIcon.TabIndex = 11;
@@ -250,7 +254,7 @@
 			// 
 			lblBinaryFileName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblBinaryFileName.AutoEllipsis = true;
-			lblBinaryFileName.Location = new Point(99, 19);
+			lblBinaryFileName.Location = new Point(100, 20);
 			lblBinaryFileName.Name = "lblBinaryFileName";
 			lblBinaryFileName.Size = new Size(415, 15);
 			lblBinaryFileName.TabIndex = 10;
@@ -259,7 +263,7 @@
 			// lblBinaryFileNameTitle
 			// 
 			lblBinaryFileNameTitle.AutoSize = true;
-			lblBinaryFileNameTitle.Location = new Point(6, 19);
+			lblBinaryFileNameTitle.Location = new Point(6, 20);
 			lblBinaryFileNameTitle.Name = "lblBinaryFileNameTitle";
 			lblBinaryFileNameTitle.Size = new Size(63, 15);
 			lblBinaryFileNameTitle.TabIndex = 9;
@@ -269,7 +273,7 @@
 			// 
 			lblBinaryFileSize.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblBinaryFileSize.AutoEllipsis = true;
-			lblBinaryFileSize.Location = new Point(99, 49);
+			lblBinaryFileSize.Location = new Point(100, 50);
 			lblBinaryFileSize.Name = "lblBinaryFileSize";
 			lblBinaryFileSize.Size = new Size(415, 15);
 			lblBinaryFileSize.TabIndex = 8;
@@ -278,7 +282,7 @@
 			// lblBinaryFileSizeTitle
 			// 
 			lblBinaryFileSizeTitle.AutoSize = true;
-			lblBinaryFileSizeTitle.Location = new Point(6, 49);
+			lblBinaryFileSizeTitle.Location = new Point(6, 50);
 			lblBinaryFileSizeTitle.Name = "lblBinaryFileSizeTitle";
 			lblBinaryFileSizeTitle.Size = new Size(30, 15);
 			lblBinaryFileSizeTitle.TabIndex = 7;
@@ -288,16 +292,16 @@
 			// 
 			lblBinaryFileType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblBinaryFileType.AutoEllipsis = true;
-			lblBinaryFileType.Location = new Point(116, 34);
+			lblBinaryFileType.Location = new Point(116, 35);
 			lblBinaryFileType.Name = "lblBinaryFileType";
-			lblBinaryFileType.Size = new Size(398, 15);
+			lblBinaryFileType.Size = new Size(395, 15);
 			lblBinaryFileType.TabIndex = 6;
 			lblBinaryFileType.Text = "[file type]";
 			// 
 			// lblBinaryFileTypeTitle
 			// 
 			lblBinaryFileTypeTitle.AutoSize = true;
-			lblBinaryFileTypeTitle.Location = new Point(6, 34);
+			lblBinaryFileTypeTitle.Location = new Point(6, 35);
 			lblBinaryFileTypeTitle.Name = "lblBinaryFileTypeTitle";
 			lblBinaryFileTypeTitle.Size = new Size(55, 15);
 			lblBinaryFileTypeTitle.TabIndex = 5;
@@ -397,7 +401,7 @@
 			// 
 			// pbImageFileIcon
 			// 
-			pbImageFileIcon.Location = new Point(99, 34);
+			pbImageFileIcon.Location = new Point(100, 35);
 			pbImageFileIcon.Name = "pbImageFileIcon";
 			pbImageFileIcon.Size = new Size(16, 16);
 			pbImageFileIcon.TabIndex = 11;
@@ -407,7 +411,7 @@
 			// 
 			pbImageFilePreview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 			pbImageFilePreview.BorderStyle = BorderStyle.FixedSingle;
-			pbImageFilePreview.Location = new Point(412, 19);
+			pbImageFilePreview.Location = new Point(412, 20);
 			pbImageFilePreview.Name = "pbImageFilePreview";
 			pbImageFilePreview.Size = new Size(102, 100);
 			pbImageFilePreview.SizeMode = PictureBoxSizeMode.Zoom;
@@ -418,7 +422,7 @@
 			// 
 			lblImageFileName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblImageFileName.AutoEllipsis = true;
-			lblImageFileName.Location = new Point(99, 19);
+			lblImageFileName.Location = new Point(100, 20);
 			lblImageFileName.Name = "lblImageFileName";
 			lblImageFileName.Size = new Size(309, 15);
 			lblImageFileName.TabIndex = 10;
@@ -427,7 +431,7 @@
 			// lblImageFileNameTitle
 			// 
 			lblImageFileNameTitle.AutoSize = true;
-			lblImageFileNameTitle.Location = new Point(6, 19);
+			lblImageFileNameTitle.Location = new Point(6, 20);
 			lblImageFileNameTitle.Name = "lblImageFileNameTitle";
 			lblImageFileNameTitle.Size = new Size(63, 15);
 			lblImageFileNameTitle.TabIndex = 9;
@@ -437,7 +441,7 @@
 			// 
 			lblImageFileSize.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblImageFileSize.AutoEllipsis = true;
-			lblImageFileSize.Location = new Point(99, 49);
+			lblImageFileSize.Location = new Point(100, 50);
 			lblImageFileSize.Name = "lblImageFileSize";
 			lblImageFileSize.Size = new Size(309, 15);
 			lblImageFileSize.TabIndex = 8;
@@ -446,7 +450,7 @@
 			// lblImageFileSizeTitle
 			// 
 			lblImageFileSizeTitle.AutoSize = true;
-			lblImageFileSizeTitle.Location = new Point(6, 49);
+			lblImageFileSizeTitle.Location = new Point(6, 50);
 			lblImageFileSizeTitle.Name = "lblImageFileSizeTitle";
 			lblImageFileSizeTitle.Size = new Size(30, 15);
 			lblImageFileSizeTitle.TabIndex = 7;
@@ -456,16 +460,16 @@
 			// 
 			lblImageFileType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblImageFileType.AutoEllipsis = true;
-			lblImageFileType.Location = new Point(116, 34);
+			lblImageFileType.Location = new Point(116, 35);
 			lblImageFileType.Name = "lblImageFileType";
-			lblImageFileType.Size = new Size(292, 15);
+			lblImageFileType.Size = new Size(290, 15);
 			lblImageFileType.TabIndex = 6;
 			lblImageFileType.Text = "[file type]";
 			// 
 			// lblImageFileTypeTitle
 			// 
 			lblImageFileTypeTitle.AutoSize = true;
-			lblImageFileTypeTitle.Location = new Point(6, 34);
+			lblImageFileTypeTitle.Location = new Point(6, 35);
 			lblImageFileTypeTitle.Name = "lblImageFileTypeTitle";
 			lblImageFileTypeTitle.Size = new Size(55, 15);
 			lblImageFileTypeTitle.TabIndex = 5;
@@ -534,6 +538,10 @@
 			// gbDocumentInfo
 			// 
 			gbDocumentInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			gbDocumentInfo.Controls.Add(lnkDocumentsPdfOptionsUncheckAll);
+			gbDocumentInfo.Controls.Add(lnkDocumentsPdfOptionsCheckAll);
+			gbDocumentInfo.Controls.Add(cblPdfPermissions);
+			gbDocumentInfo.Controls.Add(lblPdfPermissions);
 			gbDocumentInfo.Controls.Add(pbDocumentIcon);
 			gbDocumentInfo.Controls.Add(lblDocumentName);
 			gbDocumentInfo.Controls.Add(lblDocumentNameTitle);
@@ -550,49 +558,48 @@
 			// 
 			// lnkDocumentsPdfOptionsUncheckAll
 			// 
-			lnkDocumentsPdfOptionsUncheckAll.Location = new System.Drawing.Point(24, 95);
+			lnkDocumentsPdfOptionsUncheckAll.Location = new Point(24, 95);
 			lnkDocumentsPdfOptionsUncheckAll.Name = "lnkDocumentsPdfOptionsUncheckAll";
-			lnkDocumentsPdfOptionsUncheckAll.Size = new System.Drawing.Size(70, 16);
+			lnkDocumentsPdfOptionsUncheckAll.Size = new Size(70, 16);
 			lnkDocumentsPdfOptionsUncheckAll.TabIndex = 17;
 			lnkDocumentsPdfOptionsUncheckAll.TabStop = true;
 			lnkDocumentsPdfOptionsUncheckAll.Text = "Uncheck All";
-			lnkDocumentsPdfOptionsUncheckAll.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			lnkDocumentsPdfOptionsUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkDocumentsPdfOptionsUncheckAll_LinkClicked);
+			lnkDocumentsPdfOptionsUncheckAll.TextAlign = ContentAlignment.TopRight;
+			lnkDocumentsPdfOptionsUncheckAll.LinkClicked += lnkDocumentsPdfOptionsUncheckAll_LinkClicked;
 			// 
 			// lnkDocumentsPdfOptionsCheckAll
 			// 
-			lnkDocumentsPdfOptionsCheckAll.Location = new System.Drawing.Point(24, 80);
+			lnkDocumentsPdfOptionsCheckAll.Location = new Point(24, 80);
 			lnkDocumentsPdfOptionsCheckAll.Name = "lnkDocumentsPdfOptionsCheckAll";
-			lnkDocumentsPdfOptionsCheckAll.Size = new System.Drawing.Size(70, 15);
+			lnkDocumentsPdfOptionsCheckAll.Size = new Size(70, 15);
 			lnkDocumentsPdfOptionsCheckAll.TabIndex = 16;
 			lnkDocumentsPdfOptionsCheckAll.TabStop = true;
 			lnkDocumentsPdfOptionsCheckAll.Text = "Check All";
-			lnkDocumentsPdfOptionsCheckAll.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			lnkDocumentsPdfOptionsCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(lnkDocumentsPdfOptionsCheckAll_LinkClicked);
+			lnkDocumentsPdfOptionsCheckAll.TextAlign = ContentAlignment.TopRight;
+			lnkDocumentsPdfOptionsCheckAll.LinkClicked += lnkDocumentsPdfOptionsCheckAll_LinkClicked;
 			// 
 			// cblPdfPermissions
 			// 
-			cblPdfPermissions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			cblPdfPermissions.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			cblPdfPermissions.CheckOnClick = true;
 			cblPdfPermissions.FormattingEnabled = true;
-			cblPdfPermissions.Location = new System.Drawing.Point(100, 68);
+			cblPdfPermissions.Location = new Point(100, 68);
 			cblPdfPermissions.Name = "cblPdfPermissions";
-			cblPdfPermissions.Size = new System.Drawing.Size(404, 58);
+			cblPdfPermissions.Size = new Size(404, 58);
 			cblPdfPermissions.TabIndex = 15;
 			// 
 			// lblPdfPermissions
 			// 
 			lblPdfPermissions.AutoSize = true;
-			lblPdfPermissions.Location = new System.Drawing.Point(6, 65);
+			lblPdfPermissions.Location = new Point(6, 65);
 			lblPdfPermissions.Name = "lblPdfPermissions";
-			lblPdfPermissions.Size = new System.Drawing.Size(73, 15);
+			lblPdfPermissions.Size = new Size(73, 15);
 			lblPdfPermissions.TabIndex = 14;
 			lblPdfPermissions.Text = "Permissions:";
 			// 
 			// pbDocumentIcon
 			// 
-			pbDocumentIcon.Location = new Point(99, 34);
+			pbDocumentIcon.Location = new Point(100, 35);
 			pbDocumentIcon.Name = "pbDocumentIcon";
 			pbDocumentIcon.Size = new Size(16, 16);
 			pbDocumentIcon.TabIndex = 11;
@@ -602,7 +609,7 @@
 			// 
 			lblDocumentName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblDocumentName.AutoEllipsis = true;
-			lblDocumentName.Location = new Point(99, 19);
+			lblDocumentName.Location = new Point(100, 20);
 			lblDocumentName.Name = "lblDocumentName";
 			lblDocumentName.Size = new Size(415, 15);
 			lblDocumentName.TabIndex = 10;
@@ -611,7 +618,7 @@
 			// lblDocumentNameTitle
 			// 
 			lblDocumentNameTitle.AutoSize = true;
-			lblDocumentNameTitle.Location = new Point(6, 19);
+			lblDocumentNameTitle.Location = new Point(6, 20);
 			lblDocumentNameTitle.Name = "lblDocumentNameTitle";
 			lblDocumentNameTitle.Size = new Size(63, 15);
 			lblDocumentNameTitle.TabIndex = 9;
@@ -621,7 +628,7 @@
 			// 
 			lblDocumentSize.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblDocumentSize.AutoEllipsis = true;
-			lblDocumentSize.Location = new Point(99, 49);
+			lblDocumentSize.Location = new Point(100, 50);
 			lblDocumentSize.Name = "lblDocumentSize";
 			lblDocumentSize.Size = new Size(415, 15);
 			lblDocumentSize.TabIndex = 8;
@@ -630,7 +637,7 @@
 			// lblDocumentSizeTitle
 			// 
 			lblDocumentSizeTitle.AutoSize = true;
-			lblDocumentSizeTitle.Location = new Point(6, 49);
+			lblDocumentSizeTitle.Location = new Point(6, 50);
 			lblDocumentSizeTitle.Name = "lblDocumentSizeTitle";
 			lblDocumentSizeTitle.Size = new Size(30, 15);
 			lblDocumentSizeTitle.TabIndex = 7;
@@ -640,16 +647,16 @@
 			// 
 			lblDocumentType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 			lblDocumentType.AutoEllipsis = true;
-			lblDocumentType.Location = new Point(116, 34);
+			lblDocumentType.Location = new Point(116, 35);
 			lblDocumentType.Name = "lblDocumentType";
-			lblDocumentType.Size = new Size(398, 15);
+			lblDocumentType.Size = new Size(395, 15);
 			lblDocumentType.TabIndex = 6;
 			lblDocumentType.Text = "[file type]";
 			// 
 			// lblDocumentTypeTitle
 			// 
 			lblDocumentTypeTitle.AutoSize = true;
-			lblDocumentTypeTitle.Location = new Point(6, 34);
+			lblDocumentTypeTitle.Location = new Point(6, 35);
 			lblDocumentTypeTitle.Name = "lblDocumentTypeTitle";
 			lblDocumentTypeTitle.Size = new Size(55, 15);
 			lblDocumentTypeTitle.TabIndex = 5;
